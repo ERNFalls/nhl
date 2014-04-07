@@ -1,0 +1,155 @@
+<div>
+  <h4>- PIP Matter Key Data -</h4>
+  <table>
+    <tr>
+	  <td>Medical Provider:</td>
+	  <td><%= @pip.medical_provider %></td>  
+    </tr>
+    <tr>
+      <td>Insurance Carrier:</td>
+      <td>
+      <%= @pip.insurance_carrier %>
+      <% unless @pip.insurance_company.blank? %>
+        <%= " - " << @pip.insurance_company.to_s %>
+      <% end %>
+      </td>
+    </tr>
+    <tr>
+	  <td>Claimant's Name:</td>
+	  <td>
+		<% unless @pip.claimant_name.blank? %>
+		  <%= @pip.claimant_name %>
+		<% end %>
+      </td>
+    </tr>
+    <% unless @pip.date_of_loss.blank? %>
+	  <tr>
+		<td>Date of Loss:</td>
+		<td><%= @pip.date_of_loss.strftime("%F") %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% if @pip.claim_no.blank? || @pip.policy_no.blank? || @pip.insured_name.blank? %>
+  <% else %>  
+	<h4>- PIP Matter Insurance Data -</h4>
+  <% end %>
+  <table>
+	<% unless @pip.claim_no.blank? %>
+	  <tr>
+        <td>Claim No.:</td>
+        <td><%= @pip.claim_no %></td>
+	  </tr>
+    <% end %>
+    <% unless @pip.policy_no.blank? %>
+	  <tr>
+		<td>Policy No.:</td>
+        <td><%= @pip.policy_no %></td>
+	  </tr>
+    <% end %>
+    <% unless @pip.insured_name.blank? %>
+	  <tr>
+		<td>Insured's Name:</td>
+        <td>
+	      <%= @pip.insured_name %>
+		</td>
+      </tr>
+    <% end %>
+    <% unless @pip.first_date_of_policy.blank? || @pip.final_date_of_policy.blank? %>
+	  <tr>
+        <td>Dates of Policy:</td>
+        <td><%= @pip.first_date_of_policy.strftime("%F") %> through <%= @pip.final_date_of_policy.strftime("%F") %></td>
+	  </tr>
+    <% end %>
+    <% if @pip.first_date_of_policy.blank? == false && @pip.final_date_of_policy.blank? %>
+	  <tr>
+		<td>Initial Date of Policy:</td>
+        <td><%= @pip.first_date_of_policy.strftime("%F") %></td>
+      </tr>
+    <% end %>
+    <% unless @pip.claims_adjuster.blank? %>
+	  <tr>
+        <td>Claims Adjuster:</td>
+        <td><%= @pip.claims_adjuster %></td>
+      </tr>
+    <% end %>
+  </table>
+  <h4>- PIP Matter Status -</h4>
+  <table>
+	<tr>
+	  <td>Status:</td>
+      <td><%= @pip.status %></td>
+    </tr>
+    <% unless @pip.closing_date.blank? || (@pip.status != "PIP Suit - Closed" || @pip.status == "PIP Demand - Closed") %>
+	  <tr>
+        <td>Closing Date:</td>
+        <td><%= @pip.closing_date.strftime("%F") %></td>
+      </tr>
+    <% end %>
+  </table>  
+  <% unless @pip.case_year.blank? && @pip.date_suit_filed.blank? %>	
+	<h4>- PIP Suit Key Data -</h4>
+  <% end %>
+  <table>
+    <% unless @pip.plaintiff.blank? %>
+      <tr>
+        <td>Plaintiff:</td>
+        <td><%= @pip.plaintiff %></td>
+      </tr>
+    <% end %>
+    <% unless @pip.defendant.blank? %>
+      <tr>
+        <td>Defendant:</td>
+        <td><%= @pip.defendant %></td>
+      </tr>
+    <% end %>
+    <% unless @pip.side %>
+      <tr>
+        <td colspan = 2 align = center>Representing Defendant</td>
+      </tr>
+    <% end %>
+    <% unless @pip.case_county.blank? %>
+      <tr>
+        <td>County:</td>
+        <td><%= @pip.case_county %></td>
+      </tr>
+    <% end %>  
+    <% unless @pip.case_year.blank? %>
+      <tr>
+		<td>Case No.:</td>
+        <td>
+          <%= @pip.case_no %>
+        </td>
+      </tr>
+    <% end %>
+	<% unless @pip.date_suit_filed.blank? %>
+      <tr>
+        <td>Date Suit Filed:</td>
+        <td><%= @pip.date_suit_filed.strftime("%F") %></td>
+      </tr>
+    <% end %>  
+    <% unless @pip.date_of_sop.blank? %>
+	  <tr>
+        <td>Date of Service of Process:</td>
+        <td><%= @pip.date_of_sop.strftime("%F") %></td>
+      </tr>
+    <% end %>
+    <% unless @pip.initial_court_date.blank? %>
+      <tr>
+        <td>Initial Court Date:</td>
+        <td><%= @pip.initial_court_date.strftime("%F") %></td>
+	  </tr>
+    <% end %>
+    <% unless @pip.judge.blank? %>
+      <tr>
+		<td>Judge:</td>
+        <td><%= @pip.judge %></td>
+	  </tr>
+    <% end %>
+    <% unless @pip.opposing_counsel.blank? %>
+      <tr>
+		<td>Opposing Counsel:</td>
+        <td><%= @pip.opposing_counsel %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

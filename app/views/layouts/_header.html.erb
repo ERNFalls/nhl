@@ -1,0 +1,32 @@
+<div id = "header-user-portrait">
+  <div>
+    <% if current_user != nil && current_user.avatar_url != nil %>
+      <%= image_tag current_user.avatar_url.to_s, :style => "vertical-align: middle" %>
+    <% end %>
+  </div>
+</div>
+<div id = "header-user-controls">
+  <% if user_signed_in? %>
+    <div>
+      <%= current_user.email.upcase %>
+    </div>
+    <div class = "header-icon-bar">
+      <div>
+        <%= link_to image_tag("calendar_button_icon.png", :alt => 'My Calendar', :title => "My Calendar"), calendar_path %>
+      </div>
+      <div>
+        <%= link_to image_tag("my_assignments_button_icon.png", :alt => 'My Assignments', :title => "My Assignments"), my_assignments_path %>
+      </div>
+      <div>
+        <%= link_to image_tag("settings_button_icon.png", :alt => 'My Account', :title => "My Account"), user_path(current_user) %>
+      </div>
+      <div>
+      <%= link_to image_tag("log_out_button_icon.png", :alt => "Log Out", :title => "Log Out"), destroy_session_path(:user), :method => :delete, :confirm => "Are you sure you wish to Log Out?" %>
+      </div>
+    </div>
+  <% else %>
+    <h3>-WELCOME GUEST-</h3>
+    <%= button_to 'Log In', new_user_session_path, :style => 'width: 8em' %>
+  <% end %>
+</div>
+ <%= render "layouts/message_bar" %>

@@ -1,0 +1,57 @@
+<div>
+  <div class = "inner-icon-bar">
+    <% if can? :read, PipMatter %>
+	  <div>
+	    <%= link_to image_tag("back_button_icon.png", title: "Close Doc Creator", alt: "Close Doc Creator"), '#CloseDocCreator', onclick: onClick="SlideOutThirteen(); return false;"; %>
+	  </div>
+    <% end %>
+  </div>
+  <h2>- Document Creator -</h2>
+	<div class = "basic-form">
+	  <%= form_tag({:controller => "pip_matters", :action => "create_docx"}, :method => "get") do %>
+		<fieldset>
+		  <div>
+		    <%= label_tag "template", "Template:" %>
+			<br>
+			<%= select_tag "template", options_from_collection_for_select(@templates, :file, :name), {:prompt => "Select a Document Template", :style => "width: 368px;"} %>
+		  </div>
+		  <div>
+		    <%= label_tag "demand_selected", "Demand for Template:" %>
+			<br>
+			<%= select_tag "demand_selected", options_from_collection_for_select(@demands, :id, :d_o_s), {:prompt => "None Selected", :style => "width: 368px;"} %>
+		  </div>
+		  <div>
+		    <%= label_tag "check_selected", "Check for Template:" %>
+			<br>
+			<%= select_tag "check_selected", options_from_collection_for_select(@checks, :id, :details), {:prompt => "None Selected", :style => "width: 368px;"} %>
+		  </div>
+		  <div class = "create-document-control">
+			<div class = "create-document-checkbox-option">
+			  <%= label_tag "save", "Add to File:" %>
+			  <%= check_box_tag "save", "true", true, class: "checkbox" %>
+			</div>
+			<div class = "create-document-checkbox-option">
+			  <%= label_tag "download", "Download:" %>
+			  <%= check_box_tag "download", "true", false, class: "checkbox" %>
+			</div>
+			<div class = "create-document-button">
+			  <%= image_submit_tag("build_button_icon.png", :alt => "Create", :title => "Create", :docx_template => "Create") %>
+			</div>
+		  </div>
+		</fieldset>
+	  <% end %>
+	</div>
+	<table>
+	  <% PipMatter.inspect.split(/\)|\(|,\s/).each_with_index do |attribute| %>
+		<tr>
+		  <td>!<%= attribute.split(/:/).first %>!</td>
+		</tr>
+	  <% end %>
+	</table>
+  <div>
+	<%= debug @pip %>
+	<%= debug @pip.pip_demands %>
+	<%= debug @pip.pip_checks %>
+	<%= debug @templates %>
+  </div>
+</div>

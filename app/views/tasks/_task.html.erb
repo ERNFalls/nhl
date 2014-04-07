@@ -1,0 +1,180 @@
+<script type="text/javascript">
+<!--
+function ShowEditTask<%=task.id%>DIV() {
+	var edit = edit_task<%=task.id%>_div
+	var show = task_<%=task.id%>_details_div
+	if (edit.style.maxHeight=="0px")
+		show.style.maxHeight="0px",
+		show.style.opacity="0",
+		setTimeout(function() {
+			edit.style.maxHeight="480px",
+			edit.style.opacity="1";
+			}, 250);
+	else
+		edit.style.opacity="0",
+		setTimeout(function() {
+			edit.style.maxHeight="0px";
+			}, 250);
+}
+function Show<%=task.id%>TaskDetailsDIV() {
+	var edit = edit_task<%=task.id%>_div
+	var show = task_<%=task.id%>_details_div
+	if (show.style.maxHeight=="0px")
+		edit.style.maxHeight="0px",
+		edit.style.opacity="0",
+		setTimeout(function() {
+			show.style.maxHeight="480px",
+			show.style.opacity="1";
+			}, 250);
+	else
+		show.style.opacity="0",
+		setTimeout(function() {
+			show.style.maxHeight="0px";
+			}, 250);
+}
+//-->
+</script>
+<% @creator = User.where(id: [task.created_by]).pluck(:id).join(" ") %>
+<% @assignee = User.where(id: [task.assigned_to]).pluck(:id).join(" ") %>
+<div class = "full-task-div">
+  <div class = "task-title">
+    <% if task.status == "Complete" %>
+      <div class = "task-status-dot-complete">
+    <% else %>
+      <div class = "task-status-dot-<%= task.priority.downcase %>">
+	<% end %>
+	  &#149; 
+    </div>
+    <%= link_to task.updated_at.strftime('%m/%d/%Y') << " by " << User.find(@creator).username,
+    '#TaskDetails', onclick: onClick="Show#{task.id}TaskDetailsDIV(); return false;"; %>
+    <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
+      <% if can? :read, Task %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Details", alt: "Show Details"),
+	      '#TaskDetails', onclick: onClick="Show#{task.id}TaskDetailsDIV(); return false;"; %>
+        </div>
+	  <% end %>
+      <% if can? :edit, Task %>
+        <div>
+	      <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Task", alt: "Edit Task"),
+	      '#EditTask', onclick: onClick="ShowEditTask#{task.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Task %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Task", alt: "Delete Task"),
+	      {:controller => "tasks", :action => "destroy", :id => task.id, method: :delete}, method: :delete,
+	      data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>  
+	  <% end %>
+    </div>
+  </div>
+  <div id = "task_<%= task.id %>_details_div" class = "hidden-task-div" style = "max-height: 0; opacity: 0;">
+    <table style = "width: 368px;">
+      <tr>
+        <td>Assigned To:</td>
+        <td><%= User.find(@assignee).username %></td>
+      </tr>
+      <% unless task.due_date.to_s.empty? %>
+        <tr>
+          <td>Due Date:</td>
+          <td><%= task.due_date.strftime("%m/%d/%Y") %></td>
+	    </tr>
+	  <% end %>
+	  <tr >
+        <td>Priority:</td>
+        <td><%= task.priority %></td>
+	  </tr>
+	  <tr>
+        <td>Status:</td>
+        <td><%= task.status %></td>
+	  </tr>
+    </table>
+    <div class = "task-bottom">
+	  <%= task.task %>
+    </div>
+  </div>
+  <div id = "edit_task<%= task.id %>_div" class = "hidden-task-div" style = "max-height: 0; opacity: 0;">
+    <% if user_signed_in? && (current_user.id == task.created_by || task.created_by.nil?) %>
+      <%= form_for [@able, task], :url => task_updatepartial_path(task.id) do |f| %>
+        <div class = "basic-form">
+          <fieldset>
+            <div style = "display: none;">
+	          <%= f.label :taskable_id, "Matter No.:", :hidden => true %>
+	          <br>
+	          <%= f.text_field :taskable_id, {:style => 'width: 100px;', :readonly => true, :hidden => true} %>
+	        </div>
+	        <div style = "display: none;">
+	          <%= f.label :created_by, "User:", :hidden => true %>
+	          <br>
+              <% if user_signed_in? %>
+		        <%= f.text_field :created_by, :value => current_user.id.to_s, :style => 'width: 100px;', :readonly => true, :hidden => true %>
+		      <% else %>
+		        <%= f.text_field :created_by, :value => "Please, Log In to Submit Tasks.", :style => 'width: 250px;', :readonly => true, :hidden => true %>
+		      <% end %>
+            </div>
+            <div>
+              <%= f.label :due_date %>
+              <br>
+              <%= f.date_select :due_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+            </div>
+            <% user_array = User.uniq.pluck(:username, :id) %>
+	        <% if user_array.compact.empty? == true %>
+              <div>  
+                <%= f.label :assigned_to, "Assigned To:" %>
+                <br>
+                <%= "No Users Exist in Database" %>
+              </div>
+            <% else %>
+              <div>
+                <%= f.label :assigned_to, "Assigned To:" %>
+                <br>            
+                <%= f.select :assigned_to, options_for_select(user_array.compact.sort, :selected => [@able, task.assigned_to]),
+                {prompt: "Select a User"}, :style => "width:250px;" %>
+              </div>
+            <% end %>
+            <div>
+              <%= f.label :priority, "Prioriy:" %>
+              <br>
+              <%= f.select :priority, options_for_select(["Low", "Medium", "High", "Urgent"], :selected => [@able, task.priority]),
+                {prompt: "Select a User"}, :style => "width:250px;" %>
+            </div>
+            <div>
+              <%= f.label :status, "Status:" %>
+              <br>
+              <%= f.select :status, options_for_select(["Pending", "Complete"], :selected => [@able, task.priority]),
+                {prompt: "Select a User"}, :style => "width:250px;" %>
+            </div>
+            <div>
+              <td valign="top"><%= f.label :task, "Task Description:" %>
+              <br>
+              <td valign="top"><%= f.text_area :task %>
+            </div>
+          </fieldset>
+        </div>  
+        <div class = "basic-form-save-button">
+	      <%= image_submit_tag("save_button_icon.png", :title => "Save Task", :alt => "Save Task") %>
+        </div>
+      <% end %>
+    <% elsif user_signed_in? && current_user.id == task.assigned_to %>
+	  <%= form_for [@able, task], :url => task_updatepartial_path(task.id) do |f| %>
+	    <div class = "basic-form">
+	      <fieldset>
+		    <div>
+			  <%= f.label :status, "Status:" %>
+			  <br>
+			  <%= f.select :status, options_for_select(["Pending", "Complete"]),
+			    {}, :style => "width:250px;" %>
+		    </div>
+	      </fieldset>
+	    </div>  
+	    <div class = "basic-form-save-button">
+		  <%= image_submit_tag("save_button_icon.png", :title => "Save Task", :alt => "Save Task") %>
+	    </div>
+	  <% end %>
+	<% else %>
+	  <h4 style = "text-align: center;">You Do Not Have Permission To Edit This Task.</h4>  
+    <% end %>
+  </div>
+</div>
+

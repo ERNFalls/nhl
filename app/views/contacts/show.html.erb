@@ -1,0 +1,63 @@
+<h1><%= @contact.prefix.to_s + " " + @contact.first_name + " " + @contact.middle_name + " " + @contact.last_name + " " + @contact.suffix.to_s %></h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">
+    <% if can? :update, Contact %>
+	  <div>  
+	    <%= link_to link_to image_tag("edit_button_icon.png",
+	    title: "Edit Contact", alt: "Edit Contact"),
+	    edit_contact_path(@contact) %>    
+	  </div>
+    <% end %>
+    <% if can? :delete, Contact %>
+	  <div>
+	    <%= link_to link_to image_tag("delete_button_icon.png",
+	    title: "Delete Contact", alt: "Delete Contact"), contact_path(@contact),
+	    method: :delete, data: { confirm: 'Are you sure you wish to delete this Contact?' } %>
+	  </div>
+    <% end %>
+    <% if can? :read, Contact %>
+	  <div>
+	    <%= link_to link_to image_tag("list_button_icon.png",
+	    title: "Contacts Index", alt: "Contacts Index"),
+	    contacts_path %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <h3>-Contact Data-</h3>
+        <table class = "show-table">
+          <tr>
+	        <td>ID:</td>
+	        <td><%= @contact.id %></td>
+          </tr>
+          <% unless @contact.contact_type.to_s.empty? %>
+            <tr>
+              <td>Contact Type:</td>
+	          <td><%= @contact.contact_type %></td>
+            </tr>
+          <% end %>
+		  <tr> 
+            <td>Corporate Representative:</td>
+            <td>
+              <%= @contact.prefix << " " << @contact.first_name << " " <<
+              @contact.middle_name << " " << @contact.last_name << " " <<
+              @contact.suffix %>
+            </td>
+          </tr>
+          <tr> 
+            <td>Company Name:</td>
+            <td><%= @contact.company_name %></td>
+		  </tr>
+        </table>
+        <%= render "addresses/new" %>
+        <%= render @contact.addresses.sort %>
+        <%= render "phone_numbers/new" %>
+        <%= render @contact.phone_numbers.sort %>
+        <%= render "email_addresses/new" %>
+        <%= render @contact.email_addresses.sort %>
+      </div>
+    </div>
+  </div>
+</div>

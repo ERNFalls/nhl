@@ -1,0 +1,15 @@
+<%= render "devise/shared/links" %>
+<h2>Register</h2>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <div><%= f.label :email, "E-Mail Address:" %><br />
+  <%= f.email_field :email, :autofocus => true, :style => "width: 320px;" %></div>
+  <div><%= f.label :username, "Username:" %><br />
+  <%= f.text_field :username, :autofocus => true, :style => "width: 320px;" %></div>
+  <div><%= f.label :password, "Password:" %><br />
+  <%= f.password_field :password, :style => "width: 320px;" %></div>
+  <div><%= f.label :password_confirmation, "Confirm Password:" %><br />
+  <%= f.password_field :password_confirmation, :style => "width: 320px;" %></div>
+  <br>
+  <div style = "text-align: right;"><%= f.submit "Register", :style => "width: 80px;" %></div>
+<% end %>

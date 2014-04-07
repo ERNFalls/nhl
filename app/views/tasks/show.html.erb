@@ -1,0 +1,77 @@
+<% @creator = User.where(id: [@task.created_by]).pluck(:id).join(" ") %>
+<% @assignee = User.where(id: [@task.assigned_to]).pluck(:id).join(" ") %>
+<h1>Task No. <%= @task.id %></h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar"> 
+	<% if can? :read, Task %>
+      <div>
+        <%= link_to image_tag("back_button_icon.png", title: "Back to Index", alt: "Back to Index"),
+        tasks_path %>
+      </div>
+	<% end %> 
+	<% if can? :update, Task %>
+      <div id = "control-two">  
+        <%= link_to image_tag("edit_button_icon.png", title: "Edit Task", alt: "Edit Task"), edit_task_path(@task) %>    
+      </div>
+	<% end %>
+	<% if can? :delete, Task %>
+      <div>
+        <%= link_to image_tag("delete_button_icon.png", title: "Delete Task", alt: "Delete Task"),
+        task_path(@task), method: :delete, data: { confirm: 'Are you sure you wish to delete this Task?' } %>
+      </div>
+	<% end %>
+  </div>
+  <div class = "sliding-plate">
+	<div id = "plate-one" >
+	  <div>
+	    <table>
+		  <tr> 
+            <td class = "section-title-table-row" colspan = "2">- Task Details -</td>
+		  </tr>
+		  <tr> 
+            <td>Task ID:</td>
+            <td><%= @task.id %></td>
+		  </tr>
+		  <tr>
+		    <td>Case ID:</td>
+		    <td><%= @task.taskable_id %></td>
+		  </tr>
+		  <tr>
+		    <td>Created By:</td>
+		    <td><%= User.find(@creator).username  %></td>
+		  </tr>		  
+		  <tr>
+		    <td>Date Created:</td>
+		    <td><%= @task.created_at %></td>
+		  </tr>
+		  <tr>
+		    <td>Last Updated</td>
+		    <td><%= @task.updated_at %></td>
+	      </tr>
+	      <tr>
+	        <td>Assigned To:</td>
+	        <td><%= User.find(@assignee).username %></td>
+	      </tr>
+	      <% unless @task.due_date.to_s.empty? %>
+	        <tr>
+	          <td>Due Date:</td>
+	          <td><%= @task.due_date.strftime("%m/%d/%Y") %></td>
+		    </tr>
+		  <% end %>
+		  <tr >
+	        <td>Priority:</td>
+	        <td><%= @task.priority %></td>
+		  </tr>
+		  <tr>
+	        <td>Status:</td>
+	        <td><%= @task.status %></td>
+		  </tr>
+		  <tr> 
+            <td>Task Description:</td>
+            <td><%= @task.task %></td>
+		  </tr>
+	    </table>
+	  </div>
+	</div>
+  </div>
+</div>

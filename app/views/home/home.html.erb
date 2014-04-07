@@ -1,0 +1,49 @@
+<h1>Welcome to the NHL</h1>
+<div class = "sliding-plate">
+  <div id = "plate-one">
+    <div style = "text-align: justify">
+	  <h2>On Quantum Foam</h2>
+	  <br>
+	  <p>
+	    Quantum foam (also referred to as space-time foam) is a concept in quantum mechanics devised by John Wheeler in 1955. The foam is supposed to be conceptualized as the foundation of the fabric of the universe.[1]
+	  </p>
+	  <br>
+	  <p>
+	    Additionally, quantum foam can be used as a qualitative description of subatomic space-time turbulence at extremely small distances (on the order of the Planck length). At such small scales of time and space, the Heisenberg uncertainty principle allows energy to briefly decay into particles and antiparticles and then annihilate without violating physical conservation laws. As the scale of time and space being discussed shrinks, the energy of the virtual particles increases. According to Einstein's theory of general relativity, energy curves space-time. This suggests that—at sufficiently small scales—the energy of these fluctuations would be large enough to cause significant departures from the smooth space-time seen at larger scales, giving space-time a "foamy" character.
+	  </p>
+	  <br>
+	  <p>
+	    With an incomplete theory of quantum gravity, it is impossible to be certain what space-time would look like at these small scales, because existing theories of gravity do not give accurate predictions in that regime. Therefore, any of the developing theories of quantum gravity may improve our understanding of quantum foam as they are tested. However, observations of radiation from nearby quasars by Floyd Stecker of NASA's Goddard Space Flight Center have placed strong experimental limits on the possible violations of Einstein's special theory of relativity implied by the existence of quantum foam.[2] Thus experimental evidence so far has given a range of values in which scientists can test for quantum foam.
+	  </p>
+    </div>
+  </div>
+</div>
+<% begin require 'mechanize' %>
+		<div class = "sliding-plate">
+				<div id = "plate-two">
+						<div>
+								<h2>Current Google News Headlines</h2>
+								<br>
+								<table class = "index-table" style = "text-align: justify;">
+										<% agent = Mechanize.new %>
+										<% begin %>
+												<% page = agent.get('http://news.google.com/') %>
+												<% page.search("h2.esc-lead-article-title").each do |headline| %>
+														<% googlelink = headline.css('a').map { |link| link['href'] }[0].to_s %>
+														<tr>
+																<td>
+																		<a href=<%= googlelink %> alt=<%= googlelink %> title=<%= googlelink %>>
+																				<%= headline.inner_text + "..." %>
+																		</a>
+																</td>
+														</tr>
+												<% end %>
+										<% rescue Exception => e %>
+												<p style = "text-align: center;">Sorry, Google Could Not Be Found!</p>
+										<% end %>
+								</table>
+						</div>
+				</div>
+		</div>
+<% rescue LoadError %>
+<% end %>

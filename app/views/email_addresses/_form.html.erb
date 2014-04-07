@@ -1,0 +1,22 @@
+<%= form_for ([@ablec, @ablec.email_addresses.build]) do |f| %>
+  <div class = "basic-form">
+    <fieldset>
+      <legend>EmailAddress Form</legend>
+	  <%= f.hidden_field :emailable_id, :value => @ablec.id %>
+	  <%= f.hidden_field :emailable_type, :value => controller_name.classify %>
+	  <div style = "display: inline-block;">
+	    <%= f.label :address, "E-Mail Address:" %>
+	    <br>
+	    <%= f.text_field :address, :style => "width: 252px" %>
+	  </div>
+	  <div style = "display: inline-block;">
+	    <%= f.label :address_type, "Type:" %>
+	    <br>
+	    <%= f.select :address_type, options_for_select(["Personal", "Work", "Other"]), {:style => "width: 92px;"} %>
+	  </div>
+    </fieldset>
+  </div>
+  <div class = "basic-form-save-button">
+    <%= image_submit_tag("save_button_icon.png", :title => "Save E-Mail Address", :alt => "Save E-Mail Address") %>
+  </div>
+<% end %>

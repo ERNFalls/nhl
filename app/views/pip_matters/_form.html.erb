@@ -1,0 +1,209 @@
+<%= form_for @pip do |f| %>
+  <% if @pip.errors.any? %>
+    <div id = "error-explanation">
+	  <h2><%= pluralize(@pip.errors.count, "Error") %> Prohibited PIP Matter From Being Saved:</h2>
+	  <ul>
+      <% @pip.errors.full_messages.each do |msg| %>
+        <li><%= msg.titleize %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "basic-form">
+    <fieldset>	
+ 	  <legend>PIP Matter Key Data</legend>
+      <div>
+	  <% if @pip.medical_provider != nil %>
+        <% medical_provider_select = @pip.medical_provider %>
+      <% else %>
+        <% medical_provider_select = "Select a Provider" %>
+      <% end %>
+      <% medical_provider_array = MedicalProvider.uniq.pluck(:company_name) %>
+      <% if medical_provider_array.compact.empty? == true %>
+        <%= f.label :carrier, "Medical Provider:" %>
+        <br>
+        <%= "No Provider Records Exist" %>
+      <% else %>
+        <%= f.label :medical_provider, "Medical Provider:" %>
+        <br>
+	    <%= f.select :medical_provider, options_for_select(medical_provider_array.compact.sort, selected = medical_provider_select), {prompt: "Select a Provider"}, :style => "width:350px;" %>
+      <% end %>
+      </div>
+	  <div>
+	    <div style = "display: inline-block;">
+		  <%= f.label :claimant_last_name, "Claimant Last Name:" %>
+		  <br>
+		  <%= f.text_field :claimant_last_name, {:style => "width: 200px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+		  <%= f.label :claimant_prefix, "Prefix:" %>
+		  <br>
+		  <%= f.select :claimant_prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."], @pip_matter.claimant_prefix), {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
+	    </div>
+	    <div style = "display: inline-block;">
+		  <%= f.label :claimant_suffix, "Suffix:" %>
+		  <br>
+		  <%= f.select :claimant_suffix, options_for_select(["Jr.", "Esq."], @pip_matter.claimant_suffix), {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+	    </div>
+	  </div>
+	  <div>
+          <div style = "display: inline-block;">
+            <%= f.label :claimant_first_name, "First Name:" %>
+            <br>
+            <%= f.text_field :claimant_first_name, {:style => "width: 200px;"} %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :claimant_middle_name, "Middle Name:" %>
+            <br>
+            <%= f.text_field :claimant_middle_name, {:style => "width: 135px;"} %>
+          </div>
+      </div>
+      <div>
+        <%= f.label :date_of_loss, "Date of Loss:" %>
+        <br>
+        <%= f.date_select :date_of_loss, {:order => [:month, :day, :year], :start_year => 2000,
+        :include_blank => true, :with_css_classes => true} %>
+      </div>
+    </fieldset>
+    <fieldset>	
+      <legend>PIP Matter Insurance Data</legend>
+      <div>
+        <% if @pip.insurance_carrier != nil %>
+          <% carrier_selected = @pip.insurance_carrier %>
+        <% else %>
+          <% carrier_selected = "Select a Carrier" %>
+        <% end %>
+	    <% carrier_array = InsuranceCarrier.uniq.pluck(:company_name) %>
+        <% if carrier_array.compact.empty? == true %>
+          <%= f.label :insurance_carrier, "Insurance Carrier:" %>
+          <br>
+          <%= "No Insurance Carrier Records Exist" %>
+        <% else %>
+          <%= f.label :insurance_carrier, "Insurance Carrier:" %>
+          <br>
+          <%= f.select :insurance_carrier, options_for_select(carrier_array.compact.sort, selected = carrier_selected), {prompt: "Select a Carrier"}, :style => "width:350px;" %>
+        <% end %>
+      </div>
+      <div>
+	    <% if @pip.insurance_company != nil %>
+          <% insco_selected = @pip.insurance_company %>
+        <% else %>
+          <% insco_selected = "Select a Company" %>
+        <% end %>
+        <% insurance_company_array = InsuranceCompany.uniq.pluck(:company_name) %>
+        <% if insurance_company_array.compact.empty? == true %>
+          <%= f.label :insurance_company, "Insurance Company:" %>
+          <br>
+          <%= "No Insurance Company Records Exist" %>
+        <% else %>
+          <%= f.label :insurance_company, "Insurance Company:" %>
+          <br>
+          <%= f.select :insurance_company, options_for_select(insurance_company_array.compact.sort, selected = insco_selected), {prompt: "Select a Company"}, :style => "width:350px;" %>
+	    <% end %>
+	  </div>
+	  <div>
+	    <%= f.label :claim_no, "Claim No.:" %>
+	    <br>
+	    <%= f.text_field :claim_no, {:style => 'width: 346px;'} %>
+	  </div>
+	  <div>
+	    <%= f.label :policy_no, "Policy No.:" %>
+	    <br>
+	    <%= f.text_field :policy_no, {:style => 'width: 346px;'} %>
+	  </div>
+	  <div>
+	    <%= f.label :insured_name, "Insured's Name:" %>
+	    <br>
+	    <%= f.text_field :insured_name, {:style => 'width: 346px;'} %>
+	  </div>
+	  <div>
+	    <%= f.label :first_date_of_policy, "Policy Start Date:" %>
+	    <br>
+        <%= f.date_select :first_date_of_policy, {:order => [:month, :day, :year], :start_year => 2000, :include_blank => true, :with_css_classes => true} %>
+      </div>
+      <div>
+	    <%= f.label :final_date_of_policy, "Policy Expiration Date:" %>
+	    <br>
+        <%= f.date_select :final_date_of_policy, {:order => [:month, :day, :year], :start_year => 2000, :include_blank => true, :with_css_classes => true} %>
+	  </div>
+	  <div>
+	    <%= f.label :claims_adjuster, "Claims Adjuster:" %>
+	    <br>
+        <%= f.text_field :claims_adjuster, {:style => 'width: 346px;'} %></>
+	  </div>
+    </fieldset>
+    <fieldset>	
+	  <legend>PIP Matter Status</legend>
+	  <div>
+        <%= f.label :status, "Status:" %>
+        <br>
+	    <%= f.select :status, options_for_select(["PIP Demand", "Pending Carrier Response", "Pending Review", "In Suit", "PIP Demand - Closed", "PIP Suit - Closed"], selected = @pip.status), {}, :style => "width:346px;" %>
+      </div>
+	  <div>
+	    <%= f.label :closing_date, "Closing Date:" %>
+	    <br>
+        <%= f.date_select :closing_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	  </div>
+	</fieldset>
+	<fieldset>
+	  <legend>PIP Suit Key Data</legend>
+	  <%= f.hidden_field :case_state, :value => "FL" %>
+	  <div>
+	    <%= f.label :case_county, "County:" %>
+	    <%= f.select :case_county, options_for_select(Global.counties, :selected => f.object.case_county), {:prompt => "Select a County"}, {:style => 'width: 352px;'} %>
+	  </div>
+	  <div style = "display: inline-block;">
+	    <%= f.label :case_year, "Case No.:" %>
+	    <br>
+	    <%= f.text_field :case_year, {:maxlength => 4, :style => 'text-align: center; width: 50px;'} %>
+	    - <%= f.text_field :case_sequence, {:maxlength => 6, :style => 'text-align: center; width: 70px;'} %>
+	    <%= f.text_field :case_code, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>
+	    <%= f.text_field :case_location, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>
+	  </div>
+	  <div style = "display: inline-block; text-align: center;">  
+	    <%= f.label :judicial_section, "Section:" %>
+	    <br>
+	    (<%= f.text_field :judicial_section, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>)
+	  </div>
+	  <div>
+	    <%= f.label :plaintiff, "Plaintiff:" %>
+	    <br>
+	    <%= f.text_field :plaintiff, {:value => @pip.medical_provider.to_s << " " << @claimant_name.to_s, :style => "width: 346px;"} %>
+	  </div>
+	  <div>
+	    <%= f.label :defendant, "Defendant:" %>
+	    <br>
+	    <%= f.text_field :defendant, {:value => @pip.insurance_company, :style => "width: 346px;"}%>
+	  </div>
+	  <% f.hidden_field :side, :value => true %>
+	  <div>
+	    <%= f.label :date_suit_filed, "Date Suit Filed:" %>
+	    <br>
+        <%= f.date_select :date_suit_filed, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	  </div>
+	  <div>
+	    <%= f.label :date_of_sop, "Date Suit Served:" %>
+	    <br>
+        <%= f.date_select :date_of_sop, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	  </div>
+	  <div>
+	    <%= f.label :initial_court_date, "Initial Court Date:" %>
+	    <br>
+        <%= f.date_select :initial_court_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	  </div>
+	  <div>
+	    <%= f.label :judge, "Judge:" %>
+	    <br>
+	    <%= f.text_field :judge, {:style => 'width: 346px;'} %>
+	  </div>
+	  <div>
+	    <%= f.label :opposing_counsel, "Opposing Counsel:" %>
+	    <br>
+	    <%= f.text_field :opposing_counsel, {:style => 'width: 346px;'} %>
+	  </div>
+    </fieldset>
+  </div>
+  <div class = "basic-form-save-button">
+	<%= image_submit_tag("save_button_icon.png", :title => "Save PIP Matter", :alt => "Save PIP Matter") %>
+  </div>
+<% end %>

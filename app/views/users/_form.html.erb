@@ -1,0 +1,104 @@
+<%= form_for @user, :html => {:multipart => true} do |f| %>
+  <% if @user.errors.any? %>
+	<div id = "errorExplanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
+      <ul>
+	  <% @user.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+	  </ul>
+	</div>
+  <% end %>
+  <div class = "basic-form">
+    <fieldset>
+	  <div>  
+        <%= f.label :username, "Username:" %>
+		<br>
+        <%= f.text_field :username, {:style => 'width: 350px;'} %>
+      </div>
+      <div>
+        <div>
+          <div style = "display: inline-block;">
+            <%= f.label :last_name, "Last Name:" %>
+            <br>
+            <%= f.text_field :last_name, {:style => "width: 200px;"} %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :prefix, "Prefix:" %>
+            <br>
+            <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."], @user.prefix), {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :suffix, "Suffix:" %>
+            <br>
+            <%= f.select :suffix, options_for_select(["Jr.", "Esq."], @user.suffix), {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+          </div>
+        </div>
+        <div>
+	        <div style = "display: inline-block;">
+	          <%= f.label :first_name, "First Name:" %>
+	          <br>
+	          <%= f.text_field :first_name, {:style => "width: 200px;"} %>
+	        </div>
+	        <div style = "display: inline-block;">
+	          <%= f.label :middle_name, "Middle Name:" %>
+	          <br>
+	          <%= f.text_field :middle_name, {:style => "width: 135px;"} %>
+	        </div>
+	    </div>
+        <div>
+		  <%= f.label :company_name %>
+		  <br>
+		  <%= f.text_field :company_name, {:value => "NAVARRO HERNANDEZ, P.L.", :style => "width: 346px;"} %>
+	    </div>
+	  </div>
+	  <div>
+        <%= f.label :email, "E-Mail Address:" %>
+		<br>
+        <% if @user.new_record? != true %>
+          <%= f.text_field :email, {:style => 'width: 350px;'} %>
+        <% else %>
+          <%= f.text_field :email, {:style => 'width: 350px;'} %>
+        <% end %>
+      </div>
+      <div>  
+		<% if @user.new_record? != true %>
+          <%= f.label :password, "New Password:" %>
+		<% else %>
+		  <%= f.label :password, "Change Password:" %>
+		<% end %>
+		<br>
+		<% if @user.new_record? != true %>
+          <%= f.password_field :password, {:style => 'width: 350px;'} %>
+        <% else %>
+          <%= f.password_field :password, {:autocomplete => 'off', :style => 'width: 350px;'} %>
+        <% end %>
+      </div>
+      <div>  
+        <%= f.label :confirm_password, "Confirm Password:" %>
+		<br>
+        <%= f.password_field :password_confirmation, {:style => 'width: 350px;'} %>
+      </div>
+	  <% if can? :manage, User %>
+	    <div>
+	      <% if @user.role != nil %>
+		    <% current_role = @user.role %>
+		  <% else %>
+		    <% current_role = "Default" %>
+		  <% end %>
+          <%= f.label :role, "User Role:" %>
+		  <br>
+          <%= f.select :role, options_for_select([["Default", "default"], ["Clearance Level One", "one"], ["Administrator", "admin"]], selected = current_role), {}, :style => 'width: 354px;' %>
+        </div>
+      <% end %>
+      <div>
+		<%= f.label :avatar, "Upload Portrait (80px by 80px):" %>
+		<br>
+        <%= f.file_field :avatar %>
+      </div>
+    </fieldset>
+  </div>
+  <div class = "basic-form-save-button">
+    <%= image_submit_tag("save_button_icon.png", :title => "Save User", :alt => "Save User") %>
+  </div>
+<% end %>

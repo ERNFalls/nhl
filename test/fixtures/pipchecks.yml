@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: MyString
+  pipmatter_id: 
+  pipdemand_id: 
+
+two:
+  id: MyString
+  pipmatter_id: 
+  pipdemand_id: 

@@ -1,0 +1,99 @@
+<script type="text/javascript">
+<!--
+function ShowEditPhone<%=phone_number.id%>DIV() {
+	var edit = edit_phone<%=phone_number.id%>_div
+	var show = show_phone<%=phone_number.id%>_div
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
+	else
+		show.style.display="block",
+		edit.style.display="none";
+}
+//-->
+</script>
+<div id = "show_phone<%= phone_number.id %>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+	  <h3>-<%= phone_number.phone_number_type %> Phone Number-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, PhoneNumber %>
+        <div>  
+          <%= link_to link_to image_tag("mini_edit_button_icon.png", title: "Edit Phone Number", alt: "Edit Phone Number"),
+          '#EditPhone', onclick: onClick="ShowEditPhone#{phone_number.id}DIV(); return false;"; %>    
+        </div>
+      <% end %>
+      <% if can? :delete, PhoneNumber %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete Phone Number", alt: "Delete Phone Number"),
+          {:controller => "phone_numbers", :action => "destroy", :id => phone_number.id, method: :delete}, data: { confirm: 'Are you sure you wish to delete this Phone Number?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>Phone Number:</td>
+      <td><%= phone_number.full_phone_number %></td>
+    </tr>
+    <% unless phone_number.extension.blank? %>
+      <tr>
+        <td>Extension:</td>
+        <td><%= phone_number.extension %></td>
+      </tr>
+    <% end %>
+    <% unless phone_number.phone_number_type.blank? %>
+      <tr>
+	    <td>Number Type:</td>
+	    <td><%= phone_number.phone_number_type %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div id = "edit_phone<%= phone_number.id %>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+	  <h3>-Edit Phone Number-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, PhoneNumber %>
+        <div>  
+          <%= link_to link_to image_tag("mini_show_button_icon.png", title: "Show Phone Number", alt: "Show Phone Number"),
+          '#ShowPhone', onclick: onClick="ShowEditPhone#{phone_number.id}DIV(); return false;"; %>
+        </div>
+      <% end %>
+      <% if can? :delete, PhoneNumber %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete Phone Number", alt: "Delete Phone Number"),
+          {:controller => "phone_numbers", :action => "destroy", :id => phone_number.id, method: :delete}, data: { confirm: 'Are you sure you wish to delete this Phone Number?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for [@ablec, phone_number] do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+        <legend>Phone Number Form</legend>
+        <div style = "display: inline-block;">
+		  <%= f.label :phone_number_type, "Phone No.:" %>
+		  <br>
+		  <%= f.select :phone_number_type, options_for_select(
+		  ["Cell", "Home", "Work", "Other"], :selected => f.object.phone_number_type), {:default => "", :style => "width: 70px"} %>
+		  (<%= f.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>)
+		  <%= f.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>-
+		  <%= f.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 55px"} %>
+		  <%= f.text_field :country_code, :hidden => true, :value => "1" %>
+		</div>
+		<div style = "display: inline-block;">
+		  <%= f.label :extension, "Ext.:" %>
+		  <br>
+		  <%= f.text_field :extension, :style => "text-align: center; width: 55px" %>
+		</div>
+      </fieldset>
+    </div>
+    <div class = "basic-form-save-button">
+      <%= image_submit_tag("save_button_icon.png", :title => "Save Phone Number", :alt => "Save Phone Number") %>
+    </div>
+  <% end %>
+</div>

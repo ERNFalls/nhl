@@ -1,0 +1,107 @@
+<h1><%= @user.email.upcase %></h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">
+    <% if can? :update, User %>
+	  <div>  
+	    <%= link_to link_to image_tag("edit_button_icon.png", title: "Edit User", alt: "Edit User"),
+	    edit_user_path(@user) %>    
+	  </div>
+    <% end %>
+    <% if can? :delete, User %>
+	  <div>
+	    <%= link_to link_to image_tag("delete_button_icon.png", title: "Delete User", alt: "Delete User"), user_path(@user),
+	    method: :delete, data: { confirm: 'Are you sure you wish to delete this User?' } %>
+	  </div>
+    <% end %>
+    <% if can? :read, User %>
+	  <div>
+	    <%= link_to link_to image_tag("list_button_icon.png", title: "Users Index", alt: "Users Index"),
+	    users_path %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <table>
+          <tr>
+            <td>Database ID:</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td>Username:</td>
+	        <td><%= @user.username.titleize %></td>
+          </tr>
+          <tr>
+            <td>Role:</td>
+	        <% if @user.role == "admin" %>
+	          <td>Administrator</td>
+	        <% else %>
+	          <td><%= @user.role.to_s.titleize %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>
+              <%= @user.prefix.to_s << " " << @user.first_name.to_s << " " <<
+              @user.middle_name.to_s << " " << @user.last_name.to_s << " " <<
+              @user.suffix.to_s %>
+            </td>
+          </tr>
+          <tr>
+            <td>Company Name:</td>
+            <td><%= @user.company_name %></td>
+          </tr>
+          <tr>
+            <td>Email Address:</td>
+	        <td><%= @user.email.upcase %></td>
+          </tr>
+          <tr>
+            <td>User Created Date:</td>
+	        <% if @user.remember_created_at == nil %>
+              <td></td>
+            <% else %>	
+	          <td><%= @user.remember_created_at.strftime("%m-%d-%Y %H:%m:%S") %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td>Sign In Count:</td>
+	        <td><%= @user.sign_in_count %></td>
+          </tr>
+          <% unless @user.current_sign_in_at.to_s.empty? %>
+            <tr>
+              <td>Current Sign In Date:</td>
+	          <td><%= @user.current_sign_in_at.strftime("%m-%d-%Y %H:%m:%S") %></td>
+            </tr>
+          <% end %>
+          <% unless @user.current_sign_in_ip.to_s.empty? %>
+            <tr>
+              <td>Current Sign In IP Address:</td>
+	          <td><%= @user.current_sign_in_ip %></td>
+            </tr>
+          <% end %>
+          <% unless @user.last_sign_in_at.to_s.empty? %>
+            <tr>
+              <td>Last Sign In Date:</td>
+	          <td><%= @user.last_sign_in_at.strftime("%m-%d-%Y %H:%m:%S") %></td>
+            </tr>
+          <% end %>
+          <% unless @user.last_sign_in_ip.to_s.empty? %>
+            <tr>
+              <td>Last Sign In IP Address:</td>
+	          <td><%= @user.last_sign_in_ip %></td>
+            </tr>
+          <% end %> 
+          <tr>
+            <td>User Portrait</td>
+            <% if @user.avatar_url != nil %>
+              <td style = "max-height: 80px; overflow: hidden; "><%= image_tag @user.avatar_url.to_s %></td>
+            <% else %>
+              <td></td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

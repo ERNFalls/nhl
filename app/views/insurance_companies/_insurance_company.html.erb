@@ -1,0 +1,242 @@
+<script type="text/javascript">
+<!--
+function ShowEditInsu<%=insurance_company.id%>DIV() {
+	var edit = edit_insu<%=insurance_company.id%>_div
+	var show = show_insu<%=insurance_company.id%>_div
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
+	else
+		show.style.display="block",
+		edit.style.display="none";
+}
+//-->
+</script>
+<div id = "show_insu<%= insurance_company.id %>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+	  <h3>-<%= insurance_company.company_name %>-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, InsuranceCompany %>
+        <div>  
+          <%= link_to link_to image_tag("mini_edit_button_icon.png", title: "Edit Insurance", alt: "Edit Insurance"),
+          '#EditInsurance', onclick: onClick="ShowEditInsu#{insurance_company.id}DIV(); return false;"; %>    
+        </div>
+      <% end %>
+      <% if can? :delete, InsuranceCompany %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete Insurance", alt: "Delete Insurance"),
+          insurance_carrier_insurance_company_path(@carrier, insurance_company), method: :delete, data: { confirm: 'Are you sure you wish to delete this Insurance Company?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <table>
+    <tr> 
+	  <td>Company ID:</td>
+	  <td><%= insurance_company.id %></td>
+    </tr>
+    <tr>
+      <td>Carrier ID:</td>
+      <td><%= insurance_company.insurance_carrier_id %></td>
+    </tr>
+    <tr>
+	  <td>Company Name:</td>
+	  <td><%= insurance_company.company_name %></td>
+    </tr>
+    <tr> 
+	  <td>Corporate Representative:</td>
+	  <td>
+	    <%= insurance_company.corporate_rep_prefix << " " <<
+	    insurance_company.corporate_rep_first_name << " " <<
+	    insurance_company.corporate_rep_middle_name << " " <<
+	    insurance_company.corporate_rep_last_name << " " <<
+	    insurance_company.corporate_rep_suffix %>
+	  </td>
+    </tr>
+    <tr>  
+      <td>Address:</td>
+      <td>
+	    <%= insurance_company.address_line_one %>
+	    <% unless insurance_company.address_line_two.nil? %>
+	      <br>
+	      <%= insurance_company.address_line_two %>
+	    <% end %>
+	    <% unless insurance_company.address_line_three.nil? %>
+	      <br>
+	      <%= insurance_company.address_line_three %>
+	    <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= insurance_company.city %></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><%= insurance_company.state %></td>
+    </tr>
+    <tr>
+      <td>ZIP Code:</td>
+      <td>
+        <%= insurance_company.zip_code %>
+        <% unless insurance_company.plus_four_code.nil? %>
+          <%= " " << insurance_company.plus_four_code %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>  
+      <td>Phone Number:</td>
+      <td>
+	    <%= "(" << insurance_company.area_code << ") " << 
+	    insurance_company.exchange << " - " << insurance_company.suffix %>
+	    <% unless insurance_company.extension.nil? %>
+	      <%= " Ext. " << insurance_company.extension %>
+	    <% end %>
+      </td>
+    </tr>
+    <tr>  
+      <td>Fax Number:</td>
+      <td>
+	    <%= "(" << insurance_company.fax_area_code << ") " << 
+	    insurance_company.exchange << " - " << insurance_company.suffix %>
+      </td>
+    </tr>
+    <tr>
+      <td>E-Mail Address:</td>
+      <td><%= insurance_company.email_address %></td>
+    </tr>
+  </table>
+</div>
+<div id = "edit_insu<%= insurance_company.id %>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+	  <h3>-Edit <%= insurance_company.company_name %>-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, InsuranceCompany %>
+        <div>  
+          <%= link_to link_to image_tag("mini_show_button_icon.png", title: "Show Insurance", alt: "Show Isurance"),
+          '#ShowInsurance', onclick: onClick="ShowEditInsu#{insurance_company.id}DIV(); return false;"; %>    
+        </div>
+      <% end %>
+      <% if can? :delete, InsuranceCompany %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete Insurance", alt: "Delete Insurance"),
+          insurance_carrier_insurance_company_path(@carrier, insurance_company), method: :delete, data: { confirm: 'Are you sure you wish to delete this Insurance Company?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for [@insurance_carrier, insurance_company] do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+        <legend>Insurance Company Formhjhj</legend>
+        <div>
+          <%= f.label :company_name, "Company Name:" %>
+          <br>
+          <%= f.text_field :company_name, {:style => "width: 350px;"} %>
+        </div>
+	    <div>
+		  <div style = "display: inline-block;">
+		    <%= f.label :corporate_rep_last_name, "PIP Contact Last Name:" %>
+		    <br>
+		    <%= f.text_field :corporate_rep_last_name, {:style => "width: 200px;"} %>
+		  </div>
+		  <div style = "display: inline-block;">
+		    <%= f.label :corporate_rep_prefix, "Prefix:" %>
+		    <br>
+		    <%= f.select :corporate_rep_prefix, options_for_select(
+		    ["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."],
+		    insurance_company.corporate_rep_prefix), {:include_blank => true},
+		    :style => "display: inline-block; width: 75px;" %>
+		  </div>
+		  <div style = "display: inline-block;">
+		    <%= f.label :corporate_rep_suffix, "Suffix:" %>
+		    <br>
+		    <%= f.select :corporate_rep_suffix, options_for_select(["Jr.", "Esq."],
+		    insurance_company.corporate_rep_suffix), {:include_blank => true},
+		    :style => "display: inline-block; width: 60px;" %>
+		  </div>
+	    </div>
+	    <div>
+		  <div style = "display: inline-block;">
+		    <%= f.label :corporate_rep_first_name, "First Name:" %>
+		    <br>
+		    <%= f.text_field :corporate_rep_first_name, {:style => "width: 200px;"} %>
+		  </div>
+		  <div style = "display: inline-block;">
+		    <%= f.label :corporate_rep_middle_name, "Middle Name:" %>
+		    <br>
+		    <%= f.text_field :corporate_rep_middle_name, {:style => "width: 135px;"} %>
+		  </div>
+        </div>
+	    <div>
+          <%= f.label :address_line_one, "PIP Contact Address:" %>
+          <br>
+          <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+          <br>
+          <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+           <br>
+          <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+          <%= f.text_field :country, {:value => "United States of America", :hidden => true} %>
+	    </div>
+	    <div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :city, "City:"%>
+	        <br>
+	        <%= f.text_field :city, {:style => "width: 180px;"} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :state, "State:"%>
+	        <br>
+	        <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :zip_code, "ZIP:"%>
+	        <br>
+	        <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :plus_four_code, "+4:" %>
+	        <br>
+	        <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+	      </div>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :area_code, "Phone Number:" %>
+	      <br>
+	      <div style = "display: inline-block;">
+	        (<%= f.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>)
+	        <%= f.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>
+	        - <%= f.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 52px;"} %>
+	        <%= f.text_field :country_code, {:maxlength => 3,  :value => 1, :hidden => true} %>
+	      </div>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :extension, "Ext.:" %>
+	      <br>
+	      <%= f.text_field :extension, {:style => "text-align: center; width: 52px;"} %>
+	    </div>
+	    <div>
+	      <%= f.label :fax_area_code, "Fax Number:" %>
+	      <br>
+	      <div style = "display: inline-block;">
+	        (<%= f.text_field :fax_area_code, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>)
+	        <%= f.text_field :fax_exchange, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>
+	        - <%= f.text_field :fax_suffix, {:maxlength => 4, :style => "text-align: center; width: 52px;"} %>
+	      </div>
+	    </div>
+	    <div>
+	      <%= f.label :email_address, "E-Mail Address" %>
+	      <br>
+	      <%= f.text_field :email_address, {:style => "width: 242px;"} %>
+	    </div>
+      </fieldset>
+    </div>
+    <div class = "basic-form-save-button">
+      <%= image_submit_tag("save_button_icon.png", :title => "Save Insurer", :alt => "Save Insurer") %>
+    </div>
+  <% end %>
+</div>

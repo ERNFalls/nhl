@@ -1,0 +1,77 @@
+<% if user_signed_in? && (current_user.id == @task.created_by || @task.created_by == nil) %>
+  <%= form_for @task do |f| %>
+    <% if @task.errors.any? %>
+      <div id = "error-explanation">
+	    <h4><%= pluralize(@task.errors.count, "Error") %> Prohibited Task From Being Saved:</h4>
+	    <ul>
+          <% @task.errors.full_messages.each do |msg| %>
+            <li><%= msg.titleize %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class = "basic-form">
+      <fieldset>
+        <div style = "display: none;">
+          <%= f.label :created_by, "Created By:", :hidden => true %>
+          <br>
+	      <%= f.text_field :created_by, :value => current_user.id.to_s, :style => 'width: 100px;', :readonly => true, :hidden => true %>
+	    </div>
+	    <div>
+		  <%= f.label :due_date %>
+		  <br>
+		  <%= f.date_select :due_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	    </div>
+	    <% user_array = User.uniq.pluck(:username, :id) %>
+        <div>  
+		  <%= f.label :assigned_to, "Assigned To:" %>
+		  <br>
+          <% if user_array.compact.empty? == true %>
+		    <%= "No Users Exist in Database" %>
+	      <% else %>      
+		    <%= f.select :assigned_to, options_for_select(user_array.compact.sort, :selected => [@task.assigned_to]),
+		    {prompt: "Select a User"}, :style => "width:250px;" %>
+	      <% end %>
+	    </div>
+	    <div>
+		  <%= f.label :priority, "Priority:" %>
+		  <br>
+		  <%= f.select :priority, options_for_select(["Low", "Medium", "High", "Urgent"], :selected => [@task.priority]),
+		    {}, :style => "width:250px;" %>
+	    </div>
+	    <div>
+		  <%= f.label :status, "Status:" %>
+		  <br>
+		  <%= f.select :status, options_for_select(["Pending", "Complete"], :selected => [@task.status]),
+		    {}, :style => "width:250px;" %>
+	    </div>
+	    <div>
+		  <td valign="top"><%= f.label :task, "Task Description:" %>
+		  <br>
+		  <td valign="top"><%= f.text_area :task %>
+	    </div> 
+      </fieldset>
+    </div>  
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Task", :alt => "Save Task") %>
+    </div>
+  <% end %>
+<% elsif user_signed_in? && current_user.id == @task.assigned_to %>
+  <%= form_for @task do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+	    <div>
+		  <%= f.label :status, "Status:" %>
+		  <br>
+		  <%= f.select :status, options_for_select(["Pending", "Complete"]),
+		    {}, :style => "width:250px;" %>
+	    </div>
+      </fieldset>
+    </div>  
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Task", :alt => "Save Task") %>
+    </div>
+  <% end %>
+<% else %>
+  <h4 style = "text-align: center;">You Do Not Have Permission To Edit This Task.</h4>
+<% end %>

@@ -1,0 +1,2 @@
+module PipchecksHelper
+end

@@ -1,0 +1,24 @@
+<h1>Edit Medical Provider</h1>
+<div>
+  <div id = "simple-form-bar" class = "basic-icon-bar">  
+    <% if can? :read, MedicalProvider %>
+	  <div>
+	    <%= link_to link_to image_tag("show_button_icon.png",
+	    title: "Medical Provider Details", alt: "Medical Provider Details"), medical_provider_path %>    
+	  </div>
+    <% end %>
+    <% if can? :read, MedicalProvider %>
+	  <div>
+	    <%= link_to link_to image_tag("list_button_icon.png",
+	    title: "Medical Providers Index", alt: "Medical Providers Index"), medical_providers_path %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

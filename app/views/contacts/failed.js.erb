@@ -1,0 +1,7 @@
+window.scrollTo(0,0);
+if($('#acsf-last-name-field').val()=="") {
+	$('#acsf-last-name-label').css({"background-color": "#FF6666", "border-radius": "6px"});
+}
+$("#clearable").html("<%= escape_javascript(render :partial => 'layouts/flash_messages').html_safe %>").hide()
+$("#clearable").fadeIn(500);
+flash.discard;

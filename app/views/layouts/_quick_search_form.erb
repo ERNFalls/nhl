@@ -1,0 +1,11 @@
+<div class = "quick-search-bar">  
+  <%= form_tag home_home_path, :controller => "home_controller", :action => "search", :method => :get do %>
+    <div style = "width: 238px;">
+      <%= label_tag :search, "Search:", {:tabindex => '-1'} %>
+      <br>
+      <%= text_field_tag :search, params[:search], {:tabindex => '-1'} %>
+    </div>
+    <div class = "basic-search-submit-button">
+      <%= image_submit_tag("search_button_icon.png", alt: "Search", title: "Search", name: nil, tabindex: "-1") %>
+    </div>
+  <% end %>

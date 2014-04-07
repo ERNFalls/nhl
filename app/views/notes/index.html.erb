@@ -1,0 +1,71 @@
+<h1>Notes Index</h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">  
+    <% if can? :create, Note %>
+      <div>
+        <%= link_to image_tag("add_button_icon.png", title: "Add New Note", alt: "Add New Note"), new_note_path %>
+      </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <div class = "basic-search-form">
+          <%= form_tag notes_path, :method => :get do %>
+	        <div class = "basic-search-bar">  
+	          <div style = "width: 238px;">
+	            <%= label_tag :search, "Search:" %>
+	            <br>
+	            <%= text_field_tag :search, params[:search] %>
+	          </div>
+	          <div class = "basic-search-submit-button">
+	            <%= image_submit_tag("search_button_icon.png", alt: "Search", title: "Search", name: nil) %>
+	          </div>
+	        </div>
+	        <div class = "per-page-control-div">
+	          <%= form_tag notes_path, method: :get do %>
+		        <%= "Per Page:" %>
+		        <br>
+		        <%= select_tag :limit, options_for_select([10, 25, 50, 100, ["All", 100000]], selected: params[:limit] || 100) %>
+		        <div class = "small-random-button" style = "display: inline-block;">
+		          <%= image_submit_tag("small_reset_button_icon.png", alt: "Re", title: "Reload") %>
+		        </div>
+	          <% end -%>
+            </div>
+          <% end %>
+        </div>
+        <table class = "index-table">
+          <% if @notes.count > 0 %>
+	        <tr>
+	          <th>ID</th>
+	          <th>User&nbsp;</th>
+	          <th>Note</th>
+	          <% if can? :update, Note %>
+		        <th></th>
+	          <% end %>
+	          <% if can? :destroy, Note %>
+		        <th></th>
+	          <% end %>
+	        </tr>
+          <% else %>
+	        <div style = "padding: 12px;">
+            </div>
+          <% end %>
+          <% @notes.sort.each do |note| %>
+            <tr>
+              <td><%= link_to note.pipmatter_id, note %></td>
+	          <td><%= link_to note.user_id, note %></td>
+	          <td><%= link_to note.body, note %></td>
+	          <% if can? :update, Note %>
+		        <td align="center" style = "padding-bottom: 0; padding-top: 4px; width: 20px;"><%= link_to image_tag("edit_button_icon.png", alt: "Edit", title: "Edit", style: "width:16px; height: 16px;"), edit_note_path(note) %></td>
+	          <% end %>
+	          <% if can? :delete, Note %>
+		        <td align="center" style = "padding-bottom: 0; padding-top: 4px; width: 20px;"><%= link_to image_tag("delete_button_icon.png", alt: "Del.", title: "Delete", style: "width:16px; height: 16px;"), note_path(note), method: :delete, data: { confirm: 'Are you sure you wish to delete this record?' } %></td>
+	          <% end %>
+	        </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

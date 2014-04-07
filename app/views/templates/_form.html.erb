@@ -1,0 +1,41 @@
+<%= form_for @template, :html => {:multipart => true} do |f| %>
+  <% if @template.errors.any? %>
+	<div id = "errorExplanation">
+      <h2><%= pluralize(@template.errors.count, "error") %> prohibited this Template from being saved:</h2>
+      <ul>
+	  <% @template.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+	  </ul>
+	</div>
+  <% end %>
+  <div class = "basic-form">
+    <fieldset>
+	  <div>  
+        <%= f.label :name, "Template Name:" %>
+		<br>
+        <%= f.text_field :name, {:style => 'width: 350px;'} %>
+      </div>
+      <div>
+        <%= f.label :template_type, "Template Type:" %>
+		<br>
+        <%= f.text_field :template_type, {:style => 'width: 350px;'} %>
+	  </div>
+	  <div>
+	    <%= f.label :private, "Private Template:" %>
+        <%= f.check_box :private, {:default => "0"}, "1", "0" %>
+	  </div>
+	  <div style= "display: none;">
+	    <%= f.text_field :user_id, :value => current_user.id %>
+	  </div>
+      <div>
+		<%= f.label :file, "Upload Template (.DOCX)" %>
+		<br>
+        <%= f.file_field :file %>
+      </div>
+    </fieldset>
+  </div>
+  <div class = "basic-form-save-button">
+    <%= image_submit_tag("save_button_icon.png", :title => "Save Template", :alt => "Save Template") %>
+  </div>
+<% end %>

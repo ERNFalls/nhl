@@ -1,0 +1,86 @@
+<script type="text/javascript">
+<!--
+function ShowEditEmail<%=email_address.id%>DIV() {
+	var edit = edit_email<%=email_address.id%>_div
+	var show = show_email<%=email_address.id%>_div
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
+	else
+		show.style.display="block",
+		edit.style.display="none";
+}
+//-->
+</script>
+<div id = "show_email<%= email_address.id %>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+	  <h3>-<%= email_address.address_type %> E-Mail Address-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, EmailAddress %>
+        <div>  
+          <%= link_to link_to image_tag("mini_edit_button_icon.png", title: "Edit E-Mail Address", alt: "Edit E-Mail Address"),
+          '#EditEmail', onclick: onClick="ShowEditEmail#{email_address.id}DIV(); return false;"; %>    
+        </div>
+      <% end %>
+      <% if can? :delete, EmailAddress %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete E-Mail Address", alt: "Delete E-Mail Address"),
+          {:controller => "email_addresses", :action => "destroy", :id => email_address.id, method: :delete}, data: { confirm: 'Are you sure you wish to delete this E-Mail Address?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>E-Mail Address:</td>
+      <td><%= email_address.address %></td>
+    </tr>
+    <tr>
+      <td>E-Mail Address Type:</td>
+      <td><%= email_address.address_type %></td>
+    </tr>
+  </table>
+</div>
+<div id = "edit_email<%= email_address.id %>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+	  <h3>-Edit E-Mail Address-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :update, EmailAddress %>
+        <div>  
+          <%= link_to link_to image_tag("mini_show_button_icon.png", title: "Show E-Mail Address", alt: "Show E-Mail Address"),
+          '#ShowEmail', onclick: onClick="ShowEditEmail#{email_address.id}DIV(); return false;"; %>    
+        </div>
+      <% end %>
+      <% if can? :delete, EmailAddress %>
+        <div>
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Delete E-Mail Address", alt: "Delete E-Mail Address"),
+          :controller => "email_addresses", :action => "destroy", method: :delete, data: { confirm: 'Are you sure you wish to delete this E-Mail Address?' } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for [@ablec, email_address] do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+        <legend>E-Mail Address Form</legend>
+		<div style = "display: inline-block;">
+		  <%= f.label :address_type, "E-Mail Address:" %>
+		  <br>
+		  <%= f.text_field :address, :style => "width: 252px" %>
+		</div>
+		<div style = "display: inline-block;">
+		  <%= f.label :extension, "Type:" %>
+		  <br>
+		  <%= f.select :address_type, options_for_select(["Personal", "Work", "Other"], :selected => f.object.address_type), {:style => "width: 92px;"} %>
+		</div>
+      </fieldset>
+    </div>
+    <div class = "basic-form-save-button">
+      <%= image_submit_tag("save_button_icon.png", :title => "Save E-Mail Address", :alt => "Save E-Mail Address") %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,142 @@
+<% @contact = Contact.new %>
+<% @contact.phone_numbers.build %>
+<% @contact.email_addresses.build %>
+<% @contact.addresses.build %>
+<%= form_for @contact, :remote => true do |f| %>
+  <div class = "short-form" style = "margin: 0; margin-left: -4px; padding: 0;">
+    <fieldset style = "width: 286px;">
+      <legend>Add A Contact</legend>
+      <div style = "padding-bottom: 2px;">
+        <%= f.label :contact_type, "Contact Type:", {:tabindex => "-1"} %>
+        <br>
+        <%= f.select :contact_type, options_for_select(["Select Contact Type","Claims Adjuster", "Client", "General", "Insurance Company", "Judge",
+	    "Medical Provider", "Opposing Counsel", "PIP Carrier"]), {}, :id => "select-contact-type-field",
+	    :onchange => "javascript: ShowTypeForm();", :tabindex => "-1", :style => "width: 160px;" %>
+	  </div>
+      <div id = "general-form-section" style = "display:none;">
+        <div style = "display: inline-block;">
+          <div style = "display: inline-block;">
+            <%= f.label :last_name, "Last Name or Company:", {:id => "acsf-last-name-label"} %>
+            <br>
+            <%= f.text_field :last_name, {:id => "acsf-last-name-field", :style => "width: 156px;"} %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :prefix, "Prefix:" %>
+            <br>
+            <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."]), {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :suffix, "Suffix:" %>
+            <br>
+            <%= f.select :suffix, options_for_select(["Jr.", "Esq."]), {:include_blank => true}, :style => "display: inline-block; width: 54px;" %>
+          </div>
+        </div>
+        <div style = "display: inline-block;" >
+          <div style = "display: inline-block;">
+            <%= f.label :first_name, "First Name:" %>
+            <br>
+            <%= f.text_field :first_name, {:style => "width: 156px;"} %>
+          </div>
+          <div style = "display: inline-block;">
+            <%= f.label :middle_name, "Middle Name:" %>
+            <br>
+            <%= f.text_field :middle_name, {:style => "width: 112px;"} %>
+          </div>
+          <div>
+            <%= f.label :company_name, "Company Name:" %>
+            <br>
+            <%= f.text_field :company_name, {:style => "width: 276px;"} %>
+          </div>
+	    </div>
+        <div>  
+          <%= f.fields_for :addresses do |builder| %>
+            <div style = "display: inline-block;">
+              <div style = "display: none">
+                <%= builder.label :address_type, "Address Type:" %>
+                <br>
+                <%= builder.text_field :address_type, {:value => "Primary", :style => "width: 320px;"} %>
+              </div>
+              <div>
+	            <%= builder.label :address_line_one, "Primary Contact Address:" %>
+	            <br>
+	            <%= builder.text_field :address_line_one, {:style => "width: 282px;"} %>
+	            <br>
+	            <%= builder.text_field :address_line_two, {:style => "width: 282px;"} %>
+	            <br>
+	            <%= builder.text_field :address_line_three, {:style => "width: 282px;"} %>
+              </div>
+              <div style = "display: inline-block;">
+		        <div style = "display: inline-block;">
+		          <%= builder.label [:city], "City:"%>
+		          <br>
+		          <%= builder.text_field :city, {:style => "width: 132px;"} %>
+		        </div>
+		        <div style = "display: inline-block;">
+		          <%= builder.label [:state], "State:"%>
+		          <br>
+		          <%= builder.text_field :state, {:maxlength => 2, :style => "width: 32px;"} %>
+		        </div>
+		        <div style = "display: inline-block;">
+		          <%= builder.label [:zip_code], "ZIP:"%>
+		          <br>
+		          <%= builder.text_field :zip_code, {:maxlength => 5, :style => "width: 44px;"} %>
+		        </div>
+		        <div style = "display: inline-block;">
+		          <%= builder.label [:plus_four_code], "+4:"%>
+		          <br>
+		          <%= builder.text_field :plus_four_code, {:maxlength => 4, :style => "width: 36px;"} %>
+		        </div>
+		        <%= builder.text_field :country, :hidden => true, :value => "United States of America" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div>  
+          <%= f.fields_for :phone_numbers do |builder| %>
+            <div style = "display: inline-block;">
+              <%= builder.label :phone_number_type, "Primary Contact Phone No.:" %>
+              <br>
+              <%= builder.select :phone_number_type, options_for_select(["Cell", "Home", "Work", "Other"]), {:include_blank => true}, {:style => "width: 68px"} %>
+              (<%= builder.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 32px;"} %>)
+              <%= builder.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 32px;"} %>-
+              <%= builder.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 38px;"} %>
+              <%= builder.text_field :country_code, {:hidden => true, :value => "1"} %>
+            </div>
+            <div style = "display: inline-block;">
+              <%= builder.label :extension, "Ext.:" %>
+              <br>
+              <%= builder.text_field :extension, :style => " text-align: center; width: 50px;" %>
+            </div>
+          <% end %>
+        </div>
+        <div>  
+          <%= f.fields_for :email_addresses do |builder| %>
+            <div style = "display: inline-block;">
+              <%= builder.label :address_type, "Primary E-Mail Address:" %>
+              <br>
+              <%= builder.text_field :address, :style => "width: 160px" %>
+            </div>
+            <div style = "display: inline-block;">
+              <%= builder.label :extension, "Type:" %>
+              <br>
+              <%= builder.select :address_type, options_for_select(["Personal", "Work", "Other"]), {:default => "Personal"}, {:style => "width: 92px;"} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </fieldset>
+    <div id = "submit-contact", class = "short-form-save-button", style = "display: none;">
+      <%= image_submit_tag("save_button_icon.png", :title => "Save Contact", :alt => "Save Contact") %>
+    </div>
+  </div>
+  <div id = "error_explanation" style = "display: none">
+    <% if @contact.errors.any? %>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

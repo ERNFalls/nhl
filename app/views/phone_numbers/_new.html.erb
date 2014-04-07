@@ -1,0 +1,65 @@
+<script type="text/javascript">
+<!--
+function AddPhoneDIV() {
+	var add = add_phone_div
+	if (add.style.display=="none")
+		add.style.display="block";
+	else
+		add.style.display="none";
+}
+//-->
+</script>
+<div class = "mini-icon-bar" style = "margin: 4px 0; text-align: center; width: 100px;">
+  <% if can? :create, PhoneNumber %>
+	<div>  
+	  <%= link_to link_to image_tag("mini_add_button_icon.png", title: "Add Phone Number", alt: "Add Phone Number"),
+	  '#AddPhone', onclick: onClick="AddPhoneDIV(); return false;"; %>    
+	</div>
+	Phone
+  <% end %>
+</div>
+<div id = "add_phone_div" class = "poly-sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+	  <h3>-Add Phone Number-</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, PhoneNumber %>
+        <div>  
+          <%= link_to link_to image_tag("mini_delete_button_icon.png", title: "Cancel Add Phone Number", alt: "Cancel Add Phone Number"),
+          '#AddPhone', onclick: onClick="AddPhoneDIV(); return false;"; %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for ([@ablec, PhoneNumber.new]) do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+	    <legend>Phone Number Form</legend>
+	    <%= f.hidden_field :phoneable_id, :value => @ablec.id %>
+	    <%= f.hidden_field :phoneable_type, :value => controller_name.classify %>
+	    <div style = "display: inline-block;">
+	      <%= f.label :phone_number_type, "Phone No.:" %>
+	      <br>
+	      <%= f.select :phone_number_type, options_for_select(
+	      ["Cell", "Home", "Work", "Other"]), {:prompt => "", :style => "width: 70px"} %>
+	      (<%= f.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>)
+	      <%= f.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>-
+	      <%= f.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 55px"} %>
+	      <%= f.text_field :country_code, :hidden => true, :value => "1" %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :extension, "Ext.:" %>
+	      <br>
+	      <%= f.text_field :extension, :style => "text-align: center; width: 55px" %>
+	    </div>
+      </fieldset>
+    </div>
+    <div class = "basic-form-save-button">
+      <%= image_submit_tag("save_button_icon.png", :title => "Save Phone Number", :alt => "Save Phone Number") %>
+    </div>
+  <% end %>
+  <p>
+    <br>
+  </p>
+</div>

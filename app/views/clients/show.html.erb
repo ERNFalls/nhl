@@ -1,0 +1,189 @@
+<h1><%= @client.prefix.to_s + " " + @client.first_name + " " + @client.middle_name + " " + @client.last_name + " " + @client.suffix.to_s %></h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">
+    <% if can? :update, Client %>
+	  <div>  
+	    <%= link_to link_to image_tag("edit_button_icon.png",
+	    title: "Edit Client", alt: "Edit Client"),
+	    edit_client_path(@client) %>    
+	  </div>
+    <% end %>
+    <% if can? :delete, Client %>
+	  <div>
+	    <%= link_to link_to image_tag("delete_button_icon.png",
+	    title: "Delete Client", alt: "Delete Client"), client_path(@client),
+	    method: :delete, data: { confirm: 'Are you sure you wish to delete this Client?' } %>
+	  </div>
+    <% end %>
+    <% if can? :read, Client %>
+	  <div>
+	    <%= link_to link_to image_tag("list_button_icon.png",
+	    title: "Clients Index", alt: "Clients Index"),
+	    clients_path %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <h3>-Client Data-</h3>
+        <table>
+          <tr>
+	        <td>ID:</td>
+	        <td><%= @client.id %></td>
+	      </tr>
+	      <tr>
+            <td>Name:</td>
+            <td>
+              <%= @client.prefix << " " << @client.first_name << " " <<
+              @client.middle_name << " " << @client.last_name << " " <<
+              @client.suffix %>
+            </td>
+          </tr>
+          <% unless @client.company_name.blank? %>
+            <tr> 
+              <td>Company Name:</td>
+              <td><%= @client.company_name %></td>
+		    </tr>
+		  <% end %>
+		  <tr>
+	        <td>Primary E-Mail:</td>
+	        <td><%= @client.email %></td>
+	      </tr>
+	      <% unless @client.ssn.blank? %>
+	        <tr>
+	          <td>SSN:</td>
+	          <td><%= @client.ssn %></td>
+	        </tr>
+	      <% end %>
+	      <% unless @client.drivers_license_no.blank? %>
+	        <tr>
+	          <td>Driver's License No.:</td>
+	          <td><%= @client.drivers_license_no %></td>
+	        </tr>
+	      <% end %>
+	      <% unless @client.date_of_birth.blank? %>
+	        <tr>
+	          <td>Date of Birth:</td>
+	          <td><%= @client.date_of_birth.strftime("%F") %></td>
+	        </tr>
+	      <% end %>
+	      <% unless @client.aliases.blank? %>
+	        <tr>
+	          <td>Aliases:</td>
+	          <td><%= @client.aliases %></td>
+	        </tr>
+	      <% end %>
+	      <% unless @client.marital_status.blank? %>
+	        <tr>
+	          <td>Marital Status:</td>
+	          <td><%= @client.marital_status %></td>
+	        </tr>
+	      <% end %>
+	      <% unless @client.spouse.blank? %>
+	        <tr>
+	          <td>Spouse:</td>
+	          <td><%= @client.spouse %></td>
+	        </tr>
+	      <% end %>
+        </table>
+        <%= render "addresses/new" %>
+        <%= render @client.addresses.sort %>
+        <%= render "phone_numbers/new" %>
+        <%= render @client.phone_numbers.sort %>
+        <%= render "email_addresses/new" %>
+        <%= render @client.email_addresses.sort %>
+        <table>
+          <% @client.ira? %>
+            <tr>
+              <td colspan = "2">Client has an Individual Retirement Account</td>
+            </tr>
+          <% end %>
+          <% @client.four_o_one_k? %>
+            <tr>
+              <td colspan = "2">Client has a 401K</td>
+            </tr>
+          <% end %>
+          <% unless @client.repossessions.blank? %>
+            <tr>
+              <td>Repossession Details:</td>
+              <td><%= @client.reposessions %></td>
+            </tr>
+          <% end %>
+          <% unless @client.pending_suits.blank? %>
+            <tr>
+              <td>Pending Lawsuit Details:</td>
+              <td><%= @client.pending_suit %></td>
+            </tr>
+          <% end %>
+          <% unless @client.amount_owed_to_irs.blank? %>
+            <tr>
+              <td>Amount Owed to the IRS:</td>
+              <td><%= number_to_currency(@client.amount_owed_to_irs) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.safety_deposit_contents.blank? %>
+            <tr>
+              <td>Safety Deposit Contents:</td>
+              <td><%= @client.safety_deposit_contents %></td>
+            </tr>
+          <% end %>
+          <% unless @client.safety_deposit_location.blank? %>
+            <tr>
+              <td>Safety Deposit Location:</td>
+              <td><%= @client.safety_deposit_location %></td>
+            </tr>
+          <% end %>
+          <% unless @client.safety_deposit_list.blank? %>
+            <tr>
+              <td>Safety Deposit Access List:</td>
+              <td><%= @client.safety_deposit_list %></td>
+            </tr>
+          <% end %>
+          <% unless @client.safety_deposit_list.blank? %>
+            <tr>
+              <td>Safety Deposit Access List:</td>
+              <td><%= @client.safety_deposit_list %></td>
+            </tr>
+          <% end %>
+          <% unless @client.retirement.blank? %>
+            <tr>
+              <td>Retirement Income:</td>
+              <td><%= number_to_currency(@client.retirement) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.pension.blank? %>
+            <tr>
+              <td>Pension Income:</td>
+              <td><%= number_to_currency(@client.pension) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.disability.blank? %>
+            <tr>
+              <td>Disability Income:</td>
+              <td><%= number_to_currency(@client.disability) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.child_support.blank? %>
+            <tr>
+              <td>Child Support Income:</td>
+              <td><%= number_to_currency(@client.child_support) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.alimony.blank? %>
+            <tr>
+              <td>Alimony Income:</td>
+              <td><%= number_to_currency(@client.alimony) %></td>
+            </tr>
+          <% end %>
+          <% unless @client.referred_by.blank? %>
+            <tr>
+              <td>Reffered By:</td>
+              <td><%= @client.referred_by %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+@charset "UTF-8";
+* {
+  margin: 0px;
+  padding: 0px; }
+
+html {
+  background-color: #F5F5CC;
+  background: url("kanagawa_wave_background_image.jpg") no-repeat top center;
+  background: -moz-radial-gradient(50% 50%, ellipse farthest-corner, rgba(200, 200, 200, 0.25) 0%, #969696 100%), url("kanagawa_wave_background_image.jpg") no-repeat top center;
+  background: -webkit-radial-gradient(50% 50%, ellipse farthest-corner, rgba(200, 200, 200, 0.25) 0%, #969696 100%), url("kanagawa_wave_background_image.jpg") no-repeat top center;
+  background: -o-gradient(50% 50%, ellipse farthest-corner, rgba(200, 200, 200, 0.25) 0%, #969696 100%), url(kanagawa_wave_background_image.jpg) no-repeat top center;
+  background: -ms-radial-gradient(50% 50%, ellipse farthest-corner, rgba(200, 200, 200, 0.25) 0%, #969696 100%), url("kanagawa_wave_background_image.jpg") no-repeat top center;
+  background-size: cover;
+  color: #000020;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-weight: bold;
+  min-height: 100%;
+  min-width: 100%;
+  text-shadow: 0 0 10px #FFFFFF, 0 0 20px #F6F6F6, 0 0 30px #FFFFFF, 0 0 40px #CCCCCC, 0 0 50px #FFFFFF, 0 0 60px #999999, 0 0 70px #FFFFFF, 0 0 80px #060606; }
+
+#frame {
+  position: relative; }
+
+#center-container {
+  left: 50%;
+  margin-left: -160px;
+  margin-top: 160px;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  width: 320px;
+  -webkit-animation: fadein 2s;
+  /* Safari and Chrome */
+  -moz-animation: fadein 2s;
+  /* Firefox */
+  -ms-animation: fadein 2s;
+  /* Internet Explorer */
+  -o-animation: fadein 2s;
+  animation: fadein 2s; }
+
+@media screen and (max-height: 480px) {
+  html {
+    background-size: 250% !important; }
+
+  #center-container {
+    margin-top: 20px !important; } }
+@keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-ms-keyframes fadein {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+​
+#login-submit-button {
+  margin-left: 100px;
+  position: relative; }
+
+#login-enter-button {
+  margin-left: 100px;
+  margin-top: 40px;
+  position: relative; }
+
+.login-links {
+  display: inline-block;
+  font-size: 10pt;
+  margin: 16px 0;
+  position: relative; }
+
+.login-links {
+  display: inline-block; }

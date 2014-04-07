@@ -1,0 +1,97 @@
+<h1>Clients Index</h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">  
+    <% if can? :create, Client %>
+      <div>
+        <%= link_to image_tag("add_button_icon.png", title: "Add New Client", alt: "Add New Client"), new_client_path %>
+      </div>
+    <% end %>
+    <% if can? :manage, Client %>
+	  <div>
+	    <%= link_to image_tag("add_database_button_icon.png", title: "Import CSV Files", alt: "Import CSV Files"), '#Import', onclick: onclick="SlideOutTwo(); return false;"; %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <div class = "basic-search-form">
+          <%= form_tag clients_path, :method => :get do %>
+	        <div class = "basic-search-bar">  
+	          <div style = "width: 238px;">
+	            <%= label_tag :search, "Search:" %>
+	            <br>
+	            <%= text_field_tag :search, params[:search] %>
+	          </div>
+	          <div class = "basic-search-submit-button">
+	            <%= image_submit_tag("search_button_icon.png", alt: "Search", title: "Search", name: nil) %>
+	          </div>
+	        </div>
+	        <div class = "per-page-control-div">
+	          <%= form_tag clients_path, method: :get do %>
+		        <%= "Per Page:" %>
+		        <br>
+		        <%= select_tag :limit, options_for_select([10, 25, 50, 100, ["All", 100000]], selected: params[:limit] || 10) %>
+		        <div class = "small-random-button" style = "display: inline-block;">
+		          <%= image_submit_tag("small_reset_button_icon.png", alt: "Re", title: "Reload") %>
+		        </div>
+	          <% end -%>
+            </div>
+          <% end %>
+        </div>
+        <div style = "position: relative; max-width: 380px;"">
+          <%= paginate @clients %>
+          <% if @clients.total_pages > 1 || @clients.count > 10 %>
+          <% end %>
+        </div>
+        <table class = "index-table">
+          <% if @clients.count > 0 %>
+	        <tr>
+              <th>Name</th>
+              <th>ID</th>
+	          <% if can? :update, Client %>
+		        <th></th>
+	          <% end %>
+	          <% if can? :destroy, Client %>
+		        <th></th>
+	          <% end %>
+	        </tr>
+          <% else %>
+	        <div style = "padding: 12px;">
+            </div>
+          <% end %>
+          <% @clients.sort.each do |cont| %>
+	        <tr>
+              <td><%= link_to cont.prefix.to_s + " " + cont.first_name + " " + cont.middle_name + " " + cont.last_name + " " + cont.suffix.to_s, cont %></td>
+              <td><%= link_to cont.id, cont %></td>
+              <% if can? :update, Client %>
+	            <td align="center" style = "padding-bottom: 0; padding-top: 4px; width: 20px;"><%= link_to image_tag("edit_button_icon.png", alt: "Edit", title: "Edit", style: "width:16px; height: 16px;"), edit_client_path(cont) %></td>
+              <% end %>
+              <% if can? :delete, Client %>
+	            <td align="center" style = "padding-bottom: 0; padding-top: 4px; width: 20px;"><%= link_to image_tag("delete_button_icon.png", alt: "Del.", title: "Delete", style: "width:16px; height: 16px;"), client_path(cont), method: :delete, data: { confirm: 'Are you sure you wish to delete this record?' } %></td>
+              <% end %>
+            </tr>
+	      <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">  
+  <div id = "plate-two" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <% if can? :manage, Client %>
+        <div>
+          <h2>Import Pro-Docs Clients (.CSV)</h2>
+          <div>
+            <%= form_tag importpd_clients_path, multipart: true do %>
+              <%= file_field_tag :file %>
+              </br>
+              <%= submit_tag "Import"%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

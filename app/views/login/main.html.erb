@@ -1,0 +1,14 @@
+<div>
+  <h1>NHLaw</h1>
+  <% if user_signed_in? %>
+    <h3><%= current_user.email.upcase %></h3>
+    <div id = "login-enter-button">
+      <%= button_to "Enter", home_home_path, method: :get, :style=>"width: 80px;" %>
+    </div>
+  <% else %>
+    <%= render "devise/sessions/form" %>
+  <% end %>
+  <div style = "text-align: center">
+    <%= flash[:alert] %>
+  </div>
+</div>

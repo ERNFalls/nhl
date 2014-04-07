@@ -1,0 +1,127 @@
+<script type="text/javascript">
+<!--
+function ShowEditNote<%=note.id%>DIV() {
+	var edit = edit_note<%=note.id%>_div
+	var show = note_<%=note.id%>_details_div
+	if (edit.style.maxHeight=="0px")
+		show.style.maxHeight="0px",
+		show.style.opacity="0",
+		setTimeout(function() {
+			edit.style.maxHeight="480px",
+			edit.style.opacity="1";
+			}, 500);
+	else
+		edit.style.opacity="0",
+		setTimeout(function() {
+			edit.style.maxHeight="0px";
+			}, 500);
+}
+function Show<%=note.id%>NoteDetailsDIV() {
+	var edit = edit_note<%=note.id%>_div
+	var show = note_<%=note.id%>_details_div
+	if (show.style.maxHeight=="0px")
+		edit.style.maxHeight="0px",
+		edit.style.opacity="0",
+		setTimeout(function() {
+			show.style.maxHeight="480px",
+			show.style.opacity="1";
+			}, 500);
+	else
+		show.style.opacity="0",
+		setTimeout(function() {
+			show.style.maxHeight="0px";
+			}, 500);
+}
+//-->
+</script>
+<% @user = User.where(id: [note.user_id]).pluck(:id).join(" ") %>
+<div class = "full-note-div">
+  <div class = "note-title">
+    <div>
+	  <%= link_to note.updated_at.strftime('%m/%d/%Y') << " - " << User.find(@user).username, '#NoteDetails', onclick: onClick="Show#{note.id}NoteDetailsDIV(); return false;"; %>
+    </div>
+    <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
+      <% if can? :read, Note %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Details", alt: "Show Details"),
+	      '#NoteDetails', onclick: onClick="Show#{note.id}NoteDetailsDIV(); return false;"; %>
+        </div>
+	  <% end %>
+      <% if can? :edit, Note %>
+        <div>
+	      <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Note", alt: "Edit Note"),
+	      '#EditNote', onclick: onClick="ShowEditNote#{note.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Note %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Note", alt: "Delete Note"),
+	      {:controller => "notes", :action => "destroy", :id => note.id, method: :delete}, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>  
+	  <% end %>
+    </div>
+  </div>
+  <div id = "note_<%= note.id %>_details_div" class = "hidden-note-div" style = "max-height: 0; opacity: 0;">
+    <% if User.find(@user).avatar != nil %>
+	  <div class = "note-user-portrait">
+	    <div>
+		  <%= image_tag User.find(@user).avatar.to_s, :style => "vertical-align: middle" %>
+	    </div>
+	  </div>
+    <% else %>
+	  <div class = "user-portrait">
+	  </div>
+    <% end %>
+    <table class = "note-table-top">
+      <tr>
+        <td>User:</td>
+        <td><%= User.find(@user).email.upcase %></td>
+      </tr>
+      <tr>
+        <td>Username:</td>
+        <td><%= User.find(@user).username %></td>
+      </tr>
+      <tr>
+        <td>Created:</td>
+        <td><%= note.created_at %></td>
+	  </tr>
+      <tr>
+        <td>Updated:</td>
+        <td><%= note.updated_at %></td>
+	  </tr>
+    </table>
+    <div class = "note-bottom">
+	  <%= note.note %>
+    </div>
+  </div>
+  <div id = "edit_note<%= note.id %>_div" class = "hidden-note-div" style = "max-height: 0; opacity: 0;">
+    <%= form_for [@able, note] do |f| %>
+      <div class = "basic-form">
+        <fieldset>	
+          <div style = "display: none;">
+	        <%= f.label :noteable_id, "Matter No.:", :hidden => true %>
+	        <br>
+	        <%= f.text_field :noteable_id, {:style => 'width: 100px;', :hidden => true} %>
+	      </div>
+	      <div style = "display: none;">
+	        <%= f.label :user_id, "User:", :hidden => true %>
+	        <br>
+            <% if user_signed_in? %>
+		      <%= f.text_field :user_id, :value => current_user.id.to_s, :style => 'width: 100px;', :readonly => true, :hidden => true %>
+		    <% else %>
+		      <%= f.text_field :user_id, :value => "Please, Log In to Submit Notes.", :style => 'width: 250px;', :readonly => true, :hidden => true %>
+		    <% end %>
+          </div>
+          <div>
+            <td valign="top"><%= f.label :note, "Note:" %>
+            <br>
+            <td valign="top"><%= f.text_area :note %>
+          </div>
+        </fieldset>
+      </div>  
+      <div class = "basic-form-save-button">
+	    <%= image_submit_tag("save_button_icon.png", :title => "Save Note", :alt => "Save Note") %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<%= stylesheet_link_tag "main", media: "all", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
+<html lang="en" xml:lang="en" xmlns= "http://www.w3.org/1999/xhtml">
+  <head>
+	<%= favicon_link_tag 'nh_favicon.ico' %>
+    <title>NHLaw</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="google" content="notranslate">
+    <meta http-equiv="Content-Language" content="en" />
+  </head>
+  <body>
+    <div id = "main-wrapper">
+	  <div id = "background-layer"></div>
+      <div id = "header-container">
+        <%= render "layouts/header" %>
+      </div>
+	  <div id = "left-side-bar-container">
+	    <%= render "layouts/left_side_bar" %>
+	  </div>
+	  <div id = "main-container">
+	    <%= yield %>
+	  </div>
+	  <div id = "right-side-bar-container">
+	    <%= render "layouts/right_side_bar" %>
+	  </div>
+      <div>
+        <%= render "layouts/footer" %>
+      </div>
+    </div>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  </body>
+</html>

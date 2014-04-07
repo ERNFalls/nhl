@@ -1,0 +1,25 @@
+<%= form_for ([@able, @able.notes.build]) do |f| %>
+  <div class = "basic-form">
+    <fieldset>
+	  <%= f.hidden_field :noteable_id, :value => @able.id %>
+	  <%= f.hidden_field :noteable_type, :value => controller_name.classify %>
+	  <div style = "display: none;">
+	    <%= f.label :user_id, "User:" %>
+	    <br>
+        <% if user_signed_in? %>
+		  <%= f.text_field :user_id, :value => current_user.id.to_s, :style => 'width: 100px;', :readonly => true, :hidden => true %>
+		<% else %>
+		  <%= f.text_field :user_id, :value => "Please, Log In to Submit Notes.", :style => 'width: 250px;', :readonly => true, :hidden => true %>
+		<% end %>
+      </div>
+      <div>
+        <td valign="top"><%= f.label :note, "Note:" %>
+        <br>
+        <td valign="top"><%= f.text_area :note, {:style => 'width: 350px;'} %>
+      </div>
+    </fieldset>
+  </div>  
+  <div class = "basic-form-save-button">
+	<%= image_submit_tag("save_button_icon.png", :title => "Save Note", :alt => "Save Note") %>
+  </div>
+<% end %>

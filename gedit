@@ -1,0 +1,14 @@
+Listen 443
+<VirtualHost *:443>
+    ServerAdmin webmaster@localhost
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/apache.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/apache.key
+    ServerName localhost
+    DocumentRoot /home/ernie/workspaces/nhl/public
+    <Directory /home/ernie/workspaces/nhl/public>
+	Require all granted 
+	Allow from all
+        Options -MultiViews
+    </Directory>
+</VirtualHost>

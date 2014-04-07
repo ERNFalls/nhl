@@ -1,0 +1,22 @@
+<h1>Edit Insurance Carrier</h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">  
+    <% if can? :read, InsuranceCarrier %>
+      <div>
+        <%= link_to link_to image_tag("show_button_icon.png", title: "InsuranceCarrier Details", alt: "InsuranceCarrier Details"), insurance_carrier_path %>    
+      </div>
+    <% end %>
+    <% if can? :read, InsuranceCarrier %>
+      <div>
+        <%= link_to link_to image_tag("list_button_icon.png", title: "InsuranceCarriers Index", alt: "InsuranceCarriers Index"), insurance_carriers_path %>
+      </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

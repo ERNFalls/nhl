@@ -1,0 +1,6 @@
+$('#new_contact')[0].reset();
+ShowAddContactShortForm();
+window.scrollTo(0,0);
+$("#clearable").html("<%= escape_javascript(render :partial => 'layouts/flash_messages').html_safe %>").fadeIn(500);
+$('#acsf-last-name-label').css("background-color", "#F6F6F6");
+flash.discard;

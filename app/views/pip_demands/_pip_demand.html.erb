@@ -1,0 +1,253 @@
+<script type="text/javascript">
+<!--
+function ShowEditPIPDemand<%=pip_demand.id%>DIV() {
+	var edit = edit_pip_demand<%=pip_demand.id%>_div
+	var show = show_pip_demand<%=pip_demand.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_pip_demand<%=pip_demand.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Demand No. <%= pip_demand.id %></h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :read, PipDemand %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit PIP Demand", alt: "Edit PIP Demand"),
+		  '#EditPIPDemand', onclick: onClick="ShowEditPIPDemand#{pip_demand.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, PipDemand %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete PIP Demand", alt: "Delete PIP Demand"),
+		  [pip_demand.pip_matter, pip_demand], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>- PIP Demand Key Data -</h4>
+  <table>
+    <% unless pip_demand.first_date_of_service.blank? %>
+      <tr>
+	    <td>Date(s) of Service:</td>
+        <td>
+	    <%= pip_demand.first_date_of_service.strftime("%F") %>
+	    <% unless pip_demand.final_date_of_service.blank? %>
+	      through <%= pip_demand.final_date_of_service.strftime("%F") %></td>
+		<% else %>
+		  </td>
+		<% end %>
+      </tr>
+    <% else %>
+    <% end %>
+    <% unless pip_demand.total_billed.blank? %>
+      <tr>
+	    <td>Total Billed:</td>
+        <td><%= number_to_currency(pip_demand.total_billed) %></td>
+      </tr>
+    <% else %>
+    <% end %>  
+    <% unless pip_demand.amount_paid_predemand.blank? %>
+      <tr>
+        <td>Amount Paid Pre-Demand:</td>
+        <td><%= number_to_currency(pip_demand.amount_paid_predemand) %></td>
+      </tr>
+    <% else %>
+    <% end %>  
+    <% unless pip_demand.deductible.blank? %>
+      <tr>      
+	    <td>Deductible:</td>
+        <td><%= number_to_currency(pip_demand.deductible) %></td>
+      </tr>
+	<% else %>
+    <% end %>  
+    <% unless pip_demand.carrier_response.blank?%>
+	  <tr>
+	    <td>Carrier Response:</td>
+        <td><%= pip_demand.carrier_response %></td>
+      </tr>
+    <% end %>
+    <% unless pip_demand.include_demand_in_suit %>
+      <tr>
+        <td colspan = "2" >Demand Not Included In Suit</td>
+      </tr>
+    <% end %>
+  </table>
+  <h4>- PIP Demand Mailing Data -</h4>
+  <table>
+    <% unless pip_demand.demand_sent %>
+      <% unless pip_demand.date_demand_sent.blank? %>
+        <tr>
+		  <td>Date Demand Sent:</td>
+          <td><%= pip_demand.date_demand_sent.strftime("%F") %></td>
+        </tr>
+	  <% else %>
+	    <tr>
+		  <td colspan = "2" >Demand Sent</td>
+        </tr>
+	  <% end %>
+    <% else %>
+      <tr>
+	    <td colspan = "2" >Demand Has Not Been Sent</td>
+      </tr>
+	<% end %>
+    <% unless pip_demand.carrier_received %>
+      <% unless pip_demand.date_carrier_received.blank? %>
+        <tr>
+		  <td>Date Carrier Received:</td>
+          <td><%= pip_demand.date_carrier_received.strftime("%F") %></td>
+        </tr>
+	  <% else %>
+        <tr>
+		  <td colspan = "2" >Green Card Signed</td>
+        </tr>
+	  <% end %>
+    <% else %>
+      <tr>
+	    <td colspan = "2" >No Signed Green Card Exists</td>
+      </tr>
+	<% end %>
+    <% unless pip_demand.carrier_responded %>
+      <% unless pip_demand.date_of_response.blank? %>
+        <tr>
+		  <td>Date of Response:</td>
+          <td><%= pip_demand.date_of_response.strftime("%F") %></td>
+        </tr>
+	  <% else %>
+	    <tr>
+		  <td colspan = "2" >Response Exists</td>
+        </tr>
+	  <% end %>
+    <% else %>
+      <tr>
+	    <td colspan = "2" >Carrier Has Not Responded</td>
+      </tr>
+	<% end %>
+    <% unless pip_demand.certified_mail_no.blank? %>
+	  <tr>
+        <td>Certified Mail No.:</td>
+        <td><%= pip_demand.certified_mail_no %></td>
+      </tr>
+    <% end %>
+	<tr>
+	  <% unless pip_demand.postage_cost.blank? %>
+        <td>Postage Cost.:</td>
+        <td><%= number_to_currency(pip_demand.postage_cost) %></td>
+      <% else %>
+      <% end %>
+    </tr>
+  </table>	
+</div>
+<div id = "edit_pip_demand<%=pip_demand.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Demand No. <%= pip_demand.id %></h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, PipDemand %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show PIP Demand", alt: "Show PIP Demand"),
+	      '#ShowPIPDemand', onclick: onClick="ShowEditPIPDemand#{pip_demand.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, PipDemand %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete PIP Demand", alt: "Delete PIP Demand"),
+	      [pip_demand.pip_matter, pip_demand], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@pip, pip_demand]) do |f| %>
+    <div class = "basic-form">
+      <fieldset>
+        <legend>PIP Demand Key Data</legend>
+        <div>
+          <%= f.label :first_date_of_service, "First Date of Service:" %>
+          <br>
+          <%= f.date_select :first_date_of_service, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+        </div>
+        <div>
+          <%= f.label :final_date_of_service, "Final Date of Service:" %>
+          <br>
+          <%= f.date_select :final_date_of_service, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+        </div>
+        <div>
+          <%= f.label :total_billed, "Total Billed:" %>
+          <br>
+          <%= f.text_field :total_billed, {:style => 'text-align: center; width: 100px;'} %>
+        </div>
+        <div>
+          <%= f.label :amount_paid_predemand, "Benefits Paid Pre-Demand:" %>
+          <br>
+          <%= f.text_field :amount_paid_predemand, {:style => 'text-align: center; width: 100px;'} %>
+        </div>
+        <div>
+          <%= f.label :deductible, "Deductible Applied to Bill:" %>
+          <br>
+          <%= f.text_field :deductible, {:style => 'text-align: center; width: 100px;'} %>
+        </div>
+        <div>
+          <%= f.label :carrier_response, "Carrier Response:" %>
+          <br>
+          <%= f.text_field :carrier_response, {:style => 'width: 346px;'} %>
+        </div>
+        <div>
+          <%= f.label :include_demand_in_suit, "Include Demand in Suit:" %>
+          <br>
+          <%= f.select :include_demand_in_suit, [["Yes",1],["No",0]], {}, {:style => 'width: 110px;'} %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>PIP Demand Mailing Data</legend>
+        <div>
+          <%= f.check_box :demand_sent %>
+          <%= f.label :demand_sent, "Demand Sent" %>
+        </div>
+        <div style = "margin-left: 16px;">
+          <%= f.label :date_demand_sent, "Date Demand Sent:" %>
+          <br>
+          <%= f.date_select :date_demand_sent, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+        </div>
+	    <div>
+          <%= f.check_box :carrier_received %>
+          <%= f.label :carrier_received, "Carrier Received" %>
+        </div>
+        <div style = "margin-left: 16px;">
+          <%= f.label :date_carrier_received, "Date Green Card Signed:" %>
+          <br>
+          <%= f.date_select :date_carrier_received, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+        </div>
+        <div>
+          <%= f.check_box :carrier_responded %>
+          <%= f.label :carrier_responded, "Carrier Responded" %>
+        </div>
+        <div style = "margin-left: 16px;">
+          <%= f.label :date_of_response, "Date of Response:" %>
+          <br>
+          <%= f.date_select :date_of_response, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+        </div>
+        <div>
+          <%= f.label :certified_mail_no, "Certified Mail No:" %>
+          <br>
+          <%= f.text_field :certified_mail_no, {:style => 'width: 346px;'} %>
+        </div>
+        <div>
+          <%= f.label :postage_cost, "Postage Cost:" %>
+          <br>
+          <%= f.text_field :postage_cost, {:style => 'text-align: center; width: 100px;'} %>
+        </div>
+      </fieldset>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save PIP Demand", :alt => "Save PIP Demand") %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,17 @@
+<h1>New Note</h1>
+<div>
+  <div class = "basic-icon-bar">  
+    <% if can? :read, Note %>
+	  <div>
+	    <%= link_to link_to image_tag("list_button_icon.png", title: "Back to Index", alt: "Back to Index"), notes_path %>
+	  </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div = "plate-one">
+      <div>
+        Placeholder For Render Notes Form Partial
+      </div>
+    </div>
+  </div>
+</div>

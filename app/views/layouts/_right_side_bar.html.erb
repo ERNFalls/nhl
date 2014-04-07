@@ -1,0 +1,24 @@
+<% if current_user != nil %>
+  <div id = "right-side-bar">
+    <ul id = "add-contact-right-menu">
+      <li id = "add-contact-right-menu-slide-out-section">
+        <a href="ShowAddContactShortForm" onclick="ShowAddContactShortForm(); return false;"; tabindex="-1">
+          <%= image_tag ("add_contact_icon.png"), :title => "Add Contact", :tabindex=> "-1" %>
+        </a>
+        <ul id = "add-contact-sub">
+          <li><%= render 'contacts/short_form' %></li>
+        </ul>
+      </li>
+    </ul>
+    <ul id = "search-contacts-right-menu">
+      <li id = "search-contacts-right-menu-slide-out-section">
+        <a href="ShowSearchContacts" onclick="ShowSearchContacts(); return false;" tabindex="-1">
+          <%= image_tag("search_contacts_icon.png", title: "Search Contacts", :tabindex => "-1") %>
+        </a>
+        <ul id = "search-contacts-sub">
+          <li><%= render 'layouts/quick_search_form' %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<% end %>

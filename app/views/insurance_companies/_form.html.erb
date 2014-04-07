@@ -1,0 +1,107 @@
+<%= form_for [@carrier, @insurance_company] do |f| %>
+  <div class = "basic-form">
+    <fieldset>
+	  <legend>Insurance Company Form</legend>
+	  <div>
+	    <%= f.label :company_name, "Company Name:" %>
+	    <br>
+	    <%= f.text_field :company_name, {:style => "width: 350px;"} %>
+	  </div>
+	  <div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :corporate_rep_last_name, "Contact Last Name:" %>
+	      <br>
+	      <%= f.text_field :corporate_rep_last_name, {:style => "width: 200px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :corporate_rep_prefix, "Prefix:" %>
+	      <br>
+	      <%= f.select :corporate_rep_prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."],),
+	      {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :corporate_rep_suffix, "Suffix:" %>
+	      <br>
+	      <%= f.select :corporate_rep_suffix, options_for_select(["Jr.", "Esq."]),
+	      {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+	    </div>
+      </div>
+      <div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :corporate_rep_first_name, "First Name:" %>
+	      <br>
+	      <%= f.text_field :corporate_rep_first_name, {:style => "width: 200px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :corporate_rep_middle_name, "Middle Name:" %>
+	      <br>
+	      <%= f.text_field :corporate_rep_middle_name, {:style => "width: 135px;"} %>
+	    </div>
+	  </div>
+      <div>
+	    <%= f.label :address_line_one, "Contact Address:" %>
+	    <br>
+	    <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+	    <br>
+	    <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+	     <br>
+	    <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+	    <%= f.text_field :country, {:value => "United States of America", :hidden => true} %>
+      </div>
+	  <div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :city, "City:"%>
+	      <br>
+	      <%= f.text_field :city, {:style => "width: 180px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :state, "State:"%>
+	      <br>
+	      <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :zip_code, "ZIP:"%>
+	      <br>
+	      <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+	    </div>
+	    <div style = "display: inline-block;">
+	      <%= f.label :plus_four_code, "+4:" %>
+	      <br>
+	      <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+	    </div>
+	  </div>
+	  <div style = "display: inline-block;">
+	    <%= f.label :area_code, "Phone Number:" %>
+	    <br>
+	    <div style = "display: inline-block;">
+	      (<%= f.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>)
+	      <%= f.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>
+	      - <%= f.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 52px;"} %>
+	      <%= f.text_field :country_code, {:maxlength => 3,  :value => 1, :hidden => true} %>
+	    </div>
+	  </div>
+	  <div style = "display: inline-block;">
+	    <%= f.label :extension, "Ext.:" %>
+	    <br>
+	    <%= f.text_field :extension, {:style => "text-align: center; width: 52px;"} %>
+	  </div>
+	  <div>
+	    <%= f.label :fax_area_code, "Fax Number:" %>
+	    <br>
+	    <div style = "display: inline-block;">
+	      (<%= f.text_field :fax_area_code, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>)
+	      <%= f.text_field :fax_exchange, {:maxlength => 3, :style => "text-align: center; width: 40px;"} %>
+	      - <%= f.text_field :fax_suffix, {:maxlength => 4, :style => "text-align: center; width: 52px;"} %>
+	    </div>
+	  </div>
+	  <div>
+	    <%= f.label :email_address, "E-Mail Address" %>
+	    <br>
+	    <%= f.text_field :email_address, {:style => "width: 242px;"} %>
+	  </div>
+    </fieldset>
+  </div>
+  <div class = "basic-form-save-button">
+    <%= image_submit_tag("save_button_icon.png", :title => "Save Insurance Company", :alt => "Save Insurance Company") %>
+  </div>
+<% end %>

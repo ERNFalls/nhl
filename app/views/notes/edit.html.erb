@@ -1,0 +1,22 @@
+<h1>Edit Note</h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">  
+    <% if can? :read, Note %>
+      <div>
+        <%= link_to link_to image_tag("show_button_icon.png", title: "Note Details", alt: "Note Details"), note_path %>    
+      </div>
+    <% end %>
+    <% if can? :read, Note %>
+      <div>
+        <%= link_to link_to image_tag("list_button_icon.png", title: "Notes Index", alt: "Notes Index"), notes_path %>
+      </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        Placeholder for Render Form Notes Partial
+      </div>
+    </div>
+  </div>
+</div>

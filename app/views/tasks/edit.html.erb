@@ -1,0 +1,22 @@
+<h1>Edit Task</h1>
+<div>
+  <div id = "simple-control-bar" class = "basic-icon-bar">  
+    <% if can? :read, Task %>
+      <div>
+        <%= link_to link_to image_tag("show_button_icon.png", title: "Task Details", alt: "Task Details"), task_path %>    
+      </div>
+    <% end %>
+    <% if can? :read, Task %>
+      <div>
+        <%= link_to link_to image_tag("list_button_icon.png", title: "Tasks Index", alt: "Tasks Index"), tasks_path %>
+      </div>
+    <% end %>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <div>
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<%= favicon_link_tag 'nh_favicon.ico' %>
+    <title>NHLaw</title>
+    <%= stylesheet_link_tag "login", media: "all", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id = "frame">
+	  <div id = "center-container">
+        <%= yield %>
+      </div>  
+    </div>
+    <%= javascript_include_tag "login", "data-turbolinks-track" => true %>
+  </body>
+</html>

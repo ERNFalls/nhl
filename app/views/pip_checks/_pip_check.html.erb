@@ -1,0 +1,204 @@
+<script type="text/javascript">
+<!--
+function ShowEditPIPCheck<%=pip_check.id%>DIV() {
+	var edit = edit_pip_check<%=pip_check.id%>_div
+	var show = show_pip_check<%=pip_check.id%>_div
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
+	else
+		show.style.display="block",
+		edit.style.display="none";
+}
+//-->
+</script>
+<div id = "show_pip_check<%= pip_check.id %>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>
+        <% if pip_check.check_no != nil %>
+          - Check No. <%= pip_check.check_no %> -
+        <% else %>
+          - Check ID <%= pip_check.id %> -
+        <% end %>
+      </h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :edit, PipCheck %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Check", alt: "Edit Check"),
+		  '#EditCheck', onclick: onClick="ShowEditPIPCheck#{pip_check.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, PipCheck %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete PIP Check", alt: "Delete PIP Check"),
+		  pip_matter_pip_check_path(@pip, pip_check), method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td>Purpose of Check:</td>
+	  <td><%= pip_check.purpose_of_check %></td>
+    </tr>
+    <% unless pip_check.date_of_issue.blank? %>
+      <tr>
+	    <td>Date of Issue:</td>
+        <td><%= pip_check.date_of_issue.strftime("%F") %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.total_amount.blank? %>
+      <tr>
+        <td>Total Check Amount:</td>
+        <td><%= number_to_currency(pip_check.total_amount) %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <td>Check Amount:</td>
+        <td><%= "$0.00" %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.benefits.blank? %>
+      <tr>
+        <td>Portion in Benefits:</td>
+        <td><%= number_to_currency(pip_check.benefits) %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.interest.blank? %>
+      <tr>
+        <td>Portion in Interest:</td>
+        <td><%= number_to_currency(pip_check.interest) %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.penalty.blank? %>
+      <tr>
+        <td>Portion in Penalty:</td>
+        <td><%= number_to_currency(pip_check.penalty) %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.postage.blank? %>
+      <tr>
+        <td>Portion in Postage:</td>
+        <td><%= number_to_currency(pip_check.postage) %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.attorneys_fees.blank? %>
+      <tr>
+        <td>Portion in Attorney's Fees:</td>
+        <td><%= number_to_currency(pip_check.attorneys_fees) %></td>
+      </tr>
+    <% end %>
+    <% unless pip_check.include_check_in_suit %>
+      <tr>
+        <td colspan="2">Do Not Include Check in Suit</td>
+      </tr>
+    <% end %>
+    <% unless pip_check.status.blank? %>
+      <tr>
+        <td>Status:</td>
+        <td><%= pip_check.status %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div id = "edit_pip_check<%= pip_check.id %>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>
+        <% if pip_check.check_no != nil %>
+          - Edit Check No. <%= pip_check.check_no %> -
+        <% else %>
+          - Edit Check ID <%= pip_check.id %> -
+        <% end %>
+      </h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :read, PipCheck %>
+	    <div>
+		  <%= link_to image_tag("mini_show_button_icon.png", title: "Show Check", alt: "Show Check"),
+		  '#ShowCheck', onclick: onClick="ShowEditPIPCheck#{pip_check.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, PipCheck %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete PIP Check", alt: "Delete PIP Check"),
+		  pip_matter_pip_check_path(@pip, pip_check), method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <%= form_for [@pip, pip_check] do |f| %>
+    <div class = "basic-form">
+      <fieldset>	
+ 	    <legend>PIP Check Key Data</legend>
+	    <div>
+	      <%= f.label :check_no, "Check No.:" %>
+	      <br>
+	      <%= f.text_field :check_no, {:style => 'width: 346px;'} %>
+	    </div>
+	    <div>
+	      <%= f.label :date_of_issue, "Date of Issue.:" %>
+	      <br>
+	      <%= f.date_select :date_of_issue, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+	    </div>
+	    <div>
+	      <%= f.label :purpose_of_check, "Purpose of Check:" %>
+	      <br>
+	      <%= f.select :purpose_of_check, options_for_select(["Benefits, Interest, Penaly & Postage",
+	      "Benefits & Interest", "Benefits", "Interest", "Penalty & Postage", 
+	      "Penalty", "Postage", "Attorney's Fees"], :selected => f.object.purpose_of_check),
+	      {}, {:style => 'width: 352px;'} %>
+	    </div>
+	    <div>
+	      <%= f.label :total_amount, "Total Amount:" %>
+	      <br>
+	      <%= f.text_field :total_amount, {:style => 'text-align: center; width: 100px;'} %>
+	    </div>
+	    <div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :benefits, "Benefits:" %><br>
+	        <%= f.text_field :benefits, {:style => 'text-align: center; width: 100px;'} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :interest, "Interest:" %>
+	        <br>
+	        <%= f.text_field :interest, {:style => 'text-align: center; width: 100px;'} %>
+	      </div>
+	    </div>
+	    <div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :penalty, "Penalty:" %>
+	        <br>
+	        <%= f.text_field :penalty, {:style => 'text-align: center; width: 100px;'} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :postage, "Postage:" %>
+	        <br>
+	        <%= f.text_field :postage, {:style => 'text-align: center; width: 100px;'} %>
+	      </div>
+	      <div style = "display: inline-block;">
+	        <%= f.label :attorneys_fees, "Fees:" %>
+	        <br>
+	        <%= f.text_field :attorneys_fees, {:style => 'text-align: center; width: 100px;'} %>
+	      </div>
+	    </div>
+	    <div>
+          <%= f.label :include_check_in_suit, "Include in Suit:" %>
+          <br>
+          <%= f.select :include_check_in_suit, [["Yes",1],["No",0]], {}, {:style => 'width: 155px;'} %>
+        </div>
+        <div>
+	      <%= f.label :status, "Status:" %>
+	      <br>
+	      <%= f.select :status, options_for_select(["Live", "Cashed", "Expired", "Pending Re-Issue"],
+	      :selected => f.object.status), {}, {:style => 'width: 155px;'} %>
+	    </div>
+      </fieldset>
+    </div>  
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Check", :alt => "Save Check") %>
+    </div>
+  <% end %>
+</div>
