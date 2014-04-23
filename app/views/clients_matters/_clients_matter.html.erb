@@ -1,0 +1,17 @@
+<div class = "full-note-div">
+  <div class = "note-title">
+    <div>
+	  <div style = "font-weight: bold; width: 344px;">
+	    <%= Matter.find(clients_matter.matter_id).plaintiff + " vs. " + Matter.find(clients_matter.matter_id).defendant %>
+	  </div>
+    </div>
+    <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
+      <% if can? :delete, ClientsMatter %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Join", alt: "Delete Join"),
+		  [clients_matter.client, clients_matter], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<script type="text/javascript">
+<!--
+function ShowEditMortgage<%=mortgage.id%>DIV() {
+	var edit = edit_mortgage<%=mortgage.id%>_div
+	var show = show_mortgage<%=mortgage.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_mortgage<%=mortgage.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <% unless mortgage.property_id.blank? %>
+      <div>
+        <h3>Mortgage for <%= Property.find(mortgage.property_id).address_line_one %></h3>
+      </div>
+    <% else %>
+      <div>
+        <h3>Unrelated Mortgage</h3>
+      </div>
+    <% end %>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Mortgage %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Mortgage", alt: "Edit Mortgage"),
+		  '#EditMortgage', onclick: onClick="ShowEditMortgage#{mortgage.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Mortgage %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Mortgage", alt: "Delete Mortgage"),
+		  [mortgage.client, mortgage], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Mortgage Data</h4>
+  <table>
+    <% unless mortgage.mortgage_holder.blank? %>
+      <tr>
+        <td>Mortgage Holder:</td>
+        <td><%= mortgage.mortgage_holder %></td>
+      </tr>
+    <% end %>  
+    <% unless mortgage.account_no.blank? %>
+      <tr>
+        <td>Account No.:</td>
+        <td><%= mortgage.account_no %></td>
+      </tr>
+    <% end %>
+    <% unless mortgage.balance.blank? %>
+      <tr>
+	    <td>Balance:</td>
+        <td><%= number_to_currency(mortgage.balance) %></td>
+      </tr>
+    <% end %>
+    <% unless mortgage.overdue_payment.blank? %>
+      <tr>
+	    <td>Overdue Payment:</td>
+        <td><%= number_to_currency(mortgage.overdue_payment) %></td>
+      </tr>
+    <% end %>
+    <% unless mortgage.address_line_one.blank? %>
+      <tr>
+        <td>Mortgage Holder's Address:</td>
+        <td>
+          <%= mortgage.address_line_one %>
+          <br>
+          <%= mortgage.address_line_two %>
+          <br>
+          <%= mortgage.address_line_three %>
+        </td>
+      </tr>
+    <% end %>
+    <% unless mortgage.city.blank? %>
+      <tr>
+        <td>City:</td>
+        <td><%= mortgage.city %></td>
+      </tr>
+    <% end %>
+    <% unless mortgage.state.blank? %>
+      <tr>
+        <td>State:</td>
+        <td><%= mortgage.state %></td>
+      </tr>
+    <% end %>
+    <% unless mortgage.zip_code.blank? %>
+      <tr>
+        <td>ZIP Code:</td>
+        <td>
+          <%= mortgage.zip_code.to_s %>
+          <% unless mortgage.plus_four_code.blank? %>
+            <%= " - " + mortgage.plus_four_code.to_s %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div id = "edit_mortgage<%=mortgage.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Mortgage Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Mortgage %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Mortgage", alt: "Show Mortgage"),
+	      '#ShowMortgage', onclick: onClick="ShowEditMortgage#{mortgage.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Mortgage %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Mortgage", alt: "Delete Mortgage"),
+	      [mortgage.client, mortgage], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, mortgage]) do |f| %>
+    <div class = "basic-form">
+      <%= render "mortgages/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Mortgage", :alt => "Save Mortgage") %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,65 @@
+<fieldset>
+  <legend>Employment Data</legend>
+  <div style = "display: inline-block">
+    <%= f.label :employer, "Employer:" %>
+    <br>
+    <%= f.text_field :employer, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :address_line_one, "Employer Address:" %>
+    <br>
+    <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+    <br>
+    <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+     <br>
+    <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :city, "City:"%>
+	  <br>
+	  <%= f.text_field :city, {:style => "width: 180px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :state, "State:"%>
+	  <br>
+	  <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :zip_code, "ZIP:"%>
+	  <br>
+	  <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :plus_four_code, "+4:" %>
+	  <br>
+	  <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :position, "Position:" %>
+    <br>
+    <%= f.text_field :position, :style => "width:346px;" %>
+  </div>
+  <div>
+    <%= f.label :employment_length, "Employment Length:" %>
+    <br>
+    <%= f.text_field :employment_length, :style => "width: 100px" %>
+  </div>
+  <div>
+    <%= f.label :payment_cycle, "Payment Cycle:" %>
+    <br>
+    <%= f.select :payment_cycle, options_for_select(["Weekly", "Bi-Weekly", "Monthly", "Semi-Monthly"],
+    :selected => f.object.payment_cycle), {:prompt => "Select"}, :style => "width:100px;" %>
+  </div>
+  <div>
+    <%= f.label :gross_earnings, "Gross Earnings:" %>
+    <br>
+    <%= f.text_field :gross_earnings, :style => "width:100px;" %>
+  </div>
+  <div>
+    <%= f.label :net_earnings, "Net Earnings:" %>
+    <br>
+    <%= f.text_field :net_earnings, :style => "width:100px;" %>
+  </div>
+</fieldset>

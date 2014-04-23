@@ -1,25 +1,6 @@
-<%= form_for ([@ablec, @ablec.phone_numbers.build]) do |f| %>
+<%= form_for ([@able, @able.phone_numbers.build]) do |f| %>
   <div class = "basic-form">
-    <fieldset>
-	  <legend>Phone Number Form</legend>
-	  <%= f.hidden_field :phoneable_id, :value => @ablec.id %>
-	  <%= f.hidden_field :phoneable_type, :value => controller_name.classify %>
-	  <div style = "display: inline-block;">
-	    <%= f.label :phone_number_type, "Phone No.:" %>
-	    <br>
-	    <%= f.select :phone_number_type, options_for_select(
-	    ["Cell", "Home", "Work", "Other"]), {:prompt => "", :style => "width: 70px"} %>
-	    (<%= f.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>)
-	    <%= f.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>-
-	    <%= f.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 55px"} %>
-	    <%= f.text_field :country_code, :hidden => true, :value => "1" %>
-	  </div>
-	  <div style = "display: inline-block;">
-	    <%= f.label :extension, "Ext.:" %>
-	    <br>
-	    <%= f.text_field :extension, :style => "text-align: center; width: 55px" %>
-	  </div>
-    </fieldset>
+    <%= render "phone_numbers/fieldsets", f:f %>
   </div>
   <div class = "basic-form-save-button">
     <%= image_submit_tag("save_button_icon.png", :title => "Save Phone Number", :alt => "Save Phone Number") %>

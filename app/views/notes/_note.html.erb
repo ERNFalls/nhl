@@ -3,34 +3,20 @@
 function ShowEditNote<%=note.id%>DIV() {
 	var edit = edit_note<%=note.id%>_div
 	var show = note_<%=note.id%>_details_div
-	if (edit.style.maxHeight=="0px")
-		show.style.maxHeight="0px",
-		show.style.opacity="0",
-		setTimeout(function() {
-			edit.style.maxHeight="480px",
-			edit.style.opacity="1";
-			}, 500);
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
 	else
-		edit.style.opacity="0",
-		setTimeout(function() {
-			edit.style.maxHeight="0px";
-			}, 500);
+		edit.style.display="none";
 }
 function Show<%=note.id%>NoteDetailsDIV() {
 	var edit = edit_note<%=note.id%>_div
 	var show = note_<%=note.id%>_details_div
-	if (show.style.maxHeight=="0px")
-		edit.style.maxHeight="0px",
-		edit.style.opacity="0",
-		setTimeout(function() {
-			show.style.maxHeight="480px",
-			show.style.opacity="1";
-			}, 500);
+	if (show.style.display=="none")
+		edit.style.display="none",
+		show.style.display="block";
 	else
-		show.style.opacity="0",
-		setTimeout(function() {
-			show.style.maxHeight="0px";
-			}, 500);
+		show.style.display="none";
 }
 //-->
 </script>
@@ -38,7 +24,7 @@ function Show<%=note.id%>NoteDetailsDIV() {
 <div class = "full-note-div">
   <div class = "note-title">
     <div>
-	  <%= link_to note.updated_at.strftime('%m/%d/%Y') << " - " << User.find(@user).username, '#NoteDetails', onclick: onClick="Show#{note.id}NoteDetailsDIV(); return false;"; %>
+	  <%= link_to note.updated_at.strftime('%m/%d/%Y') + " - " + User.find(@user).username, '#NoteDetails', onclick: onClick="Show#{note.id}NoteDetailsDIV(); return false;"; %>
     </div>
     <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
       <% if can? :read, Note %>
@@ -56,12 +42,13 @@ function Show<%=note.id%>NoteDetailsDIV() {
 	  <% if can? :delete, Note %>
         <div>
 	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Note", alt: "Delete Note"),
-	      {:controller => "notes", :action => "destroy", :id => note.id, method: :delete}, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	      {:controller => "notes", :action => "destroy", :id => note.id, method: :delete}, method: :delete,
+	      data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
         </div>  
 	  <% end %>
     </div>
   </div>
-  <div id = "note_<%= note.id %>_details_div" class = "hidden-note-div" style = "max-height: 0; opacity: 0;">
+  <div id = "note_<%= note.id %>_details_div" class = "hidden-note-div" style = "display: none;">
     <% if User.find(@user).avatar != nil %>
 	  <div class = "note-user-portrait">
 	    <div>
@@ -72,7 +59,7 @@ function Show<%=note.id%>NoteDetailsDIV() {
 	  <div class = "user-portrait">
 	  </div>
     <% end %>
-    <table class = "note-table-top">
+    <table class = "note-table-top" style = "display: inline-block; max-width: 280px; min-width: 280px; width: 280px;">
       <tr>
         <td>User:</td>
         <td><%= User.find(@user).email.upcase %></td>
@@ -94,7 +81,7 @@ function Show<%=note.id%>NoteDetailsDIV() {
 	  <%= note.note %>
     </div>
   </div>
-  <div id = "edit_note<%= note.id %>_div" class = "hidden-note-div" style = "max-height: 0; opacity: 0;">
+  <div id = "edit_note<%= note.id %>_div" class = "hidden-note-div" style = "display: none;">
     <%= form_for [@able, note] do |f| %>
       <div class = "basic-form">
         <fieldset>	

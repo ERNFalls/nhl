@@ -1,0 +1,18 @@
+<%= form_for ([@client, @client.dependants.build]) do |f| %>
+  <% if @client.errors.any? %>
+    <div id = "errorExplanation">
+	  <h2><%= pluralize(@client.errors.count, "Error") %> Prohibited Dependant From Being Saved:</h2>
+	  <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg.titleize.titleize %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "basic-form">
+    <%= render "dependants/fieldsets", f:f %>
+  </div>
+  <div class = "basic-form-save-button">
+	<%= image_submit_tag("save_button_icon.png", :title => "Save Dependant", :alt => "Save Dependant") %>
+  </div>
+<% end %>

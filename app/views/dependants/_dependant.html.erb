@@ -1,0 +1,102 @@
+<script type="text/javascript">
+<!--
+function ShowEditDependant<%=dependant.id%>DIV() {
+	var edit = edit_dependant<%=dependant.id%>_div
+	var show = show_dependant<%=dependant.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_dependant<%=dependant.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Dependant</h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Dependant %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Dependant", alt: "Edit Dependant"),
+		  '#EditDependant', onclick: onClick="ShowEditDependant#{dependant.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Dependant %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Dependant", alt: "Delete Dependant"),
+		  [dependant.client, dependant], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Dependant Data</h4>
+  <table>
+    <% unless dependant.first_name.blank? %>
+      <tr> 
+		<td>Name:</td>
+		<td>
+		  <%= dependant.prefix.to_s + " " + dependant.first_name.to_s + " " +
+		  dependant.middle_name.to_s + " " + dependant.last_name.to_s + " " +
+		  dependant.suffix.to_s %>
+		</td>
+	  </tr>
+    <% end %>
+    <% unless dependant.ssn.blank? %>
+      <tr>
+        <td>Social Security No.:</td>
+        <td><%= dependant.ssn %></td>
+      </tr>
+    <% end %>
+    <% unless dependant.date_of_birth.blank? %>
+      <tr>
+	    <td>Date of Birth:</td>
+        <td><%= dependant.date_of_birth.strftime("%m/%d/%Y") %></td>
+      </tr>
+    <% end %>
+    <% unless dependant.relationship.blank? %>
+      <tr>
+	    <td>Relation:</td>
+        <td><%= dependant.relationship %></td>
+      </tr>
+    <% end %>
+    <% if dependant.employment == true %>
+      <tr>
+        <td colspan = "2" align = "center" style = "font-weight: bold;">
+          Dependant is Employed
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div id = "edit_dependant<%=dependant.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Dependant Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Dependant %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Dependant", alt: "Show Dependant"),
+	      '#ShowDependant', onclick: onClick="ShowEditDependant#{dependant.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Dependant %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Dependant", alt: "Delete Dependant"),
+	      [dependant.client, dependant], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, dependant]) do |f| %>
+    <div class = "basic-form">
+      <%= render "dependants/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Dependant", :alt => "Save Dependant") %>
+    </div>
+  <% end %>
+</div>

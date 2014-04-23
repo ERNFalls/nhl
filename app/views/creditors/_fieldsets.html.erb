@@ -1,0 +1,55 @@
+<fieldset>
+  <legend>Creditor Data</legend>
+  <div>
+    <%= f.label :creditor, "Creditor:" %>
+    <br>
+    <%= f.text_field :creditor, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :account_no, "Account No.:" %>
+    <br>
+    <%= f.text_field :account_no, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :date_last_used, "Date Last Used:" %>
+    <br>
+    <%= f.date_select :date_last_used, {:order => [:month, :day, :year], :start_year => 1910,
+	:include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :balance, "Outstanding Balance:" %>
+    <br>
+    <%= f.text_field :balance, :style => "width: 100px;" %>
+  </div>
+  <div>
+    <%= f.label :address_line_one, "Creditor Address:" %>
+    <br>
+    <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+    <br>
+    <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+     <br>
+    <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :city, "City:"%>
+	  <br>
+	  <%= f.text_field :city, {:style => "width: 180px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :state, "State:"%>
+	  <br>
+	  <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :zip_code, "ZIP:"%>
+	  <br>
+	  <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :plus_four_code, "+4:" %>
+	  <br>
+	  <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+    </div>
+  </div>
+</fieldset>

@@ -1,0 +1,54 @@
+<fieldset>
+  <legend>Dependant Data</legend>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :last_name, "Last Name:" %>
+	  <br>
+	  <%= f.text_field :last_name, {:style => "width: 200px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :prefix, "Prefix:" %>
+	  <br>
+	  <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."],
+	  :selected => f.object.prefix), {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :suffix, "Suffix:" %>
+	  <br>
+	  <%= f.select :suffix, options_for_select(["Jr.", "Esq."], :selected => f.object.suffix),
+	  {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+    </div>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+      <%= f.label :first_name, "First Name:" %>
+      <br>
+      <%= f.text_field :first_name, {:style => "width: 200px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+      <%= f.label :middle_name, "Middle Name:" %>
+      <br>
+      <%= f.text_field :middle_name, {:style => "width: 135px;"} %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :ssn, "Social Security No.:" %>
+    <br>
+    <%= f.text_field :ssn, :style => "width: 346px" %>
+  </div>
+  <div>
+    <%= f.label :date_of_birth, "Date of Birth:" %>
+    <br>
+    <%= f.date_select :date_of_birth, {:order => [:month, :day, :year], :start_year => 1910,
+	  :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :relationship, "Relation:" %>
+    <br>
+    <%= f.text_field :relationship, :style => "width: 346px" %>
+  </div>
+  <div>
+    <%= f.check_box :employment %>
+    <%= f.label :employment, "Check if Dependant is Employed:" %>
+  </div>
+</fieldset>

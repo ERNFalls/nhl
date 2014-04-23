@@ -1,0 +1,14 @@
+<fieldset>
+  <div style = "display: inline-block">
+    <%= f.label :expense_type, "Monthly Expense:" %>
+    <br>
+    <%= f.select :expense_type, options_for_select(Global.monthly_expenses,
+    :selected => f.object.expense_type),
+    {:prompt => "Select a Type"}, :style => "width: 240px;" %>
+  </div>
+  <div style = "display: inline-block">
+    <%= f.label :expense, "Cost:" %>
+    <br>
+    <%= f.text_field :expense, :style => "text-align: center; width: 100px;" %>
+  </div>
+</fieldset>

@@ -1,5 +1,5 @@
 <div>
-  <h4>- PIP Matter Key Data -</h4>
+  <h4PIP Matter Key Data/h4>
   <table>
     <tr>
 	  <td>Medical Provider:</td>
@@ -10,7 +10,7 @@
       <td>
       <%= @pip.insurance_carrier %>
       <% unless @pip.insurance_company.blank? %>
-        <%= " - " << @pip.insurance_company.to_s %>
+        <%= " - " + @pip.insurance_company.to_s %>
       <% end %>
       </td>
     </tr>
@@ -31,7 +31,7 @@
   </table>
   <% if @pip.claim_no.blank? || @pip.policy_no.blank? || @pip.insured_name.blank? %>
   <% else %>  
-	<h4>- PIP Matter Insurance Data -</h4>
+	<h4PIP Matter Insurance Data/h4>
   <% end %>
   <table>
 	<% unless @pip.claim_no.blank? %>
@@ -73,7 +73,7 @@
       </tr>
     <% end %>
   </table>
-  <h4>- PIP Matter Status -</h4>
+  <h4PIP Matter Status/h4>
   <table>
 	<tr>
 	  <td>Status:</td>
@@ -86,8 +86,8 @@
       </tr>
     <% end %>
   </table>  
-  <% unless @pip.case_year.blank? && @pip.date_suit_filed.blank? %>	
-	<h4>- PIP Suit Key Data -</h4>
+  <% unless @pip.case_year.blank? && @pip.filing_date.blank? %>	
+	<h4PIP Suit Key Data/h4>
   <% end %>
   <table>
     <% unless @pip.plaintiff.blank? %>
@@ -121,10 +121,10 @@
         </td>
       </tr>
     <% end %>
-	<% unless @pip.date_suit_filed.blank? %>
+	<% unless @pip.filing_date.blank? %>
       <tr>
         <td>Date Suit Filed:</td>
-        <td><%= @pip.date_suit_filed.strftime("%F") %></td>
+        <td><%= @pip.filing_date.strftime("%F") %></td>
       </tr>
     <% end %>  
     <% unless @pip.date_of_sop.blank? %>

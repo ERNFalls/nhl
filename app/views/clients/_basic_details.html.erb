@@ -1,0 +1,94 @@
+<div>
+  <h3>Client Data</h3>
+  <table>
+	<tr>
+	  <td>Name:</td>
+	  <td>
+	    <%= @client.prefix.to_s + " " + @client.first_name.to_s + " " +
+	    @client.middle_name.to_s + " " + @client.last_name.to_s + " " +
+	    @client.suffix.to_s %>
+	  </td>
+    </tr>
+    <% unless @client.company_name.blank? %>
+	  <tr> 
+	    <td>Company Name:</td>
+	    <td><%= @client.company_name %></td>
+      </tr>
+    <% end %>
+    <tr>
+	  <td>Primary E-Mail:</td>
+	  <td><%= @client.email %></td>
+	</tr>
+	<% unless @client.ssn.blank? %>
+	  <tr>
+		<td>Social Security No.:</td>
+		<td><%= @client.ssn %></td>
+	  </tr>
+	<% end %>
+	<% unless @client.drivers_license_no.blank? %>
+	  <tr>
+		<td>Driver's License No.:</td>
+		<td><%= @client.drivers_license_no %></td>
+	  </tr>
+	<% end %>
+	<% unless @client.date_of_birth.blank? %>
+	  <tr>
+		<td>Date of Birth:</td>
+		<td><%= @client.date_of_birth.strftime("%m/%d/%Y") %></td>
+	  </tr>
+	<% end %>
+	<% unless @client.aliases.blank? %>
+	  <tr>
+		<td>Aliases:</td>
+		<td><%= @client.aliases %></td>
+	  </tr>
+	<% end %>
+	<% unless @client.marital_status.blank? %>
+	  <tr>
+		<td>Marital Status:</td>
+		<br>
+		<td><%= @client.marital_status %></td>
+	  </tr>
+	<% end %>
+	<% unless @client.spouse.blank? %>
+	  <tr>
+		<td>Spouse:</td>
+		<td><%= @client.spouse %></td>
+	  </tr>
+	<% end %>
+  </table>
+  <h4>Mailing Address</h4>
+  <table>
+    <tr>
+      <td>Address:</td>
+      <td>
+        <%= @client.address_line_one %>
+        <br>
+        <%= @client.address_line_two %>
+        <br>
+        <%= @client.address_line_three %>
+      </td>
+    </tr>
+    <tr>
+      <td>City:</td>
+      <td><%= @client.city %></td>
+    </tr>
+    <tr>
+      <td>State:</td>
+      <td><%= @client.state %></td>
+    </tr>
+    <tr>
+      <td>ZIP Code:</td>
+      <td>
+        <%= @client.zip_code.to_s %>
+        <% unless @client.plus_four_code.blank? %>
+          <%= " - " + @client.plus_four_code.to_s %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <%= render @client.phone_numbers.sort %>
+  <%= render "phone_numbers/new" %>
+  <%= render @client.email_addresses.sort %>
+  <%= render "email_addresses/new" %>
+</div>

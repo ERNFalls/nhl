@@ -1,189 +1,1126 @@
-<h1><%= @client.prefix.to_s + " " + @client.first_name + " " + @client.middle_name + " " + @client.last_name + " " + @client.suffix.to_s %></h1>
+<script type="text/javascript">
+<!--
+function SlideOutMatters() {
+	var a = document.getElementById("add-matter-plate")
+    var b = document.getElementById("matters-plate")
+	var control = document.getElementById("matters-control")
+	if (b.style.width=="0px" && a.style.width=="0px")
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (b.style.width=="0px" && a.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor="coral",
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px";
+	else if (b.style.width!="0px" && a.style.width=="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (b.style.width!="0px" && a.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function AddMatter() {
+	var a = document.getElementById("matters-plate")
+    var b = document.getElementById("add-matter-plate")
+	var control = document.getElementById("matters-control")
+	if (b.style.width=="0px" && a.style.width=="0px")
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (b.style.width=="0px" && a.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor="coral",
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px";
+	else if (b.style.width!="0px" && a.style.width=="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (b.style.width!="0px" && a.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutJoins() {
+    var a = document.getElementById("joins-plate")
+	var control = document.getElementById("joins-control")
+	if (a.style.width=="0px")
+		a.style.height="auto",
+		a.style.opacity="1",
+		a.style.width="396px",
+		control.style.zIndex="20",
+		control.style.backgroundColor="coral";
+	else if (a.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutNotes() {
+	var a = document.getElementById("add-note-plate")
+    var b = document.getElementById("notes-plate")
+	var control = document.getElementById("notes-control")
+	if (b.style.width=="0px" && a.style.width=="0px")
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (b.style.width=="0px" && a.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor="coral",
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px";
+	else if (b.style.width!="0px" && a.style.width=="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (b.style.width!="0px" && a.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function AddNote() {
+	var a = document.getElementById("notes-plate")
+    var b = document.getElementById("add-note-plate")
+	var control = document.getElementById("notes-control")
+	if (b.style.width=="0px" && a.style.width=="0px")
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (b.style.width=="0px" && a.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor="coral",
+		b.style.height="auto",
+		b.style.opacity="1",
+		b.style.width="396px";
+	else if (b.style.width!="0px" && a.style.width=="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (b.style.width!="0px" && a.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutTasks() {
+	var a = document.getElementById("tasks-plate")
+	var b = document.getElementById("add-task-plate")
+	var control = document.getElementById("tasks-control")
+	if (a.style.width=="0px" && b.style.width=="0px")
+		a.style.height="auto",
+		a.style.opacity="1",
+		a.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (a.style.width=="0px" && b.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor="coral",
+		a.style.height="auto",
+		a.style.opacity="1",
+		a.style.width="396px";
+	else if (a.style.width!="0px" && b.style.width=="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (a.style.width!="0px" && b.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function AddTask() {
+    var a = document.getElementById("add-task-plate")
+	var b = document.getElementById("tasks-plate")
+	var control = document.getElementById("tasks-control")
+	if (a.style.width=="0px" && b.style.width=="0px")
+		a.style.height="auto",
+		a.style.opacity="1",
+		a.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (a.style.width=="0px" && b.style.width!="0px")
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor="coral",
+		a.style.height="auto",
+		a.style.opacity="1",
+		a.style.width="396px";
+	else if (a.style.width!="0px" && b.style.width=="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (a.style.width!="0px" && b.style.width!="0px")
+		a.style.height="0px",
+		a.style.opacity="0",
+		a.style.width="0px",
+		b.style.height="0px",
+		b.style.opacity="0",
+		b.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutFileManager() {
+	var files = document.getElementById("file-manager-plate")
+	var control = document.getElementById("file-manager-control")
+	if (files.style.width=="0px")
+		files.style.height="auto",
+		files.style.opacity="1",
+		files.style.width="396px",
+		control.style.backgroundColor="coral";
+	else
+		files.style.height="0px",
+		files.style.opacity="0",
+		files.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutDocCreator() {
+	var docc = document.getElementById("doc-creator-plate")
+	var control = document.getElementById("doc-creator-control")
+	if (docc.style.width=="0px")
+		docc.style.height="auto",
+		docc.style.opacity="1",
+		docc.style.width="396px",
+		control.style.backgroundColor="coral";
+	else
+		docc.style.height="0px",
+		docc.style.opacity="0",
+		docc.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function AddBoat() {
+	var boat = document.getElementById("boat-plate")
+	var eight = document.getElementById("plate-eight")
+	var nine = document.getElementById("plate-nine")
+	var control = document.getElementById("control-seven")
+	if (boat.style.width=="0px")
+		eight.style.height="0px",
+		eight.style.opacity="0",
+		eight.style.width="0px",
+		nine.style.height="0px",
+		nine.style.opacity="0",
+		nine.style.width="0px",
+		control.style.backgroundColor="coral",
+		boat.style.height="auto",
+		boat.style.opacity="1",
+		boat.style.width="396px";
+	else
+		boat.style.height="0px",
+		boat.style.opacity="0",
+		boat.style.width="0px",
+		nine.style.height="0px",
+		nine.style.opacity="0",
+		nine.style.width="0px",
+		control.style.backgroundColor="coral",
+		eight.style.height="auto",
+		eight.style.opacity="1",
+		eight.style.width="396px";
+}
+function CloseAddBoat() {
+	var boat = document.getElementById("boat-plate")
+	var eight = document.getElementById("plate-eight")
+	var nine = document.getElementById("plate-nine")
+	var control = document.getElementById("control-seven")
+	if (boat.style.width!="0px")
+		control.style.backgroundColor=null,
+		boat.style.height="0px",
+		boat.style.opacity="0",
+		boat.style.width="0px";
+}
+function AddMortgage() {
+	var mortgage = document.getElementById("mortgage-plate")
+	var six = document.getElementById("plate-six")
+	var seven = document.getElementById("plate-seven")
+	var control = document.getElementById("control-seven")
+	if (mortgage.style.width=="0px")
+		six.style.height="0px",
+		six.style.opacity="0",
+		six.style.width="0px",
+		seven.style.height="0px",
+		seven.style.opacity="0",
+		seven.style.width="0px",
+		control.style.backgroundColor="coral",
+		mortgage.style.height="auto",
+		mortgage.style.opacity="1",
+		mortgage.style.width="396px";
+	else
+		mortgage.style.height="0px",
+		mortgage.style.opacity="0",
+		mortgage.style.width="0px",
+		seven.style.height="0px",
+		seven.style.opacity="0",
+		seven.style.width="0px",
+		control.style.backgroundColor="coral",
+		six.style.height="auto",
+		six.style.opacity="1",
+		six.style.width="396px";
+}
+function CloseAddMortgage() {
+	var mortgage = document.getElementById("mortgage-plate")
+	var six = document.getElementById("plate-six")
+	var seven = document.getElementById("plate-seven")
+	var control = document.getElementById("control-seven")
+	if (mortgage.style.width!="0px")
+		control.style.backgroundColor=null,
+		mortgage.style.height="0px",
+		mortgage.style.opacity="0",
+		mortgage.style.width="0px";
+}
+//-->
+</script>
+<h1><%= @client.prefix.to_s + " " + @client.client_name + " " + @client.suffix.to_s %></h1>
 <div>
-  <div id = "simple-control-bar" class = "basic-icon-bar">
-    <% if can? :update, Client %>
-	  <div>  
-	    <%= link_to link_to image_tag("edit_button_icon.png",
-	    title: "Edit Client", alt: "Edit Client"),
-	    edit_client_path(@client) %>    
+  <div id = "double-decker-form-control-bar" class = "basic-icon-bar">
+    <% if can? :read, Client %>
+	  <div id = "control-one">
+	    <%= link_to link_to image_tag("back_button_icon.png",
+	    title: "Clients Index", alt: "Clients Index"),
+	    clients_path %>
 	  </div>
     <% end %>
+    <% if can? :update, Client %>
+      <div id = "control-two">  
+	    <%= link_to image_tag("edit_button_icon.png", title: "Edit Client", alt: "Edit Client"),
+	    '#EditClient', onclick: onClick="SwitchOneAndTwo(); return false;"; %>   
+      </div>
+    <% end %>
     <% if can? :delete, Client %>
-	  <div>
+	  <div id = "control-three">
 	    <%= link_to link_to image_tag("delete_button_icon.png",
 	    title: "Delete Client", alt: "Delete Client"), client_path(@client),
 	    method: :delete, data: { confirm: 'Are you sure you wish to delete this Client?' } %>
 	  </div>
     <% end %>
-    <% if can? :read, Client %>
-	  <div>
-	    <%= link_to link_to image_tag("list_button_icon.png",
-	    title: "Clients Index", alt: "Clients Index"),
-	    clients_path %>
+    <% if can? :read, Matter %>
+      <div id = "matters-control">
+        <%= link_to image_tag("case_button_icon.png", title: "Show All Matters", alt: "Show All Matters"),
+        '#ShowMatters', onclick: onClick="SlideOutMatters(); return false;"; %>
 	  </div>
     <% end %>
+    <% if can? :read, Note %>
+      <div id = "notes-control">
+        <%= link_to image_tag("note_button_icon.png", title: "Show All Notes", alt: "Show All Notes"),
+        '#ShowNotes', onclick: onClick="SlideOutNotes(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Task %>
+      <div id = "tasks-control">
+        <%= link_to image_tag("task_button_icon.png", title: "Show All Tasks", alt: "Show All Tasks"),
+        '#ShowTasks', onclick: onClick="SlideOutTasks(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Client %>
+      <div id = "file-manager-control">
+        <%= link_to image_tag("open_folder_button_icon.png", title: "Show File Manager", alt: "Show File Manager"),
+        '#ShowFileManager', onclick: onClick="SlideOutFileManager(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Client %>
+      <div id = "doc-creator-control">
+        <%= link_to image_tag("create_button_icon.png", title: "Show Document Creator", alt: "Show Document Creator"),
+        '#ShowDocCreator', onclick: onClick="SlideOutDocCreator(); return false;"; %>
+	  </div>
+    <% end %>
+    <br>
+    <span class = "counter">
+      <div></div>
+      <div></div>
+      <div></div>
+      <% if can? :read, Matter %>
+        <div>
+          (<%= @client.matters.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Note %>
+        <div>
+          (<%= @client.notes.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Task %>
+        <div>
+          (<%= @client.tasks.count %>)
+        </div>
+      <% end %>
+      <% if @file_count.sub("(","").sub(")","").to_i < 100 %>
+        <div><%= @file_count %></div>
+      <% else %>
+        <div><%= @file_count.sub("(","").sub(")","").to_i %></div>
+      <% end %>
+      <div></div>
+    </span>
+    <br>
+    <% if can? :read, BankAccount %>
+      <div id = "control-five" style = "margin-left: 2px;">
+        <%= link_to image_tag("bank_account_button_icon.png", title: "Show Bank Accounts", alt: "Show Bank Accounts"),
+        '#ShowBankAccounts', onclick: onClick="SlideOutFourOrSwitchForFive(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Property %>
+      <div id = "control-six">
+        <%= link_to image_tag("property_button_icon.png", title: "Show Properties", alt: "Show Properties"),
+        '#ShowProperties', onclick: onClick="SlideOutSixOrSwitchForSeven(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Vehicle %>
+      <div id = "control-seven">
+        <%= link_to image_tag("car_button_icon.png", title: "Show Vehicles", alt: "Show Vehicles"),
+        '#ShowVehicles', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Job %>
+      <div id = "control-eight">
+        <%= link_to image_tag("job_button_icon.png", title: "Show Jobs", alt: "Show Jobs"),
+        '#ShowJobs', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Dependant %>
+      <div id = "control-nine">
+        <%= link_to image_tag("dependants_button_icon.png", title: "Show Dependants", alt: "Show Dependants"),
+        '#ShowDependants', onclick: onClick="SlideOutTwelveOrSwitchForThirteen(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Creditor %>
+      <div id = "control-ten">
+        <%= link_to image_tag("demand_button_icon.png", title: "Show Creditors", alt: "Show Creditors"),
+        '#ShowCreditors', onclick: onClick="SlideOutFourteenOrSwitchForFifteen(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Expense %>
+      <div id = "control-eleven">
+        <%= link_to image_tag("expenses_button_icon.png", title: "Show Expenses", alt: "Show Expenses"),
+        '#ShowExpenses', onclick: onClick="SlideOutSixteenOrSwitchForSeventeen(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Furniture %>
+      <div id = "control-twelve">
+        <%= link_to image_tag("furniture_button_icon.png", title: "Show Furniture", alt: "Show Furniture"),
+        '#ShowFurniture', onclick: onClick="SlideOutEighteenOrSwitchForNineteen(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, OtherCase %>
+      <div id = "control-thirteen">
+        <%= link_to image_tag("other_button_icon.png", title: "Show Miscellaneous", alt: "Show Miscellaneous"),
+        '#ShowMisc', onclick: onClick="SlideOutTwentyOrSwitchForTwentyOne(); return false;"; %>
+	  </div>
+    <% end %>
+    <br>
+    <span class = "counter">
+      <% if can? :read, BankAccount %>
+        <div>
+          (<%= @client.bank_accounts.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Property %>
+        <div>
+        (<%= @client.properties.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Vehicle %>
+        <div>
+          (<%= @client.vehicles.count + @client.boats.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Job %>
+        <div>
+          (<%= @client.jobs.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Dependant %>
+        <div>
+          (<%= @client.dependants.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Creditor %>
+        <div>
+          (<%= @client.creditors.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Expense %>
+        <div>
+          (<%= @client.expenses.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, Furniture %>
+        <div>
+          (<%= @client.furnitures.count %>)
+        </div>
+      <% end %>
+      <% if can? :read, OtherCase %>
+        <div>
+          (<%= @client.other_cases.count %>)
+        </div>
+      <% end %>
+    </span>
   </div>
   <div class = "sliding-plate">
     <div id = "plate-one">
+      <%= render "basic_details" %>
+    </div>
+    <div id = "plate-two" style = "display: block; height: 0; margin-left: 380px; opacity: 0; width: 0;">
       <div>
-        <h3>-Client Data-</h3>
-        <table>
-          <tr>
-	        <td>ID:</td>
-	        <td><%= @client.id %></td>
-	      </tr>
-	      <tr>
-            <td>Name:</td>
-            <td>
-              <%= @client.prefix << " " << @client.first_name << " " <<
-              @client.middle_name << " " << @client.last_name << " " <<
-              @client.suffix %>
-            </td>
-          </tr>
-          <% unless @client.company_name.blank? %>
-            <tr> 
-              <td>Company Name:</td>
-              <td><%= @client.company_name %></td>
-		    </tr>
-		  <% end %>
-		  <tr>
-	        <td>Primary E-Mail:</td>
-	        <td><%= @client.email %></td>
-	      </tr>
-	      <% unless @client.ssn.blank? %>
-	        <tr>
-	          <td>SSN:</td>
-	          <td><%= @client.ssn %></td>
-	        </tr>
-	      <% end %>
-	      <% unless @client.drivers_license_no.blank? %>
-	        <tr>
-	          <td>Driver's License No.:</td>
-	          <td><%= @client.drivers_license_no %></td>
-	        </tr>
-	      <% end %>
-	      <% unless @client.date_of_birth.blank? %>
-	        <tr>
-	          <td>Date of Birth:</td>
-	          <td><%= @client.date_of_birth.strftime("%F") %></td>
-	        </tr>
-	      <% end %>
-	      <% unless @client.aliases.blank? %>
-	        <tr>
-	          <td>Aliases:</td>
-	          <td><%= @client.aliases %></td>
-	        </tr>
-	      <% end %>
-	      <% unless @client.marital_status.blank? %>
-	        <tr>
-	          <td>Marital Status:</td>
-	          <td><%= @client.marital_status %></td>
-	        </tr>
-	      <% end %>
-	      <% unless @client.spouse.blank? %>
-	        <tr>
-	          <td>Spouse:</td>
-	          <td><%= @client.spouse %></td>
-	        </tr>
-	      <% end %>
-        </table>
-        <%= render "addresses/new" %>
-        <%= render @client.addresses.sort %>
-        <%= render "phone_numbers/new" %>
-        <%= render @client.phone_numbers.sort %>
-        <%= render "email_addresses/new" %>
-        <%= render @client.email_addresses.sort %>
-        <table>
-          <% @client.ira? %>
-            <tr>
-              <td colspan = "2">Client has an Individual Retirement Account</td>
-            </tr>
-          <% end %>
-          <% @client.four_o_one_k? %>
-            <tr>
-              <td colspan = "2">Client has a 401K</td>
-            </tr>
-          <% end %>
-          <% unless @client.repossessions.blank? %>
-            <tr>
-              <td>Repossession Details:</td>
-              <td><%= @client.reposessions %></td>
-            </tr>
-          <% end %>
-          <% unless @client.pending_suits.blank? %>
-            <tr>
-              <td>Pending Lawsuit Details:</td>
-              <td><%= @client.pending_suit %></td>
-            </tr>
-          <% end %>
-          <% unless @client.amount_owed_to_irs.blank? %>
-            <tr>
-              <td>Amount Owed to the IRS:</td>
-              <td><%= number_to_currency(@client.amount_owed_to_irs) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.safety_deposit_contents.blank? %>
-            <tr>
-              <td>Safety Deposit Contents:</td>
-              <td><%= @client.safety_deposit_contents %></td>
-            </tr>
-          <% end %>
-          <% unless @client.safety_deposit_location.blank? %>
-            <tr>
-              <td>Safety Deposit Location:</td>
-              <td><%= @client.safety_deposit_location %></td>
-            </tr>
-          <% end %>
-          <% unless @client.safety_deposit_list.blank? %>
-            <tr>
-              <td>Safety Deposit Access List:</td>
-              <td><%= @client.safety_deposit_list %></td>
-            </tr>
-          <% end %>
-          <% unless @client.safety_deposit_list.blank? %>
-            <tr>
-              <td>Safety Deposit Access List:</td>
-              <td><%= @client.safety_deposit_list %></td>
-            </tr>
-          <% end %>
-          <% unless @client.retirement.blank? %>
-            <tr>
-              <td>Retirement Income:</td>
-              <td><%= number_to_currency(@client.retirement) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.pension.blank? %>
-            <tr>
-              <td>Pension Income:</td>
-              <td><%= number_to_currency(@client.pension) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.disability.blank? %>
-            <tr>
-              <td>Disability Income:</td>
-              <td><%= number_to_currency(@client.disability) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.child_support.blank? %>
-            <tr>
-              <td>Child Support Income:</td>
-              <td><%= number_to_currency(@client.child_support) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.alimony.blank? %>
-            <tr>
-              <td>Alimony Income:</td>
-              <td><%= number_to_currency(@client.alimony) %></td>
-            </tr>
-          <% end %>
-          <% unless @client.referred_by.blank? %>
-            <tr>
-              <td>Reffered By:</td>
-              <td><%= @client.referred_by %></td>
-            </tr>
-          <% end %>
-        </table>
+        <h2>Edit Client</h2>
+        <%= render "form" %>
       </div>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "matters-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Matters", alt: "Close Matters"),
+            '#CloseMatters', onclick: onClick="SlideOutMatters(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :create, Matter %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Matter", alt: "Add Matter"),
+	        '#AddMatter', onclick: onClick="AddMatter(); return false;"; %>
+	      </div>
+        <% end %>
+        <% if can? :read, ClientsMatter %>
+	      <div id = "joins-control">
+	        <%= link_to image_tag("link_button_icon.png", title: "Join With Case", alt: "Join With Case"),
+	        '#ShowJoins', onclick: onClick="SlideOutJoins(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2>Matters (<%= @client.matters.count %>)</h2>
+      <%= render @client.matters %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "add-matter-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Matters", alt: "Close Matters"),
+            '#CloseMatters', onclick: onClick="AddMatter(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Matter %>
+	      <div>
+	        <%= link_to image_tag("case_button_icon.png", title: "Show Matters", alt: "Show Matters"),
+	        '#ShowMatters', onclick: onClick="SlideOutMatters(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2>Add a Matter</h2>
+      <%= render "matters/client_form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "joins-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Joins", alt: "Close Joins"),
+            '#CloseJoins', onclick: onClick="SlideOutJoins(); return false;"; %>
+          </div>
+        <% end %>
+      </div>
+      <h2>Edit Matter Joins</h2>
+      <%= render @client.clients_matters %>
+      <h2>Create New Join With Existing Matter</h2>
+      <%= render "clients_matters/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "notes-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Notes", alt: "Close Notes"),
+            '#CloseNotes', onclick: onClick="SlideOutNotes(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :create, Note %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Note", alt: "Add Note"),
+	        '#AddNote', onclick: onClick="AddNote(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2>Notes (<%= @client.notes.count %>)</h2>
+      <%= render @client.notes.order('notes.updated_at DESC') %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "add-note-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Notes", alt: "Close Notes"),
+            '#CloseNotes', onclick: onClick="AddNote(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Note %>
+	      <div>
+	        <%= link_to image_tag("note_button_icon.png", title: "Show Notes", alt: "Show Notes"),
+	        '#ShowNotes', onclick: onClick="SlideOutNotes(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2>Add a Note</h2>
+      <%= render "notes/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "tasks-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Tasks", alt: "Close Tasks"),
+            '#CloseTasks', onclick: onClick="SlideOutTasks(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :create, Task %>
+          <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Task", alt: "Add Task"),
+            '#AddToDo', onclick: onClick="AddTask(); return false;"; %>
+          </div>
+        <% end %>
+      </div>
+      <h2>Tasks (<%= @client.tasks.count %>)</h2>
+      <%= render @client.tasks.order('tasks.updated_at DESC') %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "add-task-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Tasks", alt: "Close Tasks"),
+            '#CloseTasks', onclick: onClick="AddTask(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Task %>
+          <div>
+		    <%= link_to image_tag("task_button_icon.png", title: "Show Tasks", alt: "Show Tasks"),
+		    '#ShowTasks', onclick: onClick="SlideOutTasks(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Task</h2>
+      <%= render "tasks/matter_form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "file-manager-plate" style = "height: 0; opacity: 0; width: 0;">
+    <%= render "file_manager" %>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "doc-creator-plate" style = "height: 0; opacity: 0; width: 0;">
+    <%= render "doc_creator" %>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-four" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Bank Accounts", alt: "Close Bank Accounts"),
+            '#CloseBankAccounts', onclick: onClick="SlideOutFourOrSwitchForFive(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, BankAccount %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Bank Account", alt: "Add Bank Account"),
+	        '#AddBankAccount', onclick: onClick="SlideOutFiveOrSwitchForFour(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Bank Accounts (<%= @client.bank_accounts.count %>)</h2>
+      <%= render @client.bank_accounts.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-five" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, BankAccount %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Bank Accounts", alt: "Close Bank Accounts"),
+            '#CloseBankAccounts', onclick: onClick="SlideOutFiveOrSwitchForFour(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, BankAccount %>
+          <div>
+		    <%= link_to image_tag("bank_account_button_icon.png", title: "Show Bank Accountss", alt: "Show Bank Accounts"),
+		    '#ShowBankAccounts', onclick: onClick="SlideOutFourOrSwitchForFive(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Bank Account</h2>
+      <%= render "bank_accounts/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-six" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Properties", alt: "Close Properties"),
+            '#CloseProperties', onclick: onClick="SlideOutSixOrSwitchForSeven(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Property %>
+	      <div>
+	        <%= link_to image_tag("add_property_button_icon.png", title: "Add Property", alt: "Add Property"),
+	        '#AddProperty', onclick: onClick="SlideOutSevenOrSwitchForSix(); return false;"; %>
+	      </div>
+	    <% end %>
+	    <% if can? :create, Mortgage %>
+	      <div>
+	        <%= link_to image_tag("add_mortgage_button_icon.png", title: "Add Mortgage", alt: "Add Mortgage"),
+	        '#AddMortgage', onclick: onClick="AddMortgage(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Properties (<%= @client.properties.count %>)</h2>
+      <%= render @client.properties.sort %>
+      <%= render @client.mortgages.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-seven" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Property %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Properties", alt: "Close Properties"),
+            '#CloseProperties', onclick: onClick="SlideOutSevenOrSwitchForSix(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Property %>
+          <div>
+		    <%= link_to image_tag("property_button_icon.png", title: "Show Properties", alt: "Show Properties"),
+		    '#ShowProperties', onclick: onClick="SlideOutSixOrSwitchForSeven(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Property</h2>
+      <%= render "properties/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "mortgage-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Mortgage %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Properties", alt: "Close Properties"),
+            '#CloseProperties', onclick: onClick="CloseAddMortgage(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Mortgage %>
+          <div>
+		    <%= link_to image_tag("property_button_icon.png", title: "Show Properties", alt: "Show Properties"),
+		    '#ShowProperties', onclick: onClick="AddMortgage(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Mortgage</h2>
+      <%= render "mortgages/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-eight" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Vehicles", alt: "Close Vehicles"),
+            '#CloseVehicles', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Vehicle %>
+	      <div>
+	        <%= link_to image_tag("add_car_button_icon.png", title: "Add Car", alt: "Add Car"),
+	        '#AddCar', onclick: onClick="SlideOutNineOrSwitchForEight(); return false;"; %>
+	      </div>
+	    <% end %>
+	    <% if can? :create, Boat %>
+	      <div>
+	        <%= link_to image_tag("add_boat_button_icon.png", title: "Add Boat", alt: "Add Boat"),
+	        '#AddBoat', onclick: onClick="AddBoat(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Cars (<%= @client.vehicles.count %>) & Boats (<%= @client.boats.count %>)</h2>
+      <%= render @client.vehicles.sort %>
+      <%= render @client.boats.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-nine" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Vehicle %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Vehicles", alt: "Close Vehicles"),
+            '#CloseVehicles', onclick: onClick="SlideOutNineOrSwitchForEight(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Vehicle %>
+          <div>
+		    <%= link_to image_tag("car_button_icon.png", title: "Show Vehicles", alt: "Show Vehicles"),
+		    '#ShowVehicles', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Vehicle</h2>
+      <%= render "vehicles/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "boat-plate" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Boat %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Vehicles", alt: "Close Vehicles"),
+            '#CloseVehicles', onclick: onClick="CloseAddBoat(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Boat %>
+          <div>
+		    <%= link_to image_tag("car_button_icon.png", title: "Show Vehicles", alt: "Show Vehicles"),
+		    '#ShowVehicles', onclick: onClick="AddBoat(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Boat</h2>
+      <%= render "boats/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-ten" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Jobs", alt: "Close Jobs"),
+            '#CloseJobs', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Job %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Job", alt: "Add Job"),
+	        '#AddJob', onclick: onClick="SlideOutElevenOrSwitchForTen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Jobs (<%= @client.jobs.count %>)</h2>
+      <%= render @client.jobs.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-eleven" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Job %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Jobs", alt: "Close Jobs"),
+            '#CloseJobs', onclick: onClick="SlideOutElevenOrSwitchForTen(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Job %>
+          <div>
+		    <%= link_to image_tag("job_button_icon.png", title: "Show Jobs", alt: "Show Jobs"),
+		    '#ShowJobs', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Job</h2>
+      <%= render "jobs/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-twelve" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Dependants", alt: "Close Dependants"),
+            '#CloseDependants', onclick: onClick="SlideOutTwelveOrSwitchForThirteen(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Dependant %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Dependant", alt: "Add Dependant"),
+	        '#AddDependant', onclick: onClick="SlideOutThirteenOrSwitchForTwelve(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Dependants (<%= @client.dependants.count %>)</h2>
+      <%= render @client.dependants.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-thirteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Dependant %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Dependants", alt: "Close Dependants"),
+            '#CloseDependants', onclick: onClick="SlideOutThirteenOrSwitchForTwelve(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Dependant %>
+          <div>
+		    <%= link_to image_tag("dependants_button_icon.png", title: "Show Dependants", alt: "Show Dependants"),
+		    '#ShowDependants', onclick: onClick="SlideOutTwelveOrSwitchForThirteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Dependant</h2>
+      <%= render "dependants/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-fourteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Creditors", alt: "Close Creditors"),
+            '#CloseCreditors', onclick: onClick="SlideOutFourteenOrSwitchForFifteen(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Creditor %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Creditor", alt: "Add Creditor"),
+	        '#AddCreditor', onclick: onClick="SlideOutFifteenOrSwitchForFourteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Creditors (<%= @client.creditors.count %>)</h2>
+      <%= render @client.creditors.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-fifteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Creditor %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Creditors", alt: "Close Creditors"),
+            '#CloseCreditors', onclick: onClick="SlideOutFifteenOrSwitchForFourteen(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Creditor %>
+          <div>
+		    <%= link_to image_tag("demand_button_icon.png", title: "Show Creditors", alt: "Show Creditors"),
+		    '#ShowCreditors', onclick: onClick="SlideOutFourteenOrSwitchForFifteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Creditor</h2>
+      <%= render "creditors/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-sixteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Expense", alt: "Close Expense"),
+            '#CloseExpense', onclick: onClick="SlideOutSixteenOrSwitchForSeventeen(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Expense %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Expense", alt: "Add Expense"),
+	        '#AddExpense', onclick: onClick="SlideOutSeventeenOrSwitchForSixteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Monthly Expenses (<%= @client.expenses.count %>)</h2>
+      <%= render @client.expenses.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-seventeen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Expense %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Expense", alt: "Close Expense"),
+            '#CloseExpense', onclick: onClick="SlideOutSeventeenOrSwitchForSixteen(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Expense %>
+          <div>
+		    <%= link_to image_tag("expenses_button_icon.png", title: "Show Expense", alt: "Show Expense"),
+		    '#ShowExpense', onclick: onClick="SlideOutSixteenOrSwitchForSeventeen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add Monthly Expense</h2>
+      <%= render "expenses/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-eighteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Furniture", alt: "Close Furniture"),
+            '#CloseFurniture', onclick: onClick="SlideOutEighteenOrSwitchForNineteen(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :create, Furniture %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Furniture", alt: "Add Furniture"),
+	        '#AddFurniture', onclick: onClick="SlideOutNineteenOrSwitchForEighteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Furniture (<%= @client.furnitures.count %>)</h2>
+      <%= render @client.furnitures.sort %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-nineteen" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Furniture %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Furniture", alt: "Close Furniture"),
+            '#CloseFurniture', onclick: onClick="SlideOutNineteenOrSwitchForEighteen(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Furniture %>
+          <div>
+		    <%= link_to image_tag("furniture_button_icon.png", title: "Show Furniture", alt: "Show Furniture"),
+		    '#ShowFurniture', onclick: onClick="SlideOutEighteenOrSwitchForNineteen(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add Furniture</h2>
+      <%= render "furnitures/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-twenty" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Misc.", alt: "Close Misc."),
+            '#CloseMisc', onclick: onClick="SlideOutTwentyOrSwitchForTwentyOne(); return false;"; %>
+          </div>
+	    <% end %>
+        <% if can? :update, Client %>
+	      <div>
+	        <%= link_to image_tag("edit_button_icon.png", title: "Edit Misc.", alt: "Edit Misc."),
+	        '#EditMisc', onclick: onClick="SlideOutTwentyOneOrSwitchForTwenty(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <%= render "misc_details" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-twenty-one" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Client %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Misc.", alt: "Close Misc."),
+            '#CloseMisc.', onclick: onClick="SlideOutTwentyOneOrSwitchForTwenty(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Client %>
+          <div>
+		    <%= link_to image_tag("other_button_icon.png", title: "Show Misc.", alt: "Show Misc."),
+		    '#ShowMisc', onclick: onClick="SlideOutTwentyOrSwitchForTwentyOne(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Edit Miscellaneous</h2>
+      <%= render "misc_form" %>
     </div>
   </div>
 </div>

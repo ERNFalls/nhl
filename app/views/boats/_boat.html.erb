@@ -1,0 +1,127 @@
+<script type="text/javascript">
+<!--
+function ShowEditBoat<%=boat.id%>DIV() {
+	var edit = edit_boat<%=boat.id%>_div
+	var show = show_boat<%=boat.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_boat<%=boat.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Boat</h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Boat %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Boat", alt: "Edit Boat"),
+		  '#EditBoat', onclick: onClick="ShowEditBoat#{boat.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Boat %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Boat", alt: "Delete Boat"),
+		  [boat.client, boat], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Boat Data</h4>
+  <table>
+    <% if boat.keep == true %>
+      <tr>
+        <td colspan = "2" align = "center" style = "font-weight: bold;">
+          Client Wants to Keep Boat
+        </td>
+      </tr>
+    <% end %>
+    <% unless boat.year.blank? %>
+      <tr>
+        <td>Year</td>
+        <td><%= boat.year %></td>
+      </tr>
+    <% end %>
+    <% unless boat.make.blank? %>
+      <tr>
+        <td>Make:</td>
+        <td><%= boat.make %></td>
+      </tr>
+    <% end %>
+    <% unless boat.model.blank? %>
+      <tr>
+	    <td>Model:</td>
+        <td><%= boat.model %></td>
+      </tr>
+    <% end %>
+    <% unless boat.engine.blank? %>
+      <tr>
+	    <td>Engine Type:</td>
+        <td><%= boat.engine %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% unless boat.ownership_type.blank? && boat.bank.blank? && boat.account_no.blank? && boat.balance_owed.blank? %>
+    <h4>Purchase Information</h4>
+  <% end %>
+  <table>
+    <% unless boat.ownership_type.blank? %>
+      <tr>
+        <td>Ownership:</td>
+        <td><%= boat.ownership_type %></td>
+      </tr>
+    <% end %>
+    <% unless boat.bank.blank? %>
+      <tr>
+        <td>Bank:</td>
+        <td><%= boat.bank %></td>
+      </tr>
+    <% end %>
+    <% unless boat.account_no.blank? %>
+      <tr>
+        <td>Account Type:</td>
+        <td><%= boat.account_no %></td>
+      </tr>
+    <% end %>
+    <% unless boat.balance_owed.blank? %>
+      <tr>
+	    <td>Balance Owed:</td>
+        <td><%= number_to_currency(boat.balance_owed) %></td>
+      </tr>
+    <% end %>
+  </table>	
+</div>
+<div id = "edit_boat<%=boat.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Boat Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Boat %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Boat", alt: "Show Boat"),
+	      '#ShowBoat', onclick: onClick="ShowEditBoat#{boat.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Boat %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Boat", alt: "Delete Boat"),
+	      [boat.client, boat], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, boat]) do |f| %>
+    <div class = "basic-form">
+      <%= render "boats/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Boat", :alt => "Save Boat") %>
+    </div>
+  <% end %>
+</div>

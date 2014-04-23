@@ -1,0 +1,50 @@
+<fieldset>
+  <%= f.hidden_field :taskable_id, :value => @able.id %>
+  <%= f.hidden_field :taskable_type, :value => controller_name.classify %>
+  <div style = "display: none;">
+    <%= f.label :created_by, "User:", :hidden => true %>
+    <br>
+    <% if user_signed_in? %>
+	  <%= f.text_field :created_by, :value => current_user.id.to_s, :style => 'width: 100px;', :readonly => true, :hidden => true %>
+	<% else %>
+	  <%= f.text_field :created_by, :value => "Please, Log In to Submit Tasks.", :style => 'width: 250px;', :readonly => true, :hidden => true %>
+	<% end %>
+  </div>
+  <div>
+    <%= f.label :due_date %>
+    <br>
+    <%= f.date_select :due_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <% user_array = User.uniq.pluck(:username, :id) %>
+  <% if user_array.compact.empty? == true %>
+    <div>  
+	  <%= f.label :assigned_to, "Assigned To:" %>
+	  <br>
+	  <%= "No Users Exist in Database" %>
+    </div>
+  <% else %>
+    <div>
+	  <%= f.label :assigned_to, "Assigned To:" %>
+	  <br>            
+	  <%= f.select :assigned_to, options_for_select(user_array.compact.sort, :selected => f.object.assigned_to),
+	  {prompt: "Select a User"}, :style => "width:250px;" %>
+    </div>
+  <% end %>
+  <div>
+    <%= f.label :priority, "Prioriy:" %>
+    <br>
+    <%= f.select :priority, options_for_select(["Low", "Medium", "High", "Urgent"], :selected => f.object.priority),
+	  {prompt: "Select"}, :style => "width:250px;" %>
+  </div>
+  <div>
+    <%= f.label :status, "Status:" %>
+    <br>
+    <%= f.select :status, options_for_select(["Pending", "Complete"], :selected => f.object.status),
+	  {prompt: "Select"}, :style => "width:250px;" %>
+  </div>
+  <div>
+    <td valign="top"><%= f.label :task, "Task Description:" %>
+    <br>
+    <td valign="top"><%= f.text_area :task %>
+  </div>
+</fieldset>

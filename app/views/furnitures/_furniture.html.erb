@@ -1,0 +1,94 @@
+<script type="text/javascript">
+<!--
+function ShowEditFurniture<%=furniture.id%>DIV() {
+	var edit = edit_furniture<%=furniture.id%>_div
+	var show = furniture_<%=furniture.id%>_details_div
+	if (edit.style.display=="none")
+		show.style.display="none",
+		edit.style.display="block";
+	else
+		edit.style.display="none";
+}
+function Show<%=furniture.id%>FurnitureDetailsDIV() {
+	var edit = edit_furniture<%=furniture.id%>_div
+	var show = furniture_<%=furniture.id%>_details_div
+	if (show.style.display=="none")
+		edit.style.display="none",
+		show.style.display="block";
+	else
+		show.style.display="none";
+}
+//-->
+</script>
+<div class = "full-note-div">
+  <div class = "note-title">
+    <div>
+	  <%= link_to furniture.description.to_s + " - " + furniture.item_model + " (" + furniture.number_owned.to_s + ")",
+	  '#FurnitureDetails', onclick: onClick="Show#{furniture.id}FurnitureDetailsDIV(); return false;"; %>
+    </div>
+    <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
+      <% if can? :read, Furniture %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Details", alt: "Show Details"),
+	      '#FurnitureDetails', onclick: onClick="Show#{furniture.id}FurnitureDetailsDIV(); return false;"; %>
+        </div>
+	  <% end %>
+      <% if can? :edit, Furniture %>
+        <div>
+	      <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Furniture", alt: "Edit Furniture"),
+	      '#EditFurniture', onclick: onClick="ShowEditFurniture#{furniture.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Furniture %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Fruniture", alt: "Delete Furniture"),
+		  [furniture.client, furniture], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>  
+	  <% end %>
+    </div>
+  </div>
+  <div id = "furniture_<%= furniture.id %>_details_div" class = "hidden-furniture-div" style = "display: none;">
+    <table>
+      <% unless furniture.item_model.blank? %>
+	    <tr>
+	      <td>Item Model:</td>
+	      <td><%= furniture.item_model %></td>
+	    </tr>
+	  <% end %>
+	  <% unless furniture.description.blank? %>
+	    <tr>
+	      <td>Furniture Type:</td>	    
+	      <td><%= furniture.description %></td>
+	    </tr>
+	  <% end %>
+	  <% unless furniture.price_at_purchase.blank? %>
+	    <tr>
+	      <td>Purchase Price:</td>	    
+	      <td><%= number_to_currency(furniture.price_at_purchase) %></td>
+	    </tr>
+	  <% end %>
+	  <% unless furniture.date_of_purchase.blank? %>
+	    <tr>
+	      <td>Date of Purchase:</td>	    
+	      <td><%= furniture.date_of_purchase.strftime("%m/%d/%Y") %></td>
+	    </tr>
+	  <% end %>
+	  <% unless furniture.number_owned.blank? %>
+	    <tr>
+	      <td>Number Owned:</td>	    
+	      <td><%= furniture.number_owned %></td>
+	    </tr>
+	  <% end %>
+    </table>
+  </div>
+  <div id = "edit_furniture<%= furniture.id %>_div" class = "hidden-furniture-div" style = "display: none;">
+    <%= form_for [@client, furniture] do |f| %>
+      <div class = "basic-form">
+        <%= render "furnitures/fieldsets", f:f %>
+      </div>  
+      <div class = "basic-form-save-button">
+	    <%= image_submit_tag("save_button_icon.png", :title => "Save Furniture", :alt => "Save Furniture") %>
+      </div>
+    <% end %>
+  </div>
+</div>

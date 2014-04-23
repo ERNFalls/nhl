@@ -1,0 +1,43 @@
+  <fieldset>
+	<legend>Address Form</legend>
+    <div>
+      <%= f.hidden_field :addressable_id, :value => @able.id %>
+	  <%= f.hidden_field :addressable_type, :value => controller_name.classify %>
+      <%= f.label :address_type, "Address Type:" %>
+      <br>
+      <%= f.select :address_type, options_for_select(["Primary","Secondary"], :selected => f.object.address_type),
+      {:prompt => "Select a Type"}, {:style => "width: 206px;"} %>
+    </div>
+    <div>
+	  <%= f.label :address_line_one, "Address:" %>
+	  <br>
+	  <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+	  <br>
+	  <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+	   <br>
+	  <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+	  <%= f.text_field :country, {:value => "United States of America", :hidden => true} %>
+    </div>
+    <div>
+      <div style = "display: inline-block;">
+        <%= f.label :city, "City:"%>
+        <br>
+        <%= f.text_field :city, {:style => "width: 180px;"} %>
+      </div>
+      <div style = "display: inline-block;">
+        <%= f.label :state, "State:"%>
+        <br>
+        <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+      </div>
+      <div style = "display: inline-block;">
+        <%= f.label :zip_code, "ZIP:"%>
+        <br>
+        <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+      </div>
+      <div style = "display: inline-block;">
+        <%= f.label :plus_four_code, "+4:" %>
+        <br>
+        <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+      </div>
+    </div>
+  </fieldset>

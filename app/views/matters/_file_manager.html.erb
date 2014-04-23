@@ -1,0 +1,31 @@
+<div>
+  <div class = "inner-icon-bar">
+	<% if can? :read, PipMatter %>
+	  <div>
+		<%= link_to image_tag("back_button_icon.png", title: "Close File Manager", alt: "Close File Manager"),
+		'#CloseFileManager', onclick: onClick="SlideOutTwelve(); return false;"; %>
+	  </div>
+    <% end %>
+  </div>
+  <h2>File Manager</h2>
+  <table class = "file-management-table">
+	<% @dirfiles.sort.each do |fname| %>
+	  <% unless fname == "." || fname == ".." %>
+		<tr>
+		  <td><%= link_to fname.upmatter, :controller => 'pip_matters', :action => 'download', :id => @pip.id, :fname => fname %></td>
+		</tr>
+	  <% end %>
+	<% end %>
+  </table>
+  <h2>Upload A File</h2>
+  <div class = "upload-form">
+	<%= form_tag({action: :upload}, :multipart => true) do %>
+	  <div class = "uploader">
+		<%= file_field_tag 'document' %>
+	  </div>
+	  <div class = "upload-button">
+		<%= image_submit_tag("upload_button_icon.png", :title => "Upload File", :alt => "Upload File") %>
+	  </div>
+	<% end %>
+  </div>
+</div>

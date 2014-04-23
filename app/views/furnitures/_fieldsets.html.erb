@@ -1,0 +1,30 @@
+<fieldset>
+  <div>
+    <%= f.label :description, "Type:" %>
+    <br>
+    <%= f.select :description, options_for_select(Global.furniture,
+    :selected => f.object.description),
+    {:prompt => "Select a Type"}, :style => "width: 352px;" %>
+  </div>
+  <div>
+    <%= f.label :item_model, "Item Model" %>
+    <br>
+    <%= f.text_field :item_model, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :date_of_purchase, "Date of Purchase:" %>
+    <br>
+    <%= f.date_select :date_of_purchase, {:order => [:month, :day, :year], :start_year => 1910,
+	:include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :price_at_purchase, "Purchase Price:" %>
+    <br>
+    <%= f.text_field :price_at_purchase, :style => "width: 100px;" %>
+  </div>
+  <div>
+    <%= f.label :number_owned, "Number Owned:" %>
+    <br>
+    <%= f.text_field :number_owned, {:maxlength => 2, :style => "width: 100px"} %>
+  </div>
+</fieldset>

@@ -1,0 +1,139 @@
+<script type="text/javascript">
+<!--
+function ShowEditVehicle<%=vehicle.id%>DIV() {
+	var edit = edit_vehicle<%=vehicle.id%>_div
+	var show = show_vehicle<%=vehicle.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_vehicle<%=vehicle.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Vehicle</h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Vehicle %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Vehicle", alt: "Edit Vehicle"),
+		  '#EditVehicle', onclick: onClick="ShowEditVehicle#{vehicle.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Vehicle %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Vehicle", alt: "Delete Vehicle"),
+		  [vehicle.client, vehicle], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Vehicle Data</h4>
+  <table>
+    <% if vehicle.keep == true %>
+      <tr>
+        <td colspan = "2" align = "center" style = "font-weight: bold;">
+          Client Wants to Keep Vehicle
+        </td>
+      </tr>
+    <% end %>
+    <% unless vehicle.year.blank? %>
+      <tr>
+        <td>Year</td>
+        <td><%= vehicle.year %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.make.blank? %>
+      <tr>
+        <td>Make:</td>
+        <td><%= vehicle.make %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.model.blank? %>
+      <tr>
+	    <td>Model:</td>
+        <td><%= vehicle.model %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.color.blank? %>
+      <tr>
+	    <td>Color:</td>
+        <td><%= vehicle.color %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.vin_no.blank? %>
+      <tr>
+	    <td>VIN Number:</td>
+        <td><%= vehicle.vin_no %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.current_mileage.blank? %>
+      <tr>
+	    <td>Current Mileage:</td>
+        <td><%= vehicle.current_mileage %></td>
+      </tr>
+    <% end %>
+  </table>	
+  <% unless vehicle.ownership_type.blank? && vehicle.bank.blank? && vehicle.account_no.blank? && vehicle.balance_owed.blank? %>
+    <h4>Purchase Information</h4>
+  <% end %>
+  <table>
+    <% unless vehicle.ownership_type.blank? %>
+      <tr>
+        <td>Ownership:</td>
+        <td><%= vehicle.ownership_type %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.bank.blank? %>
+      <tr>
+        <td>Bank:</td>
+        <td><%= vehicle.bank %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.account_no.blank? %>
+      <tr>
+        <td>Account Type:</td>
+        <td><%= vehicle.account_no %></td>
+      </tr>
+    <% end %>
+    <% unless vehicle.balance_owed.blank? %>
+      <tr>
+	    <td>Balance Owed:</td>
+        <td><%= number_to_currency(vehicle.balance_owed) %></td>
+      </tr>
+    <% end %>
+  </table>	
+</div>
+<div id = "edit_vehicle<%=vehicle.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Vehicle Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Vehicle %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Vehicle", alt: "Show Vehicle"),
+	      '#ShowVehicle', onclick: onClick="ShowEditVehicle#{vehicle.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Vehicle %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Vehicle", alt: "Delete Vehicle"),
+	      [vehicle.client, vehicle], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, vehicle]) do |f| %>
+    <div class = "basic-form">
+      <%= render "vehicles/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Vehicle", :alt => "Save Vehicle") %>
+    </div>
+  <% end %>
+</div>

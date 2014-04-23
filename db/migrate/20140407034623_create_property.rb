@@ -11,6 +11,7 @@ class CreateProperty < ActiveRecord::Migration
       t.string :state
       t.integer :zip_code
       t.integer :plus_four_code
+      t.string :country
       t.string :association_name
       t.string :association_address_line_one
       t.string :association_address_line_two

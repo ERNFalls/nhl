@@ -1,12 +1,30 @@
 NHL::Application.routes.draw do
   
   devise_for :users
-
   resources :clients do
     collection { post :importpd }
+    collection { get :download }
     resources :addresses
+    resources :clients_matters
     resources :email_addresses
     resources :phone_numbers
+    resources :bank_accounts
+    resources :boats
+    resources :businesses
+    resources :creditors
+    resources :dependants
+    resources :expenses
+    resources :furnitures
+    resources :jobs
+    resources :matters
+    resources :messages
+    resources :mortgages
+    resources :notes
+    resources :other_cases
+    resources :properties
+    resources :property_transfers
+    resources :tasks
+    resources :vehicles
   end
   resources :contacts do
     collection { post :importpd }
@@ -17,16 +35,20 @@ NHL::Application.routes.draw do
   resources :insurance_carriers do
     resources :insurance_companies
   end
-  resources :notes
-  resources :pip_matters do
+  resources :matters do
     collection { get :download }
-	resources :messages
+	resources :clients
+    resources :clients_matters
+    resources :messages
 	resources :notes
-	resources :pip_demands
-	resources :pip_checks
     resources :tasks
   end
   resources :medical_providers
+  resources :notes
+  resources :pip_matters do
+	resources :pip_demands
+	resources :pip_checks
+  end
   resources :tasks do
     collection { post :createpartial }
     patch :updatepartial

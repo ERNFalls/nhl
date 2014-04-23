@@ -11,8 +11,10 @@ class CreateMortgages < ActiveRecord::Migration
       t.integer :zip_code
       t.integer :plus_four_code
       t.decimal :balance, :precision => 10, :scale => 2
-      t.string :overdue_payment
+      t.decimal :overdue_payment, :precision => 10, :scale => 2
+      t.integer :client_id
       t.integer :property_id
+      t.foreign_key :clients
       t.foreign_key :properties
       t.timestamps
     end

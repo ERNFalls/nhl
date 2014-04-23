@@ -1,0 +1,181 @@
+﻿<h1 style = "margin-top: -14px;"><%= @matter.case_simple_style %></h1>
+<div>
+  <div id = "form-control-bar" class = "basic-icon-bar">
+    <% if can? :read, Matter %>
+      <div>
+	    <%= link_to image_tag("back_button_icon.png", title: "Back to Index", alt: "Back to Index"),
+	    matters_path %>
+      </div>
+    <% end %>
+    <% if can? :update, Matter %>
+      <div id = "control-two">
+	    <%= link_to image_tag("edit_button_icon.png", title: "Edit Matter", alt: "Edit Matter"),
+	    '#EditPIP', onclick: onClick="SwitchOneAndTwo(); return false;"; %>   
+      </div>
+    <% end %>
+    <% if can? :delete, Matter %>
+      <div>
+	    <%= link_to image_tag("delete_button_icon.png", title: "Delete Matter", alt: "Delete Matter"),
+	    matter_path(@matter), method: :delete, data: { confirm: 'Are you sure you wish to delete this Matter?' } %>
+      </div>
+    <% end %>
+    <% unless @matter.case_no.to_s.empty? %>
+      <div id = "control-four">
+	    <%= link_to image_tag("docket_button_icon.png", title: "Show/Hide Docket", alt: "Show/Hide Docket"),
+	    '#ShowDocket', onclick: onClick="SlideOutThree(); return false;"; %>
+      </div>
+    <% else %>
+      <div style = "vertical-align: top;">
+      </div>
+    <% end %>
+    <% if can? :read, Note %>
+      <div id = "control-seven">
+        <%= link_to image_tag("note_button_icon.png", title: "Show Notes", alt: "Show Notes"),
+        '#ShowNotes', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+	  </div>
+    <% end %>
+    <% if can? :read, Task %>
+      <div id = "control-eight">
+        <%= link_to image_tag("task_button_icon.png", title: "Show Tasks", alt: "Show Tasks"),
+        '#ShowTasks', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+	  </div>
+    <% end %>
+    <div id = "control-nine">
+      <%= link_to image_tag("open_folder_button_icon.png", title: "Show Files", alt: "Show Files"),
+      '#ShowFiles', onclick: onClick="SlideOutTwelve(); return false;"; %>
+    </div>
+    <div id = "control-ten">
+      <%= link_to image_tag("build_button_icon.png", title: "Show Document Creator", alt: "Show Document Creator"),
+      '#ShowDocCreator', onclick: onClick="SlideOutThirteen(); return false;"; %>
+    </div>
+    <br>
+    <span class = "counter">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div><%= @docket_count %></div>
+      <% if can? :read, Note %>
+        <div>(<%= @matter.notes.count %>)</div>
+      <% end %>
+      <% if can? :read, Task %>
+        <div>(<%= @matter.tasks.count %>)</div>
+      <% end %>
+      <div><%= @file_count %></div>
+      <div></div>
+    </span>
+  </div>
+  <div class = "sliding-plate">
+    <div id = "plate-one">
+      <%= render 'details' %>
+    </div>
+    <div id = "plate-two" style = "display: block; height: 0; margin-left: 380px; opacity: 0; width: 0;">
+      <div>
+        <h2Edit Matter/h2>
+        <%= render "form" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-three" style = "height: 0; opacity: 0; width: 0;">
+    <%= render 'docket' %>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-eight" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Matter %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Notes", alt: "Close Notes"),
+            '#CloseNotes', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :create, Note %>
+	      <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add Note", alt: "Add Note"),
+	        '#AddNote', onclick: onClick="SlideOutNineOrSwitchForEight(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2Notes (<%= @matter.notes.count %>)/h2>
+      <%= render @matter.notes.order('notes.updated_at DESC') %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-nine" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Matter %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Notes", alt: "Close Notes"),
+            '#CloseNotes', onclick: onClick="SlideOutNineOrSwitchForEight(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Note %>
+	      <div>
+	        <%= link_to image_tag("note_button_icon.png", title: "Show Notes", alt: "Show Notes"),
+	        '#ShowNotes', onclick: onClick="SlideOutEightOrSwitchForNine(); return false;"; %>
+	      </div>
+        <% end %>
+      </div>
+      <h2Add a Note/h2>
+      <%= render "notes/form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-ten" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Matter %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Tasks", alt: "Close Tasks"),
+            '#CloseTasks', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :create, Task %>
+          <div>
+	        <%= link_to image_tag("add_button_icon.png", title: "Add To Do", alt: "Add To Do"),
+            '#AddToDo', onclick: onClick="SlideOutElevenOrSwitchForTen(); return false;"; %>
+          </div>
+        <% end %>
+      </div>
+      <h2>Tasks (<%= @matter.tasks.count %>)</h2>
+      <%= render @matter.tasks.order('tasks.updated_at DESC') %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-eleven" style = "height: 0; opacity: 0; width: 0;">
+    <div>
+      <div class = "inner-icon-bar">
+        <% if can? :read, Matter %>
+          <div>
+            <%= link_to image_tag("back_button_icon.png", title: "Close Tasks", alt: "Close Tasks"),
+            '#CloseTasks', onclick: onClick="SlideOutElevenOrSwitchForTen(); return false;"; %>
+          </div>
+        <% end %>
+        <% if can? :read, Task %>
+          <div>
+		    <%= link_to image_tag("task_button_icon.png", title: "Show Tasks", alt: "Show Tasks"),
+		    '#ShowTasks', onclick: onClick="SlideOutTenOrSwitchForEleven(); return false;"; %>
+	      </div>
+	    <% end %>
+      </div>
+      <h2>Add A Task</h2>
+      <%= render "tasks/matter_form" %>
+    </div>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-twelve" style = "height: 0; opacity: 0; width: 0;">
+    <%= render 'file_manager' %>
+  </div>
+</div>
+<div class = "sliding-plate">
+  <div id = "plate-thirteen" style = "height: 0; opacity: 0; width: 0;">
+    <%= render 'doc_creator' %>
+  </div>
+</div>

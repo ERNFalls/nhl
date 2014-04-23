@@ -1,0 +1,43 @@
+<div>
+  <div class = "inner-icon-bar">
+    <% if can? :read, Client %>
+	  <div>
+	    <%= link_to image_tag("back_button_icon.png", title: "Close Document Creator",
+        alt: "Close Document Creator"), '#CloseDocCreator', onclick: onClick="SlideOutDocCreator(); return false;"; %>
+	  </div>
+    <% end %>
+  </div>
+  <h2>Document Creator</h2>
+  <div class = "basic-form">
+    <%= form_tag({:controller => "clients", :action => "create_docx"}, :method => "get") do %>
+      <fieldset>
+        <div>
+          <%= label_tag "template", "Template:" %>
+          <br>
+          <%= select_tag "template", options_from_collection_for_select(@templates, :file, :name), {:prompt => "Select a Document Template", :style => "width: 368px;"} %>
+        </div>
+        <div>
+          <%= label_tag "property_selected", "Property for Template:" %>
+          <br>
+          <%= select_tag "property_selected", options_from_collection_for_select(@properties, :id, :address_line_one), {:prompt => "None Selected", :style => "width: 368px;"} %>
+        </div>
+        <div class = "create-document-control">
+          <div class = "create-document-checkbox-option">
+            <%= label_tag "save", "Add to File:" %>
+            <%= check_box_tag "save", "true", true, class: "checkbox" %>
+          </div>
+          <div class = "create-document-checkbox-option">
+            <%= label_tag "download", "Download:" %>
+            <%= check_box_tag "download", "true", false, class: "checkbox" %>
+          </div>
+          <div class = "create-document-button">
+            <%= image_submit_tag("build_button_icon.png", :alt => "Create", :title => "Create", :docx_template => "Create") %>
+          </div>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+  <div>
+    <%= render "doc_creator_help" %>
+  </div>
+</div>

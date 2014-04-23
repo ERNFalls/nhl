@@ -1,0 +1,114 @@
+<fieldset>
+  <legend>Miscellaneous</legend>
+  <div>
+	<%= f.check_box :ira %>
+	<%= f.label :ira, "IRA:" %>
+  </div>
+  <div>
+	<%= f.check_box :four_o_one_k %>
+	<%= f.label :four_o_one_k, "401K:" %>
+  </div>
+  <div>
+	<%= f.label :repossessions, "Repossessions Details (If Applicable):" %>
+	<br>
+	<%= f.text_area :repossessions, {:style => "width: 350px;"} %>
+  </div>
+  <div>
+	<%= f.label :pending_suit, "Pending Lawsuit Details (If Applicable):" %>
+	<br>
+	<%= f.text_area :pending_suit, {:style => "width: 350px;"} %>
+  </div>
+  <div>
+	<%= f.label :amount_owed_to_irs, "Amount Owed to IRS (If Applicable):" %>
+	<br>
+	<%= f.text_field :amount_owed_to_irs, {:style => "width: 100px;"} %>
+  </div>
+  <div>
+	<%= f.label :safety_deposit_contents, "Safety Deposit Contents (If Applicable):" %>
+	<br>
+	<%= f.text_area :safety_deposit_contents, {:style => "width: 350px;"} %>
+  </div>
+  <div>
+	<%= f.label :safety_deposit_location, "Saftey Deposit Location:" %>
+	<br>
+	<%= f.text_field :safety_deposit_location, {:style => "width: 350px;"} %>
+  </div>
+  <div>
+	<%= f.label :safety_deposit_list, "List Persons with Access to Safety Deposit Box:" %>
+	<br>
+	<%= f.text_area :safety_deposit_list, {:style => "width: 350px;"} %>
+  </div>
+  <div>
+	<%= f.label :other_losses, "List Any Losses From Fire/Theft/Gambling:" %>
+	<br>
+	<%= f.text_area :other_losses, {:style => "width: 350px;"} %>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Other Income Sources</legend>
+  <div>
+    <div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :retirement, "Retirement:" %>
+	  <br>
+	  <%= f.text_field :retirement, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+	<div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :pension, "Pension:" %>
+	  <br>
+	  <%= f.text_field :pension, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+	<div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :disability, "Disability:" %>
+	  <br>
+	  <%= f.text_field :disability, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+  </div>
+  <div>
+	<div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :child_support, "Child Support:" %>
+	  <br>
+	  <%= f.text_field :child_support, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+	<div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :alimony, " Alimony:" %>
+	  <br>
+	  <%= f.text_field :alimony, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+	<div style = "display: inline-block; margin-right: 10px;">
+	  <%= f.label :other_income, "Other Income:" %>
+	  <br>
+	  <%= f.text_field :other_income, {:style => "text-align: center; width: 100px;"} %>
+	</div>
+  </div>
+</fieldset>
+<% if @client.legacy_pd_email_two || @client.legacy_pd_suffix || @client.legacy_pd_file || @client.legacy_pd_one || @client.legacy_pd_two || @client.legacy_pd_three || @client.legacy_pd_four %>
+<fieldset>
+  <legend>PD Fields</legend>
+  <div>
+    <%= f.label :legacy_pd_email_two, "E-Mail Two:" %>
+    <br>
+    <%= f.text_field :legacy_pd_email_two, :style => "width: 346px" %>
+  </div>
+  <div>
+    <%= f.label :legacy_pd_suffix, "Closing Note:" %>
+    <br>
+    <%= f.text_field :legacy_pd_suffix, :style => "width: 346px" %>
+  </div>
+  <div>
+    <%= f.label :legacy_pd_one, "Notes:" %>
+    <br>
+    <%= f.text_field :legacy_pd_one, :style => "width: 346px" %>
+    <br>
+    <%= f.text_field :legacy_pd_two, :style => "width: 346px" %>
+    <br>
+    <%= f.text_field :legacy_pd_three, :style => "width: 346px" %>
+    <br>
+    <%= f.text_field :legacy_pd_four, :style => "width: 346px" %>
+  </div>
+  <div>
+    <%= f.label :legacy_pd_file, "Windows Folder Name:" %>
+    <br>
+    <%= f.text_field :legacy_pd_file, :style => "width: 346px" %>
+  </div>
+</fieldset>
+<% end %>

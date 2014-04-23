@@ -1,0 +1,54 @@
+<fieldset>
+  <legend>Boat Data</legend>
+  <div>
+    <div style = "display: inline-block">
+      <%= f.label :year, "Year:" %>
+      <br>
+      <%= f.text_field :year, {:maxlength => 4, :style => "width: 80px;"} %>
+    </div>
+    <div style = "display: inline-block">
+      <%= f.label :make, "Make:" %>
+      <br>
+      <%= f.text_field :make, :style => "width: 80px;" %>
+    </div>
+    <div style = "display: inline-block">
+      <%= f.label :model, "Model:" %>
+      <br>
+      <%= f.text_field :model, :style => "width: 80px;" %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :engine, "Engine Type:" %>
+    <br>
+    <%= f.select :engine, options_for_select(["Inboard","Outboard"], :selected => f.object.engine), 
+    {:prompt => "Select"}, :style => "width: 86px;" %>
+  </div>
+  <div>
+    <%= f.check_box :keep %>
+    <%= f.label :keep, "Check if Client Wants to Keep Boat" %>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>Purchase Information</legend>
+  <div>
+    <%= f.label :ownership_type, "Ownership:" %>
+    <br>
+    <%= f.select :ownership_type, options_for_select(["Owned", "Leased", "Financed"],
+    :selected => f.object.ownership_type), {:prompt => "Select"}, {:style => "width: 170px"} %>
+  </div>
+  <div>
+    <%= f.label :bank, "Financer (If Applicable):" %>
+    <br>
+    <%= f.text_field :bank, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :account_no, "Account No.:" %>
+    <br>
+    <%= f.text_field :account_no, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :balance_owed, "Balance Owed on Boat:" %>
+    <br>
+    <%= f.text_field :balance_owed, {:style => 'width: 80px;'} %>
+  </div>
+</fieldset>

@@ -1,0 +1,18 @@
+<%= form_for ([@client, @client.bank_accounts.build]) do |f| %>
+  <% if @client.errors.any? %>
+    <div id = "errorExplanation">
+	  <h2><%= pluralize(@client.errors.count, "Error") %> Prohibited Bank Account From Being Saved:</h2>
+	  <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg.titleize.titleize %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "basic-form">
+    <%= render "bank_accounts/fieldsets", f:f %>
+  </div>
+  <div class = "basic-form-save-button">
+	<%= image_submit_tag("save_button_icon.png", :title => "Save Bank Account", :alt => "Save Bank Account") %>
+  </div>
+<% end %>

@@ -96,21 +96,21 @@ html{
 		url("cloud_background_tile.png") repeat 0 0;
 	color: $color-black;
 	font-size: 10pt;
-	line-height: 15pt;
-	font-family: Verdana, Geneva, sans-serif;
+	line-height: 16pt;
+	font-family: "Verdana", Geneva, sans-serif;
 	min-height: 100%;
 	}
 
 h1 {
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: "Tahoma", Geneva, sans-serif;
 	}
 
 h2 {
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	font-family: "Tahoma", Geneva, sans-serif;
 	}
 
 textarea {
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: "Verdana", Geneva, sans-serif;
 	font-size: 10pt;
 	height: 100px;
 	width: 350px;
@@ -143,7 +143,7 @@ textarea {
 	margin: 0 auto;
 	margin-bottom: -540px;
 	margin-top: 6px;
-	min-width: 480px;
+	min-width: 476px;
 	overflow: hidden;
 	z-index: -40;
 	-moz-transition-duration: .5s;
@@ -357,7 +357,7 @@ textarea {
 
 @media screen and (max-width: 932px) {
 	#background-layer {
-		width: 482px;
+		width: 476px;
 		}
 	#header-container {
 		width: 482px;
@@ -520,50 +520,6 @@ textarea {
 			-webkit-transition-duration: .5s;
 			}
 
-#form-control-bar {
-	border-color: $ultra-white;
-	border-radius: 12px;
-	border-style: double;
-	border-width: 4px;
-	display: block;
-	height: 54px;
-	margin: 0;
-	padding: 0;
-	width: 388px;
-	-moz-transition-duration: .5s;
-	-o-transition-duration: .5s;
-	-webkit-transition-duration: .5s;
-	}
-
-	#form-control-bar:hover {
-		border-color: $color-navy-blue;
-		-moz-transition-duration: .5s;
-		-o-transition-duration: .5s;
-		-webkit-transition-duration: .5s;
-		}
-
-#simple-control-bar {
-	border-color: $ultra-white;
-	border-radius: 12px;
-	border-style: double;
-	border-width: 4px;
-	display: block;
-	height: 34px;
-	margin: 0;
-	padding: 0;
-	width: 388px;
-	-moz-transition-duration: .5s;
-	-o-transition-duration: .5s;
-	-webkit-transition-duration: .5s;
-	}
-
-	#simple-control-bar:hover {
-		border-color: $color-navy-blue;
-		-moz-transition-duration: .5s;
-		-o-transition-duration: .5s;
-		-webkit-transition-duration: .5s;
-		}
-
 .sliding-plate {
 	font-size: 0;
 	margin: 0;
@@ -596,7 +552,11 @@ textarea {
 				-o-transition-duration: .5s;
 				-webkit-transition-duration: .5s;
 				}
-			
+
+        .sliding-plate table {
+            min-width: 370px;
+            }
+
 		.sliding-plate > div > div > table {
 			width: 380px;
 			}
@@ -604,6 +564,74 @@ textarea {
 /*-----------------------------*/
 /*---Basic Buttons and Icons---*/
 /*-----------------------------*/
+
+#form-control-bar {
+	border-color: $ultra-white;
+	border-radius: 12px;
+	border-style: double;
+	border-width: 4px;
+	display: block;
+	height: 50px;
+	line-height: 0;
+	margin: 0;
+	padding: 0;
+	width: 388px;
+	-moz-transition-duration: .5s;
+	-o-transition-duration: .5s;
+	-webkit-transition-duration: .5s;
+	}
+
+	#form-control-bar:hover {
+		border-color: $color-navy-blue;
+		-moz-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		-webkit-transition-duration: .5s;
+		}
+
+#double-decker-form-control-bar {
+	border-color: $ultra-white;
+	border-radius: 12px;
+	border-style: double;
+	border-width: 4px;
+	display: block;
+	height: 112px;
+	line-height: 0;
+	margin: 0;
+	padding: 0;
+	width: 388px;
+	-moz-transition-duration: .5s;
+	-o-transition-duration: .5s;
+	-webkit-transition-duration: .5s;
+	}
+
+	#double-decker-form-control-bar:hover {
+		border-color: $color-navy-blue;
+		-moz-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		-webkit-transition-duration: .5s;
+		}
+
+#simple-control-bar {
+	border-color: $ultra-white;
+	border-radius: 12px;
+	border-style: double;
+	border-width: 4px;
+	display: block;
+	height: 34px;
+	margin: 0;
+	padding: 0;
+	width: 388px;
+	-moz-transition-duration: .5s;
+	-o-transition-duration: .5s;
+	-webkit-transition-duration: .5s;
+	}
+
+	#simple-control-bar:hover {
+		border-color: $color-navy-blue;
+		-moz-transition-duration: .5s;
+		-o-transition-duration: .5s;
+		-webkit-transition-duration: .5s;
+		}
 
 .basic-icon-bar {
 	display: inline-block;
@@ -726,6 +754,7 @@ textarea {
 	border-width: 1px;
 	height: 22px;
 	padding: 1px;
+	z-index: 5;
 	-moz-transition-duration: .5s;
 	-o-transition-duration: .5s;
 	-webkit-transition-duration: .5s;
@@ -783,6 +812,18 @@ textarea {
 		-o-transition-duration: .5s;
 		-webkit-transition-duration: .5s;
 		}
+
+.counter {
+    line-height: 12px;
+    }
+
+    .counter > div {
+        display: inline-block;
+        font-size: 8pt;
+        font-weight: bold;
+        width: 37.75px;
+        text-align: center;
+        }
 
 /*-----------------*/
 /*---Search Bars---*/
@@ -1115,32 +1156,6 @@ table {
 		table tr td a:link:hover {
 			text-shadow: 0px 0px $color-black;
 			}
-
-.data-counter {
-	background-color: $color-lightest-grey;
-	border-spacing: 0px 0;
-	position: absolute;
-	top: 32px;
-	}
-	
-	.data-counter tr {
-		height: 6px;
-		}
-
-		.data-counter tr td {
-			background-color: $color-light-grey;
-			font-size: 8pt;
-			font-weight: bold;
-			min-height: 6px;
-			max-height: 6px;
-			min-width: 29.5px;
-			max-width: 29.5px;
-			text-align: center;
-			}
-
-.docket-result-table {
-	min-width: 380px;
-	}
 
 .index-table {
 	margin-left: auto;
@@ -1696,7 +1711,7 @@ ul#search-contacts-sub {
 		}
 	
 	.sub-item-form fieldset {
-		width: 352px;
+		width: 356px;
 		}
 	
 	.sub-item-form .basic-form-save-button {
@@ -1918,9 +1933,8 @@ ul#search-contacts-sub {
 		-o-transition-duration: .5s;
 		-webkit-transition-duration: .5s;
 		}
-	
+
 	.note-table-top {
-		display: inline-block;
 		-moz-transition-duration: .5s;
 		-o-transition-duration: .5s;
 		-webkit-transition-duration: .5s;

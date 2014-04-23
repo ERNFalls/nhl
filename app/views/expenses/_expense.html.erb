@@ -1,0 +1,42 @@
+<script type="text/javascript">
+<!--
+function ShowEditExpense<%=expense.id%>DIV() {
+	var edit = edit_expense<%=expense.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block";
+	else
+		edit.style.display="none";
+}
+//-->
+</script>
+<div class = "full-note-div">
+  <div class = "note-title">
+    <div style = "font-weight: bold">
+	  &#149; <%= expense.expense_type.to_s + " : " + number_to_currency(expense.expense.to_s) %>
+    </div>
+    <div class = "mini-icon-bar" style = "position: absolute; right: 0px; top: 0px;">
+      <% if can? :edit, Expense %>
+        <div>
+	      <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Expense", alt: "Edit Expense"),
+	      '#EditExpense', onclick: onClick="ShowEditExpense#{expense.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Expense %>
+        <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Expense", alt: "Delete Expense"),
+		  [expense.client, expense], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>  
+	  <% end %>
+    </div>
+  </div>
+  <div id = "edit_expense<%= expense.id %>_div" class = "hidden-expense-div" style = "display: none;">
+    <%= form_for [@client, expense] do |f| %>
+      <div class = "basic-form">
+        <%= render "expenses/fieldsets", f:f %>
+      </div>  
+      <div class = "basic-form-save-button">
+	    <%= image_submit_tag("save_button_icon.png", :title => "Save Expense", :alt => "Save Expense") %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -9,7 +9,15 @@ class CreateClients < ActiveRecord::Migration
       t.string :company_name
       t.string :ssn
       t.string :drivers_license_no
-      t.string :date_of_birth
+      t.date :date_of_birth
+      t.string :address_line_one
+      t.string :address_line_two
+      t.string :address_line_three
+      t.string :city
+      t.string :state
+      t.integer :zip_code
+      t.integer :plus_four_code
+      t.string :country
       t.string :aliases
       t.string :spouse
       t.string :marital_status
@@ -60,6 +68,14 @@ class CreateClients < ActiveRecord::Migration
       ## Invitable
       # t.string :invitation_token
       t.timestamps
+      t.string :legacy_pd_email_two
+      t.string :legacy_pd_suffix
+      t.string :legacy_pd_one
+      t.string :legacy_pd_two
+      t.string :legacy_pd_three
+      t.string :legacy_pd_four
+      t.string :legacy_pd_file
     end
+    execute("ALTER SEQUENCE clients_id_seq RESTART WITH 15000;")
   end
 end

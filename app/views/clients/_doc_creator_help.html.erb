@@ -1,0 +1,161 @@
+<div>
+  <h4>
+    The following Codes can be placed in any ".docx" Templates and will retrieve the corresponding data from the Client's Table in the Database:
+  </h4>
+  <table>
+    <tr>
+      <th>Field (Value)</th>
+      <th>Code</th>
+    </tr>
+    <tr>
+      <td>Client's Last Name: <%= @client.last_name.to_s %></td>
+      <td>clientlastname</td>
+    </tr>
+    <tr>
+      <td>Client's First Name: <%= @client.first_name.to_s %></td>
+      <td>clientfirstname</td>
+    </tr>
+    <tr>
+      <td>Client's Middle Name: <%= @client.middle_name.to_s %></td>
+      <td>clientmiddlename</td>
+    <tr>
+      <td>Client's Name Prefix: <%= @client.prefix.to_s %></td>
+      <td>clientprefix</td>
+    </tr>
+    <tr>
+      <td>Client's Name Suffix: <%= @client.suffix.to_s %></td>
+      <td>clientsuffix</td>
+    </tr>
+    <tr>
+      <td>Client's Company Name: <%= @client.company_name.to_s %></td>
+      <td>clientcompany</td>
+    </tr>
+    <tr>
+      <td>Client's Social Security No.: <%= @client.ssn.to_s %></td>
+      <td>clientssn</td>
+    </tr>
+    <tr>
+      <td>Client Driver's License No.: <%= @client.drivers_license_no.to_s %></td>
+      <td>clientdlno</td>
+    </tr>
+    <tr>
+      <td>Client's Mailing Address Line One: <%= @client.address_line_one.to_s %></td>
+      <td>clientaddressone</td>
+    </tr>
+    <tr>
+      <td>Client's Address Line Two: <%= @client.address_line_two.to_s %></td>
+      <td>clientaddresstwo</td>
+    </tr>
+    <tr>
+      <td>Client's Address Line Three: <%= @client.address_line_three.to_s %></td>
+      <td>clientaddressthree</td>
+    </tr>
+    <tr>
+      <td>Client's City: <%= @client.city.to_s %></td>
+      <td>clientcity</td>
+    </tr>
+    <tr>
+      <td>Client's ZIP Code: <%= @client.zip_code.to_s %></td>
+      <td>clientzip</td>
+    </tr>
+    <tr>
+      <td>Client's Plus Four Code: <%= @client.plus_four_code.to_s %></td>
+      <td>clientplusfour</td>
+    </tr>
+    <tr>
+      <td>Client's Country: <%= @client.country.to_s %></td>
+      <td>clientcountry</td>
+    </tr>
+    <tr>
+      <td>Client's Aliases: <%= @client.aliases.to_s %></td>
+      <td>clientaliases</td>
+    </tr>
+    <tr>
+      <td>Client's Spouse: <%= @client.spouse.to_s %></td>
+      <td>clientspouse</td>
+    </tr>
+    <tr>
+      <td>Client's Marital Status: <%= @client.marital_status.to_s %></td>
+      <td>clientcity</td>
+    </tr>
+    <tr>
+      <td>Reposession Details: <%= @client.repossessions.to_s %></td>
+      <td>clientrepo</td>
+    </tr>
+    <tr>
+      <td>Pending Suit Details: <%= @client.pending_suit.to_s %></td>
+      <td>clientpendingsuits</td>
+    </tr>
+    <tr>
+      <td>Amount Owed to IRS: <%= number_to_currency(@client.amount_owed_to_irs) %></td>
+      <td>clientowesirs</td>
+    </tr>
+    <tr>
+      <td>Safety Deposit Contents: <%= @client.safety_deposit_contents.to_s %></td>
+      <td>clientsdcontents</td>
+    </tr>
+    <tr>
+      <td>Safety Deposit Location: <%= @client.safety_deposit_location.to_s %></td>
+      <td>clientsdlocation</td>
+    </tr>
+    <tr>
+      <td>Safety Deposit List: <%= @client.city.to_s %></td>
+      <td>clientsdlist</td>
+    </tr>
+    <tr>
+      <td>Client's Other Losses: <%= @client.other_losses.to_s %></td>
+      <td>clientotherlosses</td>
+    </tr>
+    <tr>
+      <td>Client's Retirement Income: <%= number_to_currency(@client.retirement) %></td>
+      <td>clientretirement</td>
+    </tr>
+    <tr>
+      <td>Client's Pension: <%= number_to_currency(@client.pension) %></td>
+      <td>clientpension</td>
+    </tr>
+    <tr>
+      <td>Client's Disability Income: <%= number_to_currency(@client.disability) %></td>
+      <td>clientdisability</td>
+    </tr>
+    <tr>
+      <td>Client's Child Support Income: <%= number_to_currency(@client.child_support) %></td>
+      <td>clientchildsupport</td>
+    </tr>
+    <tr>
+      <td>Client's Alimony Income: <%= number_to_currency(@client.alimony) %></td>
+      <td>clientalimony</td>
+    <tr>
+      <td>Client's Other Income: <%= number_to_currency(@client.other_income) %></td>
+      <td>clientotherincome</td>
+    </tr>
+    <tr>
+      <td>Referred By: <%= @client.referred_by.to_s %></td>
+      <td>clientreferredby</td>
+    </tr>
+    <tr>
+      <td>Client's Primary E-Mail: <%= @client.email.to_s %></td>
+      <td>clientemail</td>
+    </tr>
+    <tr>
+      <td>Client's IRA ("Yes"/"No"): <%= if @client.ira then "Yes" else "No" end %></td>
+      <td>clientira</td>
+    </tr>
+    <tr>
+      <td>Client's 401K ("Yes"/"No"): <%= if @client.four_o_one_k then "Yes" else "No" end %></td>
+      <td>client401k</td>
+    </tr>
+  </table>
+</div>
+<div>
+  <h4>The sub-item data Codes that follow are prefixed by "prop1" throught "prop5".</h4>
+  <table>
+    <% Property.inspect.split(/\)|\(|,\s/).each_with_index do |attribute| %>
+      <% att = attribute.split(/:/).first %>
+      <% attr = attribute.split(/:/).first.gsub("_","") %>
+      <tr>
+        <td>prop1<%= attr %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

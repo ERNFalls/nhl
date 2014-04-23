@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>EmailAddress Form</legend>
+  <%= f.hidden_field :emailable_id, :value => @able.id %>
+  <%= f.hidden_field :emailable_type, :value => controller_name.classify %>
+  <div style = "display: inline-block;">
+    <%= f.label :address, "E-Mail Address:" %>
+    <br>
+    <%= f.text_field :address, :style => "width: 250px" %>
+  </div>
+  <div style = "display: inline-block;">
+    <%= f.label :address_type, "Type:" %>
+    <br>
+    <%= f.select :address_type, options_for_select(["Personal", "Work", "Other"],
+     :selected => f.object.address_type), {:default => "Personal"}, {:style => "width: 90px;"} %>
+  </div>
+</fieldset>

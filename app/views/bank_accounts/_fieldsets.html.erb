@@ -1,0 +1,19 @@
+<fieldset>
+  <legend>Bank Account Data</legend>
+  <div>
+    <%= f.label :bank, "Bank Name:" %>
+    <br>
+    <%= f.text_field :bank, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :account_type, "Account Type:" %>
+    <br>
+    <%= f.select :account_type, options_for_select(["Checking", "Savings", "Commercial Checking"],
+    :selected => f.object.account_type), {:prompt => "Select a Type"}, :style => "width: 186px;" %>
+  </div>
+  <div>
+    <%= f.label :average_monthly_balance, "Average Monthly Balance:" %>
+    <br>
+    <%= f.text_field :average_monthly_balance, {:style => 'width: 100px;'} %>
+  </div>
+</fieldset>

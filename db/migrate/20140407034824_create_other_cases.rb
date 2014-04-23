@@ -13,7 +13,7 @@ class CreateOtherCases < ActiveRecord::Migration
       t.string :judge
       t.string :clients_counsel
       t.string :opposing_counsel
-      t.date :date_suit_filed
+      t.date :filing_date
       t.date :date_of_sop
       t.datetime :initial_court_date
       t.string :status

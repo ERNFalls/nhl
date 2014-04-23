@@ -38,12 +38,15 @@
           <div style = "display: inline-block;">
             <%= f.label :prefix, "Prefix:" %>
             <br>
-            <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."], @contact.prefix), {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
+            <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."],
+            :selected => f.object.prefix),
+            {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
           </div>
           <div style = "display: inline-block;">
             <%= f.label :suffix, "Suffix:" %>
             <br>
-            <%= f.select :suffix, options_for_select(["Jr.", "Esq."], @contact.suffix), {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
+            <%= f.select :suffix, options_for_select(["Jr.", "Esq."], :selected => f.object.suffix),
+            {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
           </div>
         </div>
         <div>

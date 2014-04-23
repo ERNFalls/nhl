@@ -1,172 +1,16 @@
 <%= form_for @client do |f| %>
   <% if @client.errors.any? %>
-    <% if @client.errors.any? %>
-	  <div id = "error-explanation">
-        <h2><%= pluralize(@client.errors.count, "Error") %> Prohibited Client From Being Saved:</h2>
-        <ul>
-	    <% @client.errors.full_messages.each do |msg| %>
-	      <li><%= msg.titleize %></li>
-	    <% end %>
-	    </ul>
-	  </div>
-    <% end %>
+    <div id = "error-explanation">
+	  <h2><%= pluralize(@client.errors.count, "Error") %> Prohibited Client From Being Saved:</h2>
+	  <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg.titleize %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
   <div class = "basic-form">
-    <fieldset>
-      <legend>Client Form</legend>
-      <div>
-	    <div style = "display: inline-block;">
-	      <%= f.label :country, :hidden => true %>
-	      <%= f.text_field :country, :hidden => true, :value => "United States of America" %>
-	    </div>
-	  </div>
-      <div>
-        <div>
-          <div style = "display: inline-block;">
-            <%= f.label :last_name, "Last Name:" %>
-            <br>
-            <%= f.text_field :last_name, {:style => "width: 200px;"} %>
-          </div>
-          <div style = "display: inline-block;">
-            <%= f.label :prefix, "Prefix:" %>
-            <br>
-            <%= f.select :prefix, options_for_select(["Mr.", "Mrs.", "Ms.", "Master", "Miss", "Dr.", "Prof.", "Hon."], @client.prefix), {:include_blank => true}, :style => "display: inline-block; width: 75px;" %>
-          </div>
-          <div style = "display: inline-block;">
-            <%= f.label :suffix, "Suffix:" %>
-            <br>
-            <%= f.select :suffix, options_for_select(["Jr.", "Esq."], @client.suffix), {:include_blank => true}, :style => "display: inline-block; width: 60px;" %>
-          </div>
-        </div>
-        <div>
-          <div style = "display: inline-block;">
-            <%= f.label :first_name, "First Name:" %>
-            <br>
-            <%= f.text_field :first_name, {:style => "width: 200px;"} %>
-          </div>
-          <div style = "display: inline-block;">
-            <%= f.label :middle_name, "Middle Name:" %>
-            <br>
-            <%= f.text_field :middle_name, {:style => "width: 135px;"} %>
-          </div>
-	    </div>
-        <div>
-		  <%= f.label :company_name, "Company Name" %>
-		  <br>
-		  <%= f.text_field :company_name, {:style => "width: 346px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :email, "Primary E-Mail:" %>
-	      <br>
-	      <%= f.text_field :email, {:style => "width: 346px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :ssn, "Social Security Number:" %>
-	      <br>
-	      <%= f.text_field :ssn, {:style => "width: 346px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :drivers_license_no, "Driver's License Number:" %>
-	      <br>
-	      <%= f.text_field :drivers_license_no, {:style => "width: 346px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :date_of_birth, "Date of Birth:" %>
-	      <br>
-	      <%= f.date_select :date_of_birth, {:order => [:month, :day, :year], :start_year => 1910,
-          :include_blank => true, :with_css_classes => true} %>
-	    </div>
-	    <div>
-	      <%= f.label :aliases, "Aliases:" %>
-	      <br>
-	      <%= f.text_field :aliases, {:style => "width: 346px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :marital_status "Marital Status:" %>
-	      <%= f.select :marital_status, options_for_select(["Single", "Married",
-	      "Divorced", "Separated", "Widowed"]), {:style => "width: 166px;"} %>
-	    </div>
-	    <div>
-	      <%= f.label :spouse, "Spouse:" %>
-	      <br>
-	      <%= f.text_field :spouse, {:style => "width: 346px;"} %>
-	    </div>
-	  </div>
-	</fieldset>
-    <fieldset>
-      <legend>Addresses</legend>
-      <div>
-        <div>
-          <%= f.fields_for :addresses do |builder| %>
-            <div>
-              <%= builder.label :address_type, "Address Type:" %>
-              <br>
-              <%= builder.select :address_type, options_for_select(["Primary","Secondary"]),
-              {:prompt => "Select a Type"}, {:style => "width: 206px;"} %>
-            </div>
-            <div style = "display: inline-block;">
-              <div>
-	            <%= builder.label :address_line_one, "Address:" %>
-	            <br>
-	            <%= builder.text_field :address_line_one, {:style => "width: 320px;"} %>
-	            <br>
-	            <%= builder.text_field :address_line_two, {:style => "width: 320px;"} %>
-	            <br>
-	            <%= builder.text_field :address_line_three, {:style => "width: 320px;"} %>
-              </div>
-              <div style = "display: inline-block;">
-		        <div style = "display: inline-block;">
-		          <%= builder.label [:city], "City:"%>
-		          <br>
-		          <%= builder.text_field :city, {:style => "width: 170px;"} %>
-		        </div>
-		        <div style = "display: inline-block;">
-		          <%= builder.label [:state], "State:"%>
-		          <br>
-		          <%= builder.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
-		        </div>
-		        <div style = "display: inline-block;">
-		          <%= builder.label [:zip_code], "ZIP:"%>
-		          <br>
-		          <%= builder.text_field :zip_code, {:maxlength => 5, :style => "width: 50px;"} %>
-		        </div>
-		        <div style = "display: inline-block;">
-		          <%= builder.label [:plus_four_code], "+4:"%>
-		          <br>
-		          <%= builder.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px;"} %>
-		        </div>
-		        <%= builder.text_field :country, :hidden => true, :value => "United States of America" %>
-              </div>
-              <p><br></p>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>Phone Numbers</legend>
-      <div>
-        <div>  
-          <%= f.fields_for :phone_numbers do |builder| %>
-            <div style = "display: inline-block;">
-              <%= builder.label :phone_number_type, "Phone No.:" %>
-              <br>
-              <%= builder.select :phone_number_type, options_for_select(["Cell", "Home", "Work", "Other"]),
-              {:prompt => "Select"}, {:style => "width: 70px"} %>
-              (<%= builder.text_field :area_code, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>)
-              <%= builder.text_field :exchange, {:maxlength => 3, :style => "text-align: center; width: 55px"} %>-
-              <%= builder.text_field :suffix, {:maxlength => 4, :style => "text-align: center; width: 55px"} %>
-              <%= builder.text_field :country_code, :hidden => true, :value => "1" %>
-            </div>
-            <div style = "display: inline-block;">
-              <%= builder.label :extension, "Ext.:" %>
-              <br>
-              <%= builder.text_field :extension, :style => "text-align: center; width: 55px" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </fieldset>
+    <%= render "basic_fieldsets", f:f %>
     <fieldset>
       <legend>E-Mail Addresses</legend>
       <div>  
@@ -180,95 +24,11 @@
             <div style = "display: inline-block;">
               <%= builder.label :extension, "Type:" %>
               <br>
-              <%= builder.select :address_type, options_for_select(["Personal", "Work", "Other"]),
-              {:prompt => "Select"}, {:style => "width: 92px;"} %>
+              <%= builder.select :address_type, options_for_select(["Personal", "Work", "Other"],
+              builder.object.address_type), {:prompt => "Select"}, {:style => "width: 92px;"} %>
             </div>
           <% end %>
         </div>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>Miscellaneous</legend>
-	  <div>
-        <%= f.label :referred_by, "Referred By:" %>
-        <br>
-        <%= f.text_field :referred_by, {:style => "width: 346px;"} %>
-      </div>
-      <div>
-        <%= f.check_box :ira %>
-        <%= f.label :ira, "IRA:" %>
-      </div>
-      <div>
-        <%= f.check_box :four_o_one_k %>
-        <%= f.label :four_o_one_k, "401K:" %>
-      </div>
-	  <div>
-        <%= f.label :repossessions, "Repossessions Details (If Applicable):" %>
-        <br>
-        <%= f.text_area :repossessions, {:style => "width: 350px;"} %>
-      </div>
-      <div>
-        <%= f.label :pending_suits, "Pending Lawsuit Details (If Applicable):" %>
-        <br>
-        <%= f.text_area :pending_suits, {:style => "width: 350px;"} %>
-      </div>
-      <div>
-        <%= f.label :amount_owed_to_irs, "Amount Owed to IRS (If Applicable):" %>
-        <br>
-        <%= f.text_field :amount_owed_to_irs, {:style => 'text-align: center; width: 100px;'} %>
-      </div>
-      <div>
-        <%= f.label :safety_deposit_contents, "Safety Deposit Contents (If Applicable):" %>
-        <br>
-        <%= f.text_area :safety_deposit_contents, {:style => "width: 350px;"} %>
-      </div>
-      <div>
-        <%= f.label :safety_deposit_location, "Saftey Deposit Location:" %>
-        <br>
-        <%= f.text_field :safety_deposit_location, {:style => "width: 350px;"} %>
-      </div>
-      <div>
-        <%= f.label :safety_deposit_list, "List Individuals with Access to Safety Deposit Box:" %>
-        <br>
-        <%= f.text_area :safety_deposit_list, {:style => "width: 350px;"} %>
-      </div>
-      <div>
-        <%= f.label :other_losses, "Describe Any Losses From Fire, Theft or Gambling:" %>
-        <br>
-        <%= f.text_area :other_losses, {:style => "width: 350px;"} %>
-      </div>
-	</fieldset>
-	<fieldset>
-      <legend>Other Income Sources</legend>
-	  <div>
-        <%= f.label :retirement, "Retirement Income:" %>
-        <br>
-        f.text_field :retirement, {:style => 'text-align: center; width: 100px;'}
-      </div>
-      <div>
-        <%= f.label :pension, "Pension:" %>
-        <br>
-        f.text_field :pension, {:style => 'text-align: center; width: 100px;'}
-      </div>
-      <div>
-        <%= f.label :disability, "Disability:" %>
-        <br>
-        f.text_field :disability, {:style => 'text-align: center; width: 100px;'}
-      </div>
-      <div>
-        <%= f.label :child_support, "Child Support Income:" %>
-        <br>
-        f.text_field :child_support, {:style => 'text-align: center; width: 100px;'}
-      </div>
-      <div>
-        <%= f.label :alimony, "Alimony:" %>
-        <br>
-        f.text_field :alimony, {:style => 'text-align: center; width: 100px;'}
-      </div>
-      <div>
-        <%= f.label :other_income, "Other Income:" %>
-        <br>
-        f.text_field :other_income, {:style => 'text-align: center; width: 100px;'}
       </div>
     </fieldset>
     <div class = "basic-form-save-button">

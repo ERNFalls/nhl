@@ -9,7 +9,7 @@ class CreateDependants < ActiveRecord::Migration
       t.string :ssn
       t.date :date_of_birth
       t.string :relationship
-      t.string :employment
+      t.boolean :employment, :default => false
       t.integer :client_id
       t.foreign_key :clients
       t.timestamps

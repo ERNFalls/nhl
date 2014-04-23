@@ -1,13 +1,9 @@
 class PipMatter < ActiveRecord::Base
 
-  include Filesystem
+  belongs_to :case
 
-  has_many :notes, :as => :noteable, :dependent => :destroy
-  accepts_nested_attributes_for :notes, :reject_if => lambda { |a| a[:note].blank? }, :allow_destroy => true
   has_many :pip_demands, dependent: :destroy
   has_many :pip_checks, dependent: :destroy
-  has_many :tasks, :as => :taskable, :dependent => :destroy
-  accepts_nested_attributes_for :tasks, :reject_if => lambda { |a| a[:task].blank? }, :allow_destroy => true
  
   accepts_nested_attributes_for :pip_demands, :pip_checks
 
@@ -28,18 +24,6 @@ class PipMatter < ActiveRecord::Base
 
   def claimant_name
     "#{claimant_first_name} #{claimant_middle_name} #{claimant_last_name}"
-  end
-
-  def case_no
-    unless judicial_section.blank?
-      if judicial_section < 10
-        "#{case_year}-#{case_sequence} #{case_code} #{case_location} (0#{judicial_section})"
-      else
-        "#{case_year}-#{case_sequence} #{case_code} #{case_location} (#{judicial_section})"
-      end
-    else
-      "#{case_year}-#{case_sequence} #{case_code} #{case_location}"
-    end
   end
 
 end

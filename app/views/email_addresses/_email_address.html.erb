@@ -15,7 +15,7 @@ function ShowEditEmail<%=email_address.id%>DIV() {
 <div id = "show_email<%= email_address.id %>_div" class = "sub-item-form">
   <div class = "sub-item-form-title">
     <div>
-	  <h3>-<%= email_address.address_type %> E-Mail Address-</h3>
+	  <h3><%= email_address.address_type %> E-Mail Address</h3>
     </div>
     <div class = "mini-icon-bar">
       <% if can? :update, EmailAddress %>
@@ -46,7 +46,7 @@ function ShowEditEmail<%=email_address.id%>DIV() {
 <div id = "edit_email<%= email_address.id %>_div" class = "sub-item-form" style = "display: none;">
   <div class = "sub-item-form-title">  
     <div>
-	  <h3>-Edit E-Mail Address-</h3>
+	  <h3>Edit E-Mail Address</h3>
     </div>
     <div class = "mini-icon-bar">
       <% if can? :update, EmailAddress %>
@@ -63,21 +63,9 @@ function ShowEditEmail<%=email_address.id%>DIV() {
       <% end %>
     </div>
   </div>
-  <%= form_for [@ablec, email_address] do |f| %>
+  <%= form_for [@able, email_address] do |f| %>
     <div class = "basic-form">
-      <fieldset>
-        <legend>E-Mail Address Form</legend>
-		<div style = "display: inline-block;">
-		  <%= f.label :address_type, "E-Mail Address:" %>
-		  <br>
-		  <%= f.text_field :address, :style => "width: 252px" %>
-		</div>
-		<div style = "display: inline-block;">
-		  <%= f.label :extension, "Type:" %>
-		  <br>
-		  <%= f.select :address_type, options_for_select(["Personal", "Work", "Other"], :selected => f.object.address_type), {:style => "width: 92px;"} %>
-		</div>
-      </fieldset>
+      <%= render "email_addresses/fieldsets", f:f %>
     </div>
     <div class = "basic-form-save-button">
       <%= image_submit_tag("save_button_icon.png", :title => "Save E-Mail Address", :alt => "Save E-Mail Address") %>

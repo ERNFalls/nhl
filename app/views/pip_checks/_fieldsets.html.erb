@@ -1,0 +1,65 @@
+<fieldset>	
+  <legend>PIP Check Key Data</legend>
+  <div>
+	<%= f.label :check_no, "Check No.:" %>
+	<br>
+	<%= f.text_field :check_no, {:style => 'width: 346px;'} %>
+  </div>
+  <div>
+	<%= f.label :date_of_issue, "Date of Issue.:" %>
+	<br>
+	<%= f.date_select :date_of_issue, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+	<%= f.label :purpose_of_check, "Purpose of Check:" %>
+	<br>
+	<%= f.select :purpose_of_check, options_for_select(["Benefits, Interest, Penaly & Postage",
+	"Benefits & Interest", "Benefits", "Interest", "Penalty & Postage", 
+	"Penalty", "Postage", "Attorney's Fees"], :selected => f.object.purpose_of_check),
+	{:prompt => "Select a Purpose"}, {:style => 'width: 352px;'} %>
+  </div>
+  <div>
+	<%= f.label :total_amount, "Total Amount:" %>
+	<br>
+	<%= f.text_field :total_amount, {:style => 'text-align: center; width: 100px;'} %>
+  </div>
+  <div>
+	<div style = "display: inline-block;">
+	  <%= f.label :benefits, "Benefits:" %><br>
+	  <%= f.text_field :benefits, {:style => 'text-align: center; width: 100px;'} %>
+	</div>
+	<div style = "display: inline-block;">
+	  <%= f.label :interest, "Interest:" %>
+	  <br>
+	  <%= f.text_field :interest, {:style => 'text-align: center; width: 100px;'} %>
+	</div>
+  </div>
+  <div>
+	<div style = "display: inline-block;">
+	  <%= f.label :penalty, "Penalty:" %>
+	  <br>
+	  <%= f.text_field :penalty, {:style => 'text-align: center; width: 100px;'} %>
+	</div>
+	<div style = "display: inline-block;">
+	  <%= f.label :postage, "Postage:" %>
+	  <br>
+	  <%= f.text_field :postage, {:style => 'text-align: center; width: 100px;'} %>
+	</div>
+	<div style = "display: inline-block;">
+	  <%= f.label :attorneys_fees, "Fees:" %>
+	  <br>
+	  <%= f.text_field :attorneys_fees, {:style => 'text-align: center; width: 100px;'} %>
+	</div>
+  </div>
+  <div>
+    <%= f.label :include_check_in_suit, "Include in Suit:" %>
+    <br>
+    <%= f.select :include_check_in_suit, [["Yes",1],["No",0]], {}, {:style => 'width: 155px;'} %>
+  </div>
+  <div>
+	<%= f.label :status, "Status:" %>
+	<br>
+	<%= f.select :status, options_for_select(["Live", "Cashed", "Expired", "Pending Re-Issue"],
+	:selected => f.object.status), {}, {:style => 'width: 155px;'} %>
+  </div>
+</fieldset>

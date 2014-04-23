@@ -1,0 +1,164 @@
+<script type="text/javascript">
+<!--
+function ShowEditProperty<%=property.id%>DIV() {
+	var edit = edit_property<%=property.id%>_div
+	var show = show_property<%=property.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_property<%=property.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Property</h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Property %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Property", alt: "Edit Property"),
+		  '#EditProperty', onclick: onClick="ShowEditProperty#{property.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Property %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Property", alt: "Delete Property"),
+		  [property.client, property], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Property Data</h4>
+  <table>
+    <% if property.rent == true %>
+      <tr>
+        <td colspan = "2" align = "center" style = "font-weight: bold;">Rental Property</td>
+      </tr>
+    <% end %>
+    <% unless property.property_type.blank? %>
+      <tr>
+        <td>Type:</td>
+        <td><%= property.property_type %></td>
+      </tr>
+    <% end %>
+    <% unless property.date_of_purchase.blank? %>
+      <tr>
+        <td>Purchase Date:</td>
+        <td><%= property.date_of_purchase.strftime("%m/%d/%Y") %></td>
+      </tr>
+    <% end %>
+    <% unless property.address_line_one.blank? %>
+      <tr>        <td>Address:</td>
+        <td>
+          <%= property.address_line_one %>
+          <br>
+          <%= property.address_line_two %>
+          <br>
+          <%= property.address_line_three %>
+        </td>
+      </tr>
+    <% end %>
+    <% unless property.city.blank? %>
+      <tr>
+	    <td>City:</td>
+        <td><%= property.city %></td>
+      </tr>
+    <% end %>
+    <% unless property.state.blank? %>
+      <tr>
+	    <td>State:</td>
+        <td><%= property.state %></td>
+      </tr>
+    <% end %>
+    <% unless property.zip_code.blank? %>
+      <tr>
+	    <td>ZIP Code:</td>
+        <td>
+          <%= property.zip_code %> <%= property.plus_four_code %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <% unless property.association_name.blank? %>
+    <h4>Association Data</h4>
+  <% end %>
+  <table>
+    <% unless property.association_name.blank? %>
+     <tr>
+       <td>Association:</td>
+       <td><%= property.association_name %></td>
+     </tr>
+    <% end %>
+    <% unless property.association_balance.blank? %>
+     <tr>
+       <td>Outstanding Balance:</td>
+       <td><%= number_to_currency(property.association_balance) %></td>
+     </tr>
+    <% end %>
+    <% unless property.association_address_line_one.blank? %>
+      <tr>
+        <td>Address:</td>
+        <td>
+          <%= property.association_address_line_one %>
+          <br>
+          <%= property.association_address_line_two %>
+          <br>
+          <%= property.association_address_line_three %>
+        </td>
+      </tr>
+    <% end %>
+    <% unless property.association_city.blank? %>
+      <tr>
+	    <td>City:</td>
+        <td><%= property.association_city %></td>
+      </tr>
+    <% end %>
+    <% unless property.association_state.blank? %>
+      <tr>
+	    <td>State:</td>
+        <td><%= property.association_state %></td>
+      </tr>
+    <% end %>
+    <% unless property.association_zip_code.blank? %>
+      <tr>
+	    <td>ZIP Code:</td>
+        <td>
+          <%= property.association_zip_code %> <%= property.association_plus_four_code %>
+        </td>
+      </tr>
+    <% end %>
+  </table>	
+</div>
+<div id = "edit_property<%=property.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Property Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Property %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Property", alt: "Show Property"),
+	      '#ShowProperty', onclick: onClick="ShowEditProperty#{property.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Property %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Property", alt: "Delete Property"),
+	      [property.client, property], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, property]) do |f| %>
+    <div class = "basic-form">
+      <%= render "properties/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Property", :alt => "Save Property") %>
+    </div>
+  <% end %>
+</div>

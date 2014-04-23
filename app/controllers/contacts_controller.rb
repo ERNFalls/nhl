@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
   
   def show
     @contact = Contact.find(params[:id])
-    @ablec = @contact
+    @able = @contact
   end
   
   def new

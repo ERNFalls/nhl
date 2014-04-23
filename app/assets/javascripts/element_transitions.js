@@ -20,7 +20,7 @@ function SwitchOneAndTwo() {
 		two.style.opacity="0",
 		two.style.width="0px",
 		one.style.marginLeft="396px",
-		control.style.backgroundColor="transparent",
+		control.style.backgroundColor=null,
 		setTimeout(function() {
 			two.style.height="0px",
 			one.style.height="auto",
@@ -41,7 +41,7 @@ function SlideOutTwo() {
 		two.style.height="0px",
 		two.style.opacity="0",
 		two.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutThree() {
 	var three = document.getElementById("plate-three")
@@ -55,7 +55,7 @@ function SlideOutThree() {
 		three.style.height="0px",
 		three.style.opacity="0",
 		three.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutThreeOrSwitchForFour() {
 	var three = document.getElementById("plate-three")
@@ -69,18 +69,16 @@ function SlideOutThreeOrSwitchForFour() {
 	else if (three.style.width=="0px" && four.style.width!="0px")
 		four.style.height="0px",
 		four.style.opacity="0",
-		four.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			three.style.height="auto",
-			three.style.opacity="1",
-			three.style.width="396px";
-		}, 500);
+		four.style.width="0px",
+		three.style.height="auto",
+		three.style.opacity="1",
+		three.style.width="396px";
 	else if (three.style.width!="0px" && four.style.width=="0px")
 		three.style.height="0px",
 		three.style.opacity="0",
 		three.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (three.style.width!="0px" && four.style.width!="0px")
 		three.style.height="0px",
 		three.style.opacity="0",
@@ -88,7 +86,7 @@ function SlideOutThreeOrSwitchForFour() {
 		four.style.height="0px",
 		four.style.opacity="0",
 		four.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutFourOrSwitchForThree() {
 	var three = document.getElementById("plate-three")
@@ -102,18 +100,16 @@ function SlideOutFourOrSwitchForThree() {
 	else if (three.style.width!="0px" && four.style.width=="0px")
 		three.style.height="0px",
 		three.style.opacity="0",
-		three.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			four.style.height="auto",
-			four.style.opacity="1",
-			four.style.width="396px";
-			}, 500);
+		three.style.width="0px",
+		four.style.height="auto",
+		four.style.opacity="1",
+		four.style.width="396px";
 	else if (three.style.width=="0px" && four.style.width!="0px")
 		four.style.height="0px",
 		four.style.opacity="0",
 		four.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (three.style.width!="0px" && four.style.width!="396px")
 		three.style.height="0px",
 		three.style.opacity="0",
@@ -121,7 +117,7 @@ function SlideOutFourOrSwitchForThree() {
 		four.style.height="0px",
 		four.style.opacity="0",
 		four.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutFourOrSwitchForFive() {
 	var four = document.getElementById("plate-four")
@@ -137,16 +133,14 @@ function SlideOutFourOrSwitchForFive() {
 		five.style.opacity="0",
 		five.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			four.style.height="auto",
-			four.style.opacity="1",
-			four.style.width="396px";
-		}, 500);
+		four.style.height="auto",
+		four.style.opacity="1",
+		four.style.width="396px";
 	else if (four.style.width!="0px" && five.style.width=="0px")
 		four.style.height="0px",
 		four.style.opacity="0",
 		four.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (four.style.width!="0px" && five.style.width!="0px")
 		four.style.height="0px",
 		four.style.opacity="0",
@@ -154,7 +148,7 @@ function SlideOutFourOrSwitchForFive() {
 		five.style.height="0px",
 		five.style.opacity="0",
 		five.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutFiveOrSwitchForFour() {
 	var five = document.getElementById("plate-five")
@@ -170,16 +164,14 @@ function SlideOutFiveOrSwitchForFour() {
 		four.style.opacity="0",
 		four.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			five.style.height="auto",
-			five.style.opacity="1",
-			five.style.width="396px";
-		}, 500);
+		five.style.height="auto",
+		five.style.opacity="1",
+		five.style.width="396px";
 	else if (five.style.width!="0px" && four.style.width=="0px")
 		five.style.height="0px",
 		five.style.opacity="0",
 		five.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (five.style.width!="0px" && four.style.width!="0px")
 		five.style.height="0px",
 		five.style.opacity="0",
@@ -187,7 +179,7 @@ function SlideOutFiveOrSwitchForFour() {
 		four.style.height="0px",
 		four.style.opacity="0",
 		four.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutSixOrSwitchForSeven() {
 	var six = document.getElementById("plate-six")
@@ -203,16 +195,14 @@ function SlideOutSixOrSwitchForSeven() {
 		seven.style.opacity="0",
 		seven.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			six.style.height="auto",
-			six.style.opacity="1",
-			six.style.width="396px";
-		}, 500);
+		six.style.height="auto",
+		six.style.opacity="1",
+		six.style.width="396px";
 	else if (six.style.width!="0px" && seven.style.width=="0px")
 		six.style.height="0px",
 		six.style.opacity="0",
 		six.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (six.style.width!="0px" && seven.style.width!="0px")
 		six.style.height="0px",
 		six.style.opacity="0",
@@ -220,7 +210,7 @@ function SlideOutSixOrSwitchForSeven() {
 		seven.style.height="0px",
 		seven.style.opacity="0",
 		seven.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutSevenOrSwitchForSix() {
 	var seven = document.getElementById("plate-seven")
@@ -236,16 +226,14 @@ function SlideOutSevenOrSwitchForSix() {
 		six.style.opacity="0",
 		six.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			seven.style.height="auto",
-			seven.style.opacity="1",
-			seven.style.width="396px";
-		}, 500);
+		seven.style.height="auto",
+		seven.style.opacity="1",
+		seven.style.width="396px";
 	else if (seven.style.width!="0px" && six.style.width=="0px")
 		seven.style.height="0px",
 		seven.style.opacity="0",
 		seven.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (seven.style.width!="0px" && six.style.width!="0px")
 		seven.style.height="0px",
 		seven.style.opacity="0",
@@ -253,7 +241,7 @@ function SlideOutSevenOrSwitchForSix() {
 		six.style.height="0px",
 		six.style.opacity="0",
 		six.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutEightOrSwitchForNine() {
 	var eight = document.getElementById("plate-eight")
@@ -278,7 +266,7 @@ function SlideOutEightOrSwitchForNine() {
 		eight.style.height="0px",
 		eight.style.opacity="0",
 		eight.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (eight.style.width!="0px" && nine.style.width!="0px")
 		eight.style.height="0px",
 		eight.style.opacity="0",
@@ -286,7 +274,7 @@ function SlideOutEightOrSwitchForNine() {
 		nine.style.height="0px",
 		nine.style.opacity="0",
 		nine.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutNineOrSwitchForEight() {
 	var nine = document.getElementById("plate-nine")
@@ -302,16 +290,14 @@ function SlideOutNineOrSwitchForEight() {
 		eight.style.opacity="0",
 		eight.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			nine.style.height="auto",
-			nine.style.opacity="1",
-			nine.style.width="396px";
-		}, 500);
+		nine.style.height="auto",
+		nine.style.opacity="1",
+		nine.style.width="396px";
 	else if (nine.style.width!="0px" && eight.style.width=="0px")
 		nine.style.height="0px",
 		nine.style.opacity="0",
 		nine.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (nine.style.width!="0px" && eight.style.width!="0px")
 		nine.style.height="0px",
 		nine.style.opacity="0",
@@ -319,7 +305,7 @@ function SlideOutNineOrSwitchForEight() {
 		eight.style.height="0px",
 		eight.style.opacity="0",
 		eight.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutTenOrSwitchForEleven() {
 	var ten = document.getElementById("plate-ten")
@@ -335,16 +321,14 @@ function SlideOutTenOrSwitchForEleven() {
 		eleven.style.opacity="0",
 		eleven.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			ten.style.height="auto",
-			ten.style.opacity="1",
-			ten.style.width="396px";
-		}, 500);
+		ten.style.height="auto",
+		ten.style.opacity="1",
+		ten.style.width="396px";
 	else if (ten.style.width!="0px" && eleven.style.width=="0px")
 		ten.style.height="0px",
 		ten.style.opacity="0",
 		ten.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (ten.style.width!="0px" && eleven.style.width!="0px")
 		ten.style.height="0px",
 		ten.style.opacity="0",
@@ -352,7 +336,7 @@ function SlideOutTenOrSwitchForEleven() {
 		eleven.style.height="0px",
 		eleven.style.opacity="0",
 		eleven.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutElevenOrSwitchForTen() {
 	var eleven = document.getElementById("plate-eleven")
@@ -368,16 +352,14 @@ function SlideOutElevenOrSwitchForTen() {
 		ten.style.opacity="0",
 		ten.style.width="0px",
 		control.style.backgroundColor="coral",
-		setTimeout(function() {
-			eleven.style.height="auto",
-			eleven.style.opacity="1",
-			eleven.style.width="396px";
-		}, 500);
+		eleven.style.height="auto",
+		eleven.style.opacity="1",
+		eleven.style.width="396px";
 	else if (eleven.style.width!="0px" && ten.style.width=="0px")
 		eleven.style.height="0px",
 		eleven.style.opacity="0",
 		eleven.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 	else if (eleven.style.width!="0px" && ten.style.width!="0px")
 		eleven.style.height="0px",
 		eleven.style.opacity="0",
@@ -385,7 +367,7 @@ function SlideOutElevenOrSwitchForTen() {
 		ten.style.height="0px",
 		ten.style.opacity="0",
 		ten.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutTwelve() {
 	var twelve = document.getElementById("plate-twelve")
@@ -399,7 +381,7 @@ function SlideOutTwelve() {
 		twelve.style.height="0px",
 		twelve.style.opacity="0",
 		twelve.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
 }
 function SlideOutThirteen() {
 	var thirteen = document.getElementById("plate-thirteen")
@@ -413,5 +395,315 @@ function SlideOutThirteen() {
 		thirteen.style.height="0px",
 		thirteen.style.opacity="0",
 		thirteen.style.width="0px",
-		control.style.backgroundColor="transparent";
+		control.style.backgroundColor=null;
+}
+function SlideOutTwelveOrSwitchForThirteen() {
+	var twelve = document.getElementById("plate-twelve")
+	var thirteen = document.getElementById("plate-thirteen")
+	var control = document.getElementById("control-nine")
+	if (twelve.style.width=="0px" && thirteen.style.width=="0px")
+		twelve.style.height="auto",
+		twelve.style.opacity="1",
+		twelve.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (twelve.style.width=="0px" && thirteen.style.width!="0px")
+		thirteen.style.height="0px",
+		thirteen.style.opacity="0",
+		thirteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		twelve.style.height="auto",
+		twelve.style.opacity="1",
+		twelve.style.width="396px";
+	else if (twelve.style.width!="0px" && thirteen.style.width=="0px")
+		twelve.style.height="0px",
+		twelve.style.opacity="0",
+		twelve.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (twelve.style.width!="0px" && thirteen.style.width!="0px")
+		twelve.style.height="0px",
+		twelve.style.opacity="0",
+		twelve.style.width="0px",
+		thirteen.style.height="0px",
+		thirteen.style.opacity="0",
+		thirteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutThirteenOrSwitchForTwelve() {
+	var thirteen = document.getElementById("plate-thirteen")
+	var twelve = document.getElementById("plate-twelve")
+	var control = document.getElementById("control-nine")
+	if (thirteen.style.width=="0px" && twelve.style.width=="0px")
+		thirteen.style.height="auto",
+		thirteen.style.opacity="1",
+		thirteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (thirteen.style.width=="0px" && twelve.style.width!="0px")
+		twelve.style.height="0px",
+		twelve.style.opacity="0",
+		twelve.style.width="0px",
+		control.style.backgroundColor="coral",
+		thirteen.style.height="auto",
+		thirteen.style.opacity="1",
+		thirteen.style.width="396px";
+	else if (thirteen.style.width!="0px" && twelve.style.width=="0px")
+		thirteen.style.height="0px",
+		thirteen.style.opacity="0",
+		thirteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (thirteen.style.width!="0px" && twelve.style.width!="0px")
+		thirteen.style.height="0px",
+		thirteen.style.opacity="0",
+		thirteen.style.width="0px",
+		twelve.style.height="0px",
+		twelve.style.opacity="0",
+		twelve.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutFourteenOrSwitchForFifteen() {
+	var fourteen = document.getElementById("plate-fourteen")
+	var fifteen = document.getElementById("plate-fifteen")
+	var control = document.getElementById("control-ten")
+	if (fourteen.style.width=="0px" && fifteen.style.width=="0px")
+		fourteen.style.height="auto",
+		fourteen.style.opacity="1",
+		fourteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (fourteen.style.width=="0px" && fifteen.style.width!="0px")
+		fifteen.style.height="0px",
+		fifteen.style.opacity="0",
+		fifteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		fourteen.style.height="auto",
+		fourteen.style.opacity="1",
+		fourteen.style.width="396px";
+	else if (fourteen.style.width!="0px" && fifteen.style.width=="0px")
+		fourteen.style.height="0px",
+		fourteen.style.opacity="0",
+		fourteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (fourteen.style.width!="0px" && fifteen.style.width!="0px")
+		fourteen.style.height="0px",
+		fourteen.style.opacity="0",
+		fourteen.style.width="0px",
+		fifteen.style.height="0px",
+		fifteen.style.opacity="0",
+		fifteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutFifteenOrSwitchForFourteen() {
+	var fifteen = document.getElementById("plate-fifteen")
+	var fourteen = document.getElementById("plate-fourteen")
+	var control = document.getElementById("control-ten")
+	if (fifteen.style.width=="0px" && fourteen.style.width=="0px")
+		fifteen.style.height="auto",
+		fifteen.style.opacity="1",
+		fifteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (fifteen.style.width=="0px" && fourteen.style.width!="0px")
+		fourteen.style.height="0px",
+		fourteen.style.opacity="0",
+		fourteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		fifteen.style.height="auto",
+		fifteen.style.opacity="1",
+		fifteen.style.width="396px";
+	else if (fifteen.style.width!="0px" && fourteen.style.width=="0px")
+		fifteen.style.height="0px",
+		fifteen.style.opacity="0",
+		fifteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (fifteen.style.width!="0px" && fourteen.style.width!="0px")
+		fifteen.style.height="0px",
+		fifteen.style.opacity="0",
+		fifteen.style.width="0px",
+		fourteen.style.height="0px",
+		fourteen.style.opacity="0",
+		fourteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutSixteenOrSwitchForSeventeen() {
+	var sixteen = document.getElementById("plate-sixteen")
+	var seventeen = document.getElementById("plate-seventeen")
+	var control = document.getElementById("control-eleven")
+	if (sixteen.style.width=="0px" && seventeen.style.width=="0px")
+		sixteen.style.height="auto",
+		sixteen.style.opacity="1",
+		sixteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (sixteen.style.width=="0px" && seventeen.style.width!="0px")
+		seventeen.style.height="0px",
+		seventeen.style.opacity="0",
+		seventeen.style.width="0px",
+		control.style.backgroundColor="coral",
+		sixteen.style.height="auto",
+		sixteen.style.opacity="1",
+		sixteen.style.width="396px";
+	else if (sixteen.style.width!="0px" && seventeen.style.width=="0px")
+		sixteen.style.height="0px",
+		sixteen.style.opacity="0",
+		sixteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (sixteen.style.width!="0px" && seventeen.style.width!="0px")
+		sixteen.style.height="0px",
+		sixteen.style.opacity="0",
+		sixteen.style.width="0px",
+		seventeen.style.height="0px",
+		seventeen.style.opacity="0",
+		seventeen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutSeventeenOrSwitchForSixteen() {
+	var seventeen = document.getElementById("plate-seventeen")
+	var sixteen = document.getElementById("plate-sixteen")
+	var control = document.getElementById("control-eleven")
+	if (seventeen.style.width=="0px" && sixteen.style.width=="0px")
+		seventeen.style.height="auto",
+		seventeen.style.opacity="1",
+		seventeen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (seventeen.style.width=="0px" && sixteen.style.width!="0px")
+		sixteen.style.height="0px",
+		sixteen.style.opacity="0",
+		sixteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		seventeen.style.height="auto",
+		seventeen.style.opacity="1",
+		seventeen.style.width="396px";
+	else if (seventeen.style.width!="0px" && sixteen.style.width=="0px")
+		seventeen.style.height="0px",
+		seventeen.style.opacity="0",
+		seventeen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (seventeen.style.width!="0px" && sixteen.style.width!="0px")
+		seventeen.style.height="0px",
+		seventeen.style.opacity="0",
+		seventeen.style.width="0px",
+		sixteen.style.height="0px",
+		sixteen.style.opacity="0",
+		sixteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutEighteenOrSwitchForNineteen() {
+	var eighteen = document.getElementById("plate-eighteen")
+	var nineteen = document.getElementById("plate-nineteen")
+	var control = document.getElementById("control-twelve")
+	if (eighteen.style.width=="0px" && nineteen.style.width=="0px")
+		eighteen.style.height="auto",
+		eighteen.style.opacity="1",
+		eighteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (eighteen.style.width=="0px" && nineteen.style.width!="0px")
+		nineteen.style.height="0px",
+		nineteen.style.opacity="0",
+		nineteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		eighteen.style.height="auto",
+		eighteen.style.opacity="1",
+		eighteen.style.width="396px";
+	else if (eighteen.style.width!="0px" && nineteen.style.width=="0px")
+		eighteen.style.height="0px",
+		eighteen.style.opacity="0",
+		eighteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (eighteen.style.width!="0px" && nineteen.style.width!="0px")
+		eighteen.style.height="0px",
+		eighteen.style.opacity="0",
+		eighteen.style.width="0px",
+		nineteen.style.height="0px",
+		nineteen.style.opacity="0",
+		nineteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutNineteenOrSwitchForEighteen() {
+	var nineteen = document.getElementById("plate-nineteen")
+	var eighteen = document.getElementById("plate-eighteen")
+	var control = document.getElementById("control-twelve")
+	if (nineteen.style.width=="0px" && eighteen.style.width=="0px")
+		nineteen.style.height="auto",
+		nineteen.style.opacity="1",
+		nineteen.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (nineteen.style.width=="0px" && eighteen.style.width!="0px")
+		eighteen.style.height="0px",
+		eighteen.style.opacity="0",
+		eighteen.style.width="0px",
+		control.style.backgroundColor="coral",
+		nineteen.style.height="auto",
+		nineteen.style.opacity="1",
+		nineteen.style.width="396px";
+	else if (nineteen.style.width!="0px" && eighteen.style.width=="0px")
+		nineteen.style.height="0px",
+		nineteen.style.opacity="0",
+		nineteen.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (nineteen.style.width!="0px" && eighteen.style.width!="0px")
+		nineteen.style.height="0px",
+		nineteen.style.opacity="0",
+		nineteen.style.width="0px",
+		eighteen.style.height="0px",
+		eighteen.style.opacity="0",
+		eighteen.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutTwentyOrSwitchForTwentyOne() {
+	var twenty = document.getElementById("plate-twenty")
+	var twentyone = document.getElementById("plate-twenty-one")
+	var control = document.getElementById("control-thirteen")
+	if (twenty.style.width=="0px" && twentyone.style.width=="0px")
+		twenty.style.height="auto",
+		twenty.style.opacity="1",
+		twenty.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (twenty.style.width=="0px" && twentyone.style.width!="0px")
+		twentyone.style.height="0px",
+		twentyone.style.opacity="0",
+		twentyone.style.width="0px",
+		control.style.backgroundColor="coral",
+		twenty.style.height="auto",
+		twenty.style.opacity="1",
+		twenty.style.width="396px";
+	else if (twenty.style.width!="0px" && twentyone.style.width=="0px")
+		twenty.style.height="0px",
+		twenty.style.opacity="0",
+		twenty.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (twenty.style.width!="0px" && twentyone.style.width!="0px")
+		twenty.style.height="0px",
+		twenty.style.opacity="0",
+		twenty.style.width="0px",
+		twentyone.style.height="0px",
+		twentyone.style.opacity="0",
+		twentyone.style.width="0px",
+		control.style.backgroundColor=null;
+}
+function SlideOutTwentyOneOrSwitchForTwenty() {
+	var twentyone = document.getElementById("plate-twenty-one")
+	var twenty = document.getElementById("plate-twenty")
+	var control = document.getElementById("control-thirteen")
+	if (twentyone.style.width=="0px" && twenty.style.width=="0px")
+		twentyone.style.height="auto",
+		twentyone.style.opacity="1",
+		twentyone.style.width="396px",
+		control.style.backgroundColor="coral";
+	else if (twentyone.style.width=="0px" && twenty.style.width!="0px")
+		twenty.style.height="0px",
+		twenty.style.opacity="0",
+		twenty.style.width="0px",
+		control.style.backgroundColor="coral",
+		twentyone.style.height="auto",
+		twentyone.style.opacity="1",
+		twentyone.style.width="396px";
+	else if (twentyone.style.width!="0px" && twenty.style.width=="0px")
+		twentyone.style.height="0px",
+		twentyone.style.opacity="0",
+		twentyone.style.width="0px",
+		control.style.backgroundColor=null;
+	else if (twentyone.style.width!="0px" && twenty.style.width!="0px")
+		twentyone.style.height="0px",
+		twentyone.style.opacity="0",
+		twentyone.style.width="0px",
+		twenty.style.height="0px",
+		twenty.style.opacity="0",
+		twenty.style.width="0px",
+		control.style.backgroundColor=null;
 }

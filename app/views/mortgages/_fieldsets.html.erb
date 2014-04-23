@@ -1,0 +1,67 @@
+<fieldset>
+  <legend>Mortgage Data</legend>
+  <div>
+    <% property_array = Property.uniq.pluck(:address_line_one, :id) %>
+    <% if property_array.compact.empty? == true %>
+	  <%= f.label :property_id, "Property:" %>
+	  <br>
+	  <%= "(Add Properties for Client Before Mortgages!)" %>
+    <% else %>
+	  <%= f.label :property_id, "Property:" %>
+	  <br>
+      <%= f.select :property_id, options_for_select(property_array.compact.sort,
+      :selected => f.object.property_id), {prompt: "Select a Property for this Mortgage"}, :style => "width:352px;" %>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :mortgage_holder, "Mortage Holder:" %>
+    <br>
+    <%= f.text_field :mortgage_holder, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :account_no, "Account No.:" %>
+    <br>
+    <%= f.text_field :account_no, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :balance, "Balance:" %>
+    <br>
+    <%= f.text_field :balance, :style => "width: 100px;" %>
+  </div>
+  <div>
+    <%= f.label :overdue_payment, "Amount Overdue:" %>
+    <br>
+    <%= f.text_field :overdue_payment, :style => "width: 100px;" %>
+  </div>
+  <div>
+    <%= f.label :address_line_one, "Mortgage Holder's Address:" %>
+    <br>
+    <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+    <br>
+    <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+     <br>
+    <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :city, "City:"%>
+	  <br>
+	  <%= f.text_field :city, {:style => "width: 180px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :state, "State:"%>
+	  <br>
+	  <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :zip_code, "ZIP:"%>
+	  <br>
+	  <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :plus_four_code, "+4:" %>
+	  <br>
+	  <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+    </div>
+  </div>
+</fieldset>

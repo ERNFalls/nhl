@@ -1,0 +1,84 @@
+<fieldset>
+  <legend>Case Key Data</legend>
+  <%= f.hidden_field :case_state, :value => "FL" %>
+  <div>
+    <%= f.label :plaintiff, "Plaintiff:" %>
+    <br>
+    <%= f.text_field :plaintiff, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :defendant, "Defendant:" %>
+    <br>
+    <%= f.text_field :defendant, :style => "width: 346px;" %>
+  </div>
+  <div>
+    <%= f.label :side, "Representing:" %>
+    <br>
+    <% if f.object.side %>
+      <% selside = "1" %>
+    <% else %>
+      <% selside = "0" %>
+    <% end %>
+    <%= f.select :side, options_for_select([["Defendant", "0"],["Plaintiff","1"]], :selected => selside), {}, {:style => "width: 180px;"}%>
+  </div>
+  <div>
+    <%= f.label :case_county, "County:" %>
+    <%= f.select :case_county, options_for_select(Global.counties, :selected => f.object.case_county), {:prompt => "Select a County"}, {:style => 'width: 352px;'} %>
+  </div>
+  <div style = "display: inline-block;">
+    <%= f.label :case_year, "Case No.:" %>
+    <br>
+    <%= f.text_field :case_year, {:maxlength => 4, :style => 'text-align: center; width: 50px;'} %>
+    - <%= f.text_field :case_sequence, {:maxlength => 6, :style => 'text-align: center; width: 70px;'} %>
+    <%= f.text_field :case_code, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>
+    <%= f.text_field :case_location, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>
+  </div>
+  <div style = "display: inline-block; text-align: center;">  
+    <%= f.label :judicial_section, "Section:" %>
+    <br>
+    (<%= f.text_field :judicial_section, {:maxlength => 2, :style => 'text-align: center; width: 30px;'} %>)
+  </div>
+  <div>
+    <%= f.label :filing_date, "Filing Date:" %>
+    <br>
+	<%= f.date_select :filing_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :date_of_sop, "Service of Process Date:" %>
+    <br>
+	<%= f.date_select :date_of_sop, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :initial_court_date, "Initial Court Date:" %>
+    <br>
+	<%= f.date_select :initial_court_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+  <div>
+    <%= f.label :judge, "Judge:" %>
+    <br>
+    <%= f.text_field :judge, {:style => 'width: 346px;'} %>
+  </div>
+  <div>
+    <%= f.label :opposing_counsel, "Opposing Counsel:" %>
+    <br>
+    <%= f.text_field :opposing_counsel, {:style => 'width: 346px;'} %>
+  </div>
+  <div>
+    <%= f.label :closing_date, "Closing Date:" %>
+    <br>
+	<%= f.date_select :closing_date, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+</fieldset>
+<fieldset>	
+  <legend>Matter Status</legend>
+  <div>
+	<%= f.label :status, "Status:" %>
+	<br>
+    <%= f.select :status, options_for_select(["In Suit", "Closed"], :selected => f.object.status), {}, :style => "width:346px;" %>
+  </div>
+  <div>
+    <%= f.label :matter_closed, "Matter Closed:" %>
+    <br>
+	<%= f.date_select :matter_closed, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
+  </div>
+</fieldset>

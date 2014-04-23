@@ -5,6 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 
 NHL::Application.load_tasks
 
-task :promote_admin => :environment do
-  User.first.update_attribute('role', 'admin')
+task :create_admin => :environment do
+  user = User.create!( :email => 'admin@nhlawpl.com', :username => 'SuperAdmin',
+  :password => 'password', :role => 'admin')
 end

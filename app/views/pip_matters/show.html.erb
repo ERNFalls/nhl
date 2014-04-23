@@ -89,7 +89,7 @@
     </div>
     <div id = "plate-two" style = "display: block; height: 0; margin-left: 380px; opacity: 0; width: 0;">
       <div>
-        <h2>- Edit PIP Matter -</h2>
+        <h2Edit PIP Matter/h2>
         <%= render "form" %>
       </div>
     </div>
@@ -117,7 +117,7 @@
 	      </div>
 	    <% end %>
       </div>
-      <h2>- PIP Demands (<%= @pip.pip_demands.count %>)-</h2>
+      <h2PIP Demands (<%= @pip.pip_demands.count %>)/h2>
       <%= render @pip.pip_demands.sort %>
     </div>
   </div>
@@ -139,7 +139,7 @@
           </div>
         <% end %>
       </div>
-      <h2>- Add a PIP Demand -</h2>
+      <h2Add a PIP Demand/h2>
       <%= render "pip_demands/form" %>
     </div>
   </div>
@@ -162,7 +162,7 @@
         <% end %>
       </div>
       <div>
-        <h2>- Checks (<%= @pip.pip_checks.count %>)-</h2>
+        <h2Checks (<%= @pip.pip_checks.count %>)/h2>
         <%= render @pip.pip_checks.sort %>
       </div>
     </div>
@@ -185,7 +185,7 @@
 	      </div>
 	    <% end %>
       </div>
-      <h2>- Add a Check -</h2>
+      <h2Add a Check/h2>
       <%= render "pip_checks/form" %>
     </div>
   </div>
@@ -207,7 +207,7 @@
 	      </div>
         <% end %>
       </div>
-      <h2>- Notes (<%= @pip.notes.count %>)-</h2>
+      <h2Notes (<%= @pip.notes.count %>)/h2>
       <%= render @pip.notes.order('notes.updated_at DESC') %>
     </div>
   </div>
@@ -229,7 +229,7 @@
 	      </div>
         <% end %>
       </div>
-      <h2>- Add a Note -</h2>
+      <h2Add a Note/h2>
       <%= render "notes/form" %>
     </div>
   </div>
@@ -251,7 +251,7 @@
           </div>
         <% end %>
       </div>
-      <h2>- Tasks (<%= @pip.tasks.count %>)-</h2>
+      <h2Tasks (<%= @pip.tasks.count %>)/h2>
       <%= render @pip.tasks.order('tasks.updated_at DESC') %>
     </div>
   </div>
@@ -273,7 +273,7 @@
 	      </div>
 	    <% end %>
       </div>
-      <h2>- Add A Task -</h2>
+      <h2Add A Task/h2>
       <%= render "tasks/matter_form" %>
     </div>
   </div>

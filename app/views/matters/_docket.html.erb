@@ -1,0 +1,36 @@
+<div>
+  <div class = "inner-icon-bar">
+    <% if can? :read, Matter %>
+	  <div>
+		<%= link_to image_tag("back_button_icon.png", title: "Close Docket", alt: "Close Docket"), '#CloseDocket', onclick: onClick="SlideOutThree(); return false;"; %>
+      </div>
+    <% end %>
+  </div>
+  <% unless @matter.case_no.to_s.empty? %>
+    <div>
+	  <% if Gem.win_platform? %>
+	    <div style = "font-weight: bold; margin: 6px 0; text-align: center;">
+	      <%= "This is why Windows sucks. Try Linux." %>
+	    </div>
+	  <% else %>
+	    <h2>Docket for <%= @matter.case_no %></h2>
+	    <table>
+		  <% if @docket_count != "(NF)" && @docket_count != "(0)" %>
+		    <% @target_docket_page.search("tr.RowPrimary", "tr.RowAlt").sort.each do |entry| %>
+			  <tr>
+			    <td><%= entry.inner_text %></td>
+			  </tr>
+		    <% end %>
+		  <% else %>
+		    <div style = "text-align: center;">No Docket Entries Located for <%= @matter.case_no %></div>
+		    <div style = "font-color: blue; font-weight: bold; text-align: center;">
+		      <%= link_to "Verify the Matter No. at the Official Docket Page for Miami Dade County",
+		      "https://www2.miami-dadeclerk.com/civil/search.aspx",
+		      :confirm => "Are you sure you wish to leave this site?" %>
+		    </div>
+	      <% end %>
+        </table>
+	  <% end %>
+    </div>
+  <% end %>
+</div>

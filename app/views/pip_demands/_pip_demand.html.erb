@@ -18,7 +18,7 @@ function ShowEditPIPDemand<%=pip_demand.id%>DIV() {
       <h3>Demand No. <%= pip_demand.id %></h3>
     </div>
     <div class = "mini-icon-bar">
-	  <% if can? :read, PipDemand %>
+	  <% if can? :update, PipDemand %>
 	    <div>
 		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit PIP Demand", alt: "Edit PIP Demand"),
 		  '#EditPIPDemand', onclick: onClick="ShowEditPIPDemand#{pip_demand.id}DIV(); return false;"; %>
@@ -32,7 +32,7 @@ function ShowEditPIPDemand<%=pip_demand.id%>DIV() {
       <% end %>
     </div>
   </div>
-  <h4>- PIP Demand Key Data -</h4>
+  <h4PIP Demand Key Data/h4>
   <table>
     <% unless pip_demand.first_date_of_service.blank? %>
       <tr>
@@ -80,7 +80,7 @@ function ShowEditPIPDemand<%=pip_demand.id%>DIV() {
       </tr>
     <% end %>
   </table>
-  <h4>- PIP Demand Mailing Data -</h4>
+  <h4PIP Demand Mailing Data/h4>
   <table>
     <% unless pip_demand.demand_sent %>
       <% unless pip_demand.date_demand_sent.blank? %>
@@ -167,84 +167,7 @@ function ShowEditPIPDemand<%=pip_demand.id%>DIV() {
   </div>
   <%= form_for ([@pip, pip_demand]) do |f| %>
     <div class = "basic-form">
-      <fieldset>
-        <legend>PIP Demand Key Data</legend>
-        <div>
-          <%= f.label :first_date_of_service, "First Date of Service:" %>
-          <br>
-          <%= f.date_select :first_date_of_service, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
-        </div>
-        <div>
-          <%= f.label :final_date_of_service, "Final Date of Service:" %>
-          <br>
-          <%= f.date_select :final_date_of_service, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
-        </div>
-        <div>
-          <%= f.label :total_billed, "Total Billed:" %>
-          <br>
-          <%= f.text_field :total_billed, {:style => 'text-align: center; width: 100px;'} %>
-        </div>
-        <div>
-          <%= f.label :amount_paid_predemand, "Benefits Paid Pre-Demand:" %>
-          <br>
-          <%= f.text_field :amount_paid_predemand, {:style => 'text-align: center; width: 100px;'} %>
-        </div>
-        <div>
-          <%= f.label :deductible, "Deductible Applied to Bill:" %>
-          <br>
-          <%= f.text_field :deductible, {:style => 'text-align: center; width: 100px;'} %>
-        </div>
-        <div>
-          <%= f.label :carrier_response, "Carrier Response:" %>
-          <br>
-          <%= f.text_field :carrier_response, {:style => 'width: 346px;'} %>
-        </div>
-        <div>
-          <%= f.label :include_demand_in_suit, "Include Demand in Suit:" %>
-          <br>
-          <%= f.select :include_demand_in_suit, [["Yes",1],["No",0]], {}, {:style => 'width: 110px;'} %>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>PIP Demand Mailing Data</legend>
-        <div>
-          <%= f.check_box :demand_sent %>
-          <%= f.label :demand_sent, "Demand Sent" %>
-        </div>
-        <div style = "margin-left: 16px;">
-          <%= f.label :date_demand_sent, "Date Demand Sent:" %>
-          <br>
-          <%= f.date_select :date_demand_sent, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
-        </div>
-	    <div>
-          <%= f.check_box :carrier_received %>
-          <%= f.label :carrier_received, "Carrier Received" %>
-        </div>
-        <div style = "margin-left: 16px;">
-          <%= f.label :date_carrier_received, "Date Green Card Signed:" %>
-          <br>
-          <%= f.date_select :date_carrier_received, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
-        </div>
-        <div>
-          <%= f.check_box :carrier_responded %>
-          <%= f.label :carrier_responded, "Carrier Responded" %>
-        </div>
-        <div style = "margin-left: 16px;">
-          <%= f.label :date_of_response, "Date of Response:" %>
-          <br>
-          <%= f.date_select :date_of_response, {:order => [:month, :day, :year], :include_blank => true, :with_css_classes => true} %>
-        </div>
-        <div>
-          <%= f.label :certified_mail_no, "Certified Mail No:" %>
-          <br>
-          <%= f.text_field :certified_mail_no, {:style => 'width: 346px;'} %>
-        </div>
-        <div>
-          <%= f.label :postage_cost, "Postage Cost:" %>
-          <br>
-          <%= f.text_field :postage_cost, {:style => 'text-align: center; width: 100px;'} %>
-        </div>
-      </fieldset>
+      <%= render "pip_demands/fieldsets", f:f %>
     </div>
     <div class = "basic-form-save-button">
 	  <%= image_submit_tag("save_button_icon.png", :title => "Save PIP Demand", :alt => "Save PIP Demand") %>

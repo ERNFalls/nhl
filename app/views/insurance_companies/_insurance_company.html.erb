@@ -15,7 +15,7 @@ function ShowEditInsu<%=insurance_company.id%>DIV() {
 <div id = "show_insu<%= insurance_company.id %>_div" class = "sub-item-form">
   <div class = "sub-item-form-title">
     <div>
-	  <h3>-<%= insurance_company.company_name %>-</h3>
+	  <h3>%= insurance_company.company_name %>/h3>
     </div>
     <div class = "mini-icon-bar">
       <% if can? :update, InsuranceCompany %>
@@ -48,10 +48,10 @@ function ShowEditInsu<%=insurance_company.id%>DIV() {
     <tr> 
 	  <td>Corporate Representative:</td>
 	  <td>
-	    <%= insurance_company.corporate_rep_prefix << " " <<
-	    insurance_company.corporate_rep_first_name << " " <<
-	    insurance_company.corporate_rep_middle_name << " " <<
-	    insurance_company.corporate_rep_last_name << " " <<
+	    <%= insurance_company.corporate_rep_prefix + " " +
+	    insurance_company.corporate_rep_first_name + " " +
+	    insurance_company.corporate_rep_middle_name + " " +
+	    insurance_company.corporate_rep_last_name + " " +
 	    insurance_company.corporate_rep_suffix %>
 	  </td>
     </tr>
@@ -82,25 +82,25 @@ function ShowEditInsu<%=insurance_company.id%>DIV() {
       <td>
         <%= insurance_company.zip_code %>
         <% unless insurance_company.plus_four_code.nil? %>
-          <%= " " << insurance_company.plus_four_code %>
+          <%= " " + insurance_company.plus_four_code %>
         <% end %>
       </td>
     </tr>
     <tr>  
       <td>Phone Number:</td>
       <td>
-	    <%= "(" << insurance_company.area_code << ") " << 
-	    insurance_company.exchange << " - " << insurance_company.suffix %>
+	    <%= "(" + insurance_company.area_code + ") " + 
+	    insurance_company.exchange + " - " + insurance_company.suffix %>
 	    <% unless insurance_company.extension.nil? %>
-	      <%= " Ext. " << insurance_company.extension %>
+	      <%= " Ext. " + insurance_company.extension %>
 	    <% end %>
       </td>
     </tr>
     <tr>  
       <td>Fax Number:</td>
       <td>
-	    <%= "(" << insurance_company.fax_area_code << ") " << 
-	    insurance_company.exchange << " - " << insurance_company.suffix %>
+	    <%= "(" + insurance_company.fax_area_code + ") " + 
+	    insurance_company.exchange + " - " + insurance_company.suffix %>
       </td>
     </tr>
     <tr>
@@ -112,7 +112,7 @@ function ShowEditInsu<%=insurance_company.id%>DIV() {
 <div id = "edit_insu<%= insurance_company.id %>_div" class = "sub-item-form" style = "display: none;">
   <div class = "sub-item-form-title">  
     <div>
-	  <h3>-Edit <%= insurance_company.company_name %>-</h3>
+	  <h3Edit <%= insurance_company.company_name %>/h3>
     </div>
     <div class = "mini-icon-bar">
       <% if can? :update, InsuranceCompany %>

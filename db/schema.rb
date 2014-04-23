@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407075850) do
+ActiveRecord::Schema.define(version: 20140421151551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,46 +44,21 @@ ActiveRecord::Schema.define(version: 20140407075850) do
   end
 
   create_table "bankruptcy_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
-
-  create_table "bankruptcy_matters_clients", id: false, force: true do |t|
-    t.integer "chapter"
-    t.string  "bankruptcy_type"
-    t.integer "client_id"
-    t.integer "bankruptcy_matter_id"
-  end
-
-  add_index "bankruptcy_matters_clients", ["bankruptcy_matter_id"], name: "index_bankruptcy_matters_clients_on_bankruptcy_matter_id", using: :btree
-  add_index "bankruptcy_matters_clients", ["client_id"], name: "index_bankruptcy_matters_clients_on_client_id", using: :btree
 
   create_table "boats", force: true do |t|
-    t.boolean  "keep",                                  default: false
+    t.boolean  "keep",                                    default: false
+    t.string   "ownership_type"
     t.integer  "year"
     t.string   "make"
     t.string   "model"
     t.string   "engine"
     t.string   "bank"
     t.string   "account_no"
-    t.decimal  "balance_owed", precision: 10, scale: 2
+    t.decimal  "balance_owed",   precision: 10, scale: 2
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -108,34 +83,10 @@ ActiveRecord::Schema.define(version: 20140407075850) do
   end
 
   create_table "civil_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
-
-  create_table "civil_matters_clients", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "civil_matter_id"
-  end
-
-  add_index "civil_matters_clients", ["civil_matter_id"], name: "index_civil_matters_clients_on_civil_matter_id", using: :btree
-  add_index "civil_matters_clients", ["client_id"], name: "index_civil_matters_clients_on_client_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.string   "last_name"
@@ -146,7 +97,15 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "company_name"
     t.string   "ssn"
     t.string   "drivers_license_no"
-    t.string   "date_of_birth"
+    t.date     "date_of_birth"
+    t.string   "address_line_one"
+    t.string   "address_line_two"
+    t.string   "address_line_three"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.integer  "plus_four_code"
+    t.string   "country"
     t.string   "aliases"
     t.string   "spouse"
     t.string   "marital_status"
@@ -182,92 +141,28 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "legacy_pd_email_two"
+    t.string   "legacy_pd_suffix"
+    t.string   "legacy_pd_one"
+    t.string   "legacy_pd_two"
+    t.string   "legacy_pd_three"
+    t.string   "legacy_pd_four"
+    t.string   "legacy_pd_file"
   end
 
-  create_table "clients_commercial_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "commercial_matter_id"
-  end
-
-  add_index "clients_commercial_matters", ["client_id"], name: "index_clients_commercial_matters_on_client_id", using: :btree
-  add_index "clients_commercial_matters", ["commercial_matter_id"], name: "index_clients_commercial_matters_on_commercial_matter_id", using: :btree
-
-  create_table "clients_criminal_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "criminal_matter_id"
-  end
-
-  add_index "clients_criminal_matters", ["client_id"], name: "index_clients_criminal_matters_on_client_id", using: :btree
-  add_index "clients_criminal_matters", ["criminal_matter_id"], name: "index_clients_criminal_matters_on_criminal_matter_id", using: :btree
-
-  create_table "clients_family_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "family_matter_id"
-  end
-
-  add_index "clients_family_matters", ["client_id"], name: "index_clients_family_matters_on_client_id", using: :btree
-  add_index "clients_family_matters", ["family_matter_id"], name: "index_clients_family_matters_on_family_matter_id", using: :btree
-
-  create_table "clients_foreclosure_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "foreclosure_matter_id"
-  end
-
-  add_index "clients_foreclosure_matters", ["client_id"], name: "index_clients_foreclosure_matters_on_client_id", using: :btree
-  add_index "clients_foreclosure_matters", ["foreclosure_matter_id"], name: "index_clients_foreclosure_matters_on_foreclosure_matter_id", using: :btree
-
-  create_table "clients_immigration_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "immigration_matter_id"
-  end
-
-  add_index "clients_immigration_matters", ["client_id"], name: "index_clients_immigration_matters_on_client_id", using: :btree
-  add_index "clients_immigration_matters", ["immigration_matter_id"], name: "index_clients_immigration_matters_on_immigration_matter_id", using: :btree
-
-  create_table "clients_modification_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "modification_matter_id"
-  end
-
-  add_index "clients_modification_matters", ["client_id"], name: "index_clients_modification_matters_on_client_id", using: :btree
-  add_index "clients_modification_matters", ["modification_matter_id"], name: "index_clients_modification_matters_on_modification_matter_id", using: :btree
-
-  create_table "clients_pi_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "pi_matter_id"
-  end
-
-  add_index "clients_pi_matters", ["client_id"], name: "index_clients_pi_matters_on_client_id", using: :btree
-  add_index "clients_pi_matters", ["pi_matter_id"], name: "index_clients_pi_matters_on_pi_matter_id", using: :btree
-
-  create_table "clients_pip_matters", id: false, force: true do |t|
-    t.integer "client_id"
-    t.integer "pip_matter_id"
-  end
-
-  add_index "clients_pip_matters", ["client_id"], name: "index_clients_pip_matters_on_client_id", using: :btree
-  add_index "clients_pip_matters", ["pip_matter_id"], name: "index_clients_pip_matters_on_pip_matter_id", using: :btree
-
-  create_table "commercial_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
+  create_table "clients_matters", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "client_id"
+    t.integer  "matter_id"
+  end
+
+  add_index "clients_matters", ["client_id", "matter_id"], name: "index_clients_matters_on_client_id_and_matter_id", unique: true, using: :btree
+
+  create_table "commercial_matters", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "contacts", force: true do |t|
@@ -300,25 +195,9 @@ ActiveRecord::Schema.define(version: 20140407075850) do
   end
 
   create_table "criminal_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "dependants", force: true do |t|
@@ -330,7 +209,7 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "ssn"
     t.date     "date_of_birth"
     t.string   "relationship"
-    t.string   "employment"
+    t.boolean  "employment",    default: false
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -361,47 +240,15 @@ ActiveRecord::Schema.define(version: 20140407075850) do
   end
 
   create_table "family_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "foreclosure_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "furnitures", force: true do |t|
@@ -409,32 +256,16 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "description"
     t.decimal  "price_at_purchase", precision: 10, scale: 2
     t.date     "date_of_purchase"
-    t.string   "number_owned"
+    t.integer  "number_owned",                               default: 1
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "immigration_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "insurance_carriers", force: true do |t|
@@ -513,6 +344,29 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.datetime "updated_at"
   end
 
+  create_table "matters", force: true do |t|
+    t.string   "plaintiff"
+    t.string   "defendant"
+    t.boolean  "side"
+    t.string   "case_state"
+    t.string   "case_county"
+    t.integer  "case_year"
+    t.integer  "case_sequence"
+    t.string   "case_code"
+    t.integer  "case_location"
+    t.integer  "judicial_section"
+    t.string   "judge"
+    t.string   "opposing_counsel"
+    t.date     "filing_date"
+    t.date     "date_of_sop"
+    t.datetime "initial_court_date"
+    t.date     "closing_date"
+    t.string   "status"
+    t.date     "matter_closed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "medical_providers", force: true do |t|
     t.string   "company_name"
     t.string   "corporate_rep_last_name"
@@ -552,25 +406,9 @@ ActiveRecord::Schema.define(version: 20140407075850) do
   add_index "messages", ["messageable_id", "messageable_type"], name: "index_messages_on_messageable_id_and_messageable_type", using: :btree
 
   create_table "modification_matters", force: true do |t|
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "mortgages", force: true do |t|
@@ -584,7 +422,8 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.integer  "zip_code"
     t.integer  "plus_four_code"
     t.decimal  "balance",            precision: 10, scale: 2
-    t.string   "overdue_payment"
+    t.decimal  "overdue_payment",    precision: 10, scale: 2
+    t.integer  "client_id"
     t.integer  "property_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -615,7 +454,7 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "judge"
     t.string   "clients_counsel"
     t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
+    t.date     "filing_date"
     t.date     "date_of_sop"
     t.datetime "initial_court_date"
     t.string   "status"
@@ -673,25 +512,9 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "vehicle_model"
     t.string   "vehicle_year"
     t.string   "primary_medical_provider"
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "pip_checks", force: true do |t|
@@ -748,25 +571,9 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "claims_adjuster"
     t.date     "first_date_of_policy"
     t.date     "final_date_of_policy"
-    t.string   "plaintiff"
-    t.string   "defendant"
-    t.boolean  "side"
-    t.string   "case_state"
-    t.string   "case_county"
-    t.integer  "case_year"
-    t.integer  "case_sequence"
-    t.string   "case_code"
-    t.integer  "case_location"
-    t.integer  "judicial_section"
-    t.string   "judge"
-    t.string   "opposing_counsel"
-    t.date     "date_suit_filed"
-    t.date     "date_of_sop"
-    t.datetime "initial_court_date"
-    t.string   "status"
-    t.date     "closing_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "matter_id"
   end
 
   create_table "properties", force: true do |t|
@@ -780,6 +587,7 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "state"
     t.integer  "zip_code"
     t.integer  "plus_four_code"
+    t.string   "country"
     t.string   "association_name"
     t.string   "association_address_line_one"
     t.string   "association_address_line_two"
@@ -885,6 +693,7 @@ ActiveRecord::Schema.define(version: 20140407075850) do
     t.string   "make"
     t.string   "model"
     t.string   "color"
+    t.string   "vin_no"
     t.string   "current_mileage"
     t.string   "bank"
     t.string   "account_no"
@@ -896,29 +705,53 @@ ActiveRecord::Schema.define(version: 20140407075850) do
 
   add_foreign_key "bank_accounts", "clients", name: "bank_accounts_client_id_fk"
 
+  add_foreign_key "bankruptcy_matters", "matters", name: "bankruptcy_matters_matter_id_fk"
+
   add_foreign_key "boats", "clients", name: "boats_client_id_fk"
 
   add_foreign_key "businesses", "clients", name: "businesses_client_id_fk"
 
+  add_foreign_key "civil_matters", "matters", name: "civil_matters_matter_id_fk"
+
+  add_foreign_key "clients_matters", "clients", name: "clients_matters_client_id_fk"
+  add_foreign_key "clients_matters", "matters", name: "clients_matters_matter_id_fk"
+
+  add_foreign_key "commercial_matters", "matters", name: "commercial_matters_matter_id_fk"
+
   add_foreign_key "creditors", "clients", name: "creditors_client_id_fk"
+
+  add_foreign_key "criminal_matters", "matters", name: "criminal_matters_matter_id_fk"
 
   add_foreign_key "dependants", "clients", name: "dependants_client_id_fk"
 
   add_foreign_key "expenses", "clients", name: "expenses_client_id_fk"
 
+  add_foreign_key "family_matters", "matters", name: "family_matters_matter_id_fk"
+
+  add_foreign_key "foreclosure_matters", "matters", name: "foreclosure_matters_matter_id_fk"
+
   add_foreign_key "furnitures", "clients", name: "furnitures_client_id_fk"
+
+  add_foreign_key "immigration_matters", "matters", name: "immigration_matters_matter_id_fk"
 
   add_foreign_key "insurance_companies", "insurance_carriers", name: "insurance_companies_insurance_carrier_id_fk"
 
   add_foreign_key "jobs", "clients", name: "jobs_client_id_fk"
 
+  add_foreign_key "modification_matters", "matters", name: "modification_matters_matter_id_fk"
+
+  add_foreign_key "mortgages", "clients", name: "mortgages_client_id_fk"
   add_foreign_key "mortgages", "properties", name: "mortgages_property_id_fk"
 
   add_foreign_key "other_cases", "clients", name: "other_cases_client_id_fk"
 
+  add_foreign_key "pi_matters", "matters", name: "pi_matters_matter_id_fk"
+
   add_foreign_key "pip_checks", "pip_matters", name: "pip_checks_pip_matter_id_fk"
 
   add_foreign_key "pip_demands", "pip_matters", name: "pip_demands_pip_matter_id_fk"
+
+  add_foreign_key "pip_matters", "matters", name: "pip_matters_matter_id_fk"
 
   add_foreign_key "properties", "clients", name: "properties_client_id_fk"
 

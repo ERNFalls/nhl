@@ -1,0 +1,92 @@
+<fieldset>
+  <legend>Property Data</legend>
+  <div>
+    <%= f.label :rent, "Check if Rent:" %>
+    <%= f.check_box :rent %>
+  </div>
+  <div>
+    <%= f.label :property_type, "Property Type:" %>
+    <br>
+    <%= f.select :property_type, options_for_select(["Homestead","Investment"], :selected => f.object.property_type),
+    {:prompt => "Select a Type"}, {:style => "width: 176px;"} %>
+  </div>
+  <div>
+    <%= f.label :date_of_purchase, "Date of Purchase:" %>
+    <br>
+    <%= f.date_select :date_of_purchase, {:order => [:month, :day, :year],
+    :include_blank => true, :with_css_classes => true, :start_year => 1900} %>
+  </div>
+  <div>
+    <%= f.label :address_line_one, "Address:" %>
+    <br>
+    <%= f.text_field :address_line_one, {:style => "width: 345px;"} %>
+    <br>
+    <%= f.text_field :address_line_two, {:style => "width: 345px;"} %>
+     <br>
+    <%= f.text_field :address_line_three, {:style => "width: 345px;"} %>
+    <%= f.text_field :country, {:value => "United States of America", :hidden => true} %>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :city, "City:"%>
+	  <br>
+	  <%= f.text_field :city, {:style => "width: 180px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :state, "State:"%>
+	  <br>
+	  <%= f.text_field :state, {:maxlength => 2, :style => "width: 40px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :zip_code, "ZIP:"%>
+	  <br>
+	  <%= f.text_field :zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :plus_four_code, "+4:" %>
+	  <br>
+	  <%= f.text_field :plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :association_name, "Name of Association (If Applicable):" %>
+    <br>
+    <%= f.text_field :association_name, {:style => "width: 345px;"} %>
+  </div>
+  <div>
+    <%= f.label :association_balance, "Outstanding Association Balance:" %>
+    <br>
+    <%= f.text_field :association_balance, {:style => "width: 100px;"} %>
+  </div>
+  <div>
+    <%= f.label :association_address_line_one, "Association Address:" %>
+    <br>
+    <%= f.text_field :association_address_line_one, {:style => "width: 345px;"} %>
+    <br>
+    <%= f.text_field :association_address_line_two, {:style => "width: 345px;"} %>
+     <br>
+    <%= f.text_field :association_address_line_three, {:style => "width: 345px;"} %>
+  </div>
+  <div>
+    <div style = "display: inline-block;">
+	  <%= f.label :association_city, "City:"%>
+	  <br>
+	  <%= f.text_field :association_city, {:style => "width: 180px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :association_state, "State:"%>
+	  <br>
+	  <%= f.text_field :association_state, {:maxlength => 2, :style => "width: 40px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :association_zip_code, "ZIP:"%>
+	  <br>
+	  <%= f.text_field :association_zip_code, {:maxlength => 5, :style => "width: 52px;"} %>
+    </div>
+    <div style = "display: inline-block;">
+	  <%= f.label :association_plus_four_code, "+4:" %>
+	  <br>
+	  <%= f.text_field :association_plus_four_code, {:maxlength => 4, :style => "width: 40px"} %>
+    </div>
+  </div>
+</fieldset>

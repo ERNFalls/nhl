@@ -43,8 +43,8 @@
           <tr>
             <td>Name:</td>
             <td>
-              <%= @user.prefix.to_s << " " << @user.first_name.to_s << " " <<
-              @user.middle_name.to_s << " " << @user.last_name.to_s << " " <<
+              <%= @user.prefix.to_s + " " + @user.first_name.to_s + " " +
+              @user.middle_name.to_s + " " + @user.last_name.to_s + " " +
               @user.suffix.to_s %>
             </td>
           </tr>

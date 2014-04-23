@@ -1,0 +1,18 @@
+<%= form_for ([@client, @client.clients_matters.build]) do |f| %>
+  <% if @client.errors.any? %>
+    <div id = "errorExplanation">
+	  <h2><%= pluralize(@client.errors.count, "Error") %> Prohibited Join From Being Saved:</h2>
+	  <ul>
+      <% @client.errors.full_messages.each do |msg| %>
+        <li><%= msg.titleize.titleize %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "basic-form">
+    <%= render "clients_matters/fieldsets", f:f %>
+  </div>
+  <div class = "basic-form-save-button">
+	<%= image_submit_tag("save_button_icon.png", :title => "Save Join", :alt => "Save Join") %>
+  </div>
+<% end %>

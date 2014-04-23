@@ -1,0 +1,126 @@
+<script type="text/javascript">
+<!--
+function ShowEditCreditor<%=creditor.id%>DIV() {
+	var edit = edit_creditor<%=creditor.id%>_div
+	var show = show_creditor<%=creditor.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_creditor<%=creditor.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3>Creditor</h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Creditor %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Creditor", alt: "Edit Creditor"),
+		  '#EditCreditor', onclick: onClick="ShowEditCreditor#{creditor.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Creditor %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Creditor", alt: "Delete Creditor"),
+		  [creditor.client, creditor], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <h4>Creditor Data</h4>
+  <table>
+    <% unless creditor.creditor.blank? %>
+      <tr>
+        <td>Creditor:</td>
+        <td><%= creditor.creditor %></td>
+      </tr>
+    <% end %>  
+    <% unless creditor.account_no.blank? %>
+      <tr>
+        <td>Account No.:</td>
+        <td><%= creditor.account_no %></td>
+      </tr>
+    <% end %>
+    <% unless creditor.date_last_used.blank? %>
+      <tr>
+	    <td>Date Last Used:</td>
+        <td><%= creditor.date_last_used.strftime("%m/%d/%Y") %></td>
+      </tr>
+    <% end %>
+    <% unless creditor.balance.blank? %>
+      <tr>
+	    <td>Balance:</td>
+        <td><%= number_to_currency(creditor.balance) %></td>
+      </tr>
+    <% end %>
+    <% unless creditor.address_line_one.blank? %>
+      <tr>
+        <td>Creditor Address:</td>
+        <td>
+          <%= creditor.address_line_one %>
+          <br>
+          <%= creditor.address_line_two %>
+          <br>
+          <%= creditor.address_line_three %>
+        </td>
+      </tr>
+    <% end %>
+    <% unless creditor.city.blank? %>
+      <tr>
+        <td>City:</td>
+        <td><%= creditor.city %></td>
+      </tr>
+    <% end %>
+    <% unless creditor.state.blank? %>
+      <tr>
+        <td>State:</td>
+        <td><%= creditor.state %></td>
+      </tr>
+    <% end %>
+    <% unless creditor.zip_code.blank? %>
+      <tr>
+        <td>ZIP Code:</td>
+        <td>
+          <%= creditor.zip_code.to_s %>
+          <% unless creditor.plus_four_code.blank? %>
+            <%= " - " + creditor.plus_four_code.to_s %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div id = "edit_creditor<%=creditor.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit Creditor Data</h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Creditor %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Creditor", alt: "Show Creditor"),
+	      '#ShowCreditor', onclick: onClick="ShowEditCreditor#{creditor.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Creditor %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Creditor", alt: "Delete Creditor"),
+	      [creditor.client, creditor], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, creditor]) do |f| %>
+    <div class = "basic-form">
+      <%= render "creditors/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Creditor", :alt => "Save Creditor") %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,162 @@
+<script type="text/javascript">
+<!--
+function ShowEditMatter<%=matter.id%>DIV() {
+	var edit = edit_matter<%=matter.id%>_div
+	var show = show_matter<%=matter.id%>_div
+	if (edit.style.display=="none")
+		edit.style.display="block",
+		show.style.display="none";
+	else
+		edit.style.display="none",
+		show.style.display="block";
+}
+//-->
+</script>
+<div id = "show_matter<%=matter.id%>_div" class = "sub-item-form">
+  <div class = "sub-item-form-title">
+    <div>
+      <h3><%= matter.case_simple_style %></h3>
+    </div>
+    <div class = "mini-icon-bar">
+	  <% if can? :update, Matter %>
+	    <div>
+		  <%= link_to image_tag("mini_edit_button_icon.png", title: "Edit Matter", alt: "Edit Matter"),
+		  '#EditMatter', onclick: onClick="ShowEditMatter#{matter.id}DIV(); return false;"; %>
+	    </div>
+      <% end %>
+      <% if can? :delete, Matter %>
+	    <div>
+		  <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Matter", alt: "Delete Matter"),
+		  [matter], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+	    </div>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <% unless matter.case_year.blank? && matter.filing_date.blank? %>	
+	  <h4>Matter Key Data</h4>
+    <% end %>
+    <table>
+      <% if matter.plaintiff %>
+        <tr>
+          <td>Plaintiff:</td>
+          <td><%= matter.plaintiff %></td>
+        </tr>
+      <% end %>
+      <% if matter.defendant %>
+        <tr>
+          <td>Defendant:</td>
+          <td><%= matter.defendant %></td>
+        </tr>
+      <% end %>
+      <% if matter.side %>
+        <tr>
+          <td colspan = 2 align = center>Representing Plaintiff</td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan = 2 align = center>Representing Defendant</td>
+        </tr>
+      <% end %>
+      <% unless matter.case_county.blank? %>
+        <tr>
+          <td>County:</td>
+          <td><%= matter.case_county %></td>
+        </tr>
+      <% end %>  
+      <% unless matter.case_no.length < 5 %>
+        <tr>
+		  <td>Case No.:</td>
+          <td>
+            <%= matter.case_no %>
+          </td>
+        </tr>
+      <% end %>
+	  <% if matter.filing_date %>
+        <tr>
+          <td>Date Suit Filed:</td>
+          <td><%= matter.filing_date.strftime("%F") %></td>
+        </tr>
+      <% end %>  
+      <% if matter.date_of_sop %>
+	    <tr>
+          <td>Date of Service of Process:</td>
+          <td><%= matter.date_of_sop.strftime("%F") %></td>
+        </tr>
+      <% end %>
+      <% if matter.initial_court_date %>
+        <tr>
+          <td>Initial Court Date:</td>
+          <td><%= matter.initial_court_date.strftime("%F") %></td>
+	    </tr>
+      <% end %>
+      <% unless matter.judge.blank? %>
+        <tr>
+		  <td>Judge:</td>
+          <td><%= matter.judge %></td>
+	    </tr>
+      <% end %>
+      <% unless matter.opposing_counsel.blank? %>
+        <tr>
+		  <td>Opposing Counsel:</td>
+          <td><%= matter.opposing_counsel %></td>
+        </tr>
+      <% end %>
+      <% if matter.closing_date %>
+	    <tr>
+          <td>Closing Date:</td>
+          <td><%= matter.closing_date.strftime("%F") %></td>
+        </tr>
+      <% end %>
+    </table>
+    <h4>Matter Status</h4>
+    <table>
+	  <tr>
+	    <td>Status:</td>
+        <td><%= matter.status %></td>
+      </tr>
+      <% if matter.created_at %>
+	    <tr>
+          <td>Matter Opened:</td>
+          <td><%= matter.created_at.strftime("%F") %></td>
+        </tr>
+      <% end %>
+      <% if matter.matter_closed %>
+	    <tr>
+          <td>Matter Closed:</td>
+          <td><%= matter.matter_closed.strftime("%F") %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<div id = "edit_matter<%=matter.id%>_div" class = "sub-item-form" style = "display: none;">
+  <div class = "sub-item-form-title">  
+    <div>
+      <h3>Edit <%= matter.case_simple_style %></h3>
+    </div>
+    <div class = "mini-icon-bar">
+      <% if can? :read, Matter %>
+        <div>
+	      <%= link_to image_tag("mini_show_button_icon.png", title: "Show Matter", alt: "Show Matter"),
+	      '#ShowMatter', onclick: onClick="ShowEditMatter#{matter.id}DIV(); return false;"; %>
+        </div>
+	  <% end %>
+	  <% if can? :delete, Matter %>
+        <div>
+	      <%= link_to image_tag("mini_delete_button_icon.png", title: "Delete Matter", alt: "Delete Matter"),
+	      [matter], method: :delete, data: { confirm: 'Are you sure you want to permanently delete this record?' } %>
+        </div>
+	  <% end %>
+    </div>
+  </div>
+  <%= form_for ([@client, matter]) do |f| %>
+    <div class = "basic-form">
+      <%= render "matters/fieldsets", f:f %>
+    </div>
+    <div class = "basic-form-save-button">
+	  <%= image_submit_tag("save_button_icon.png", :title => "Save Matter", :alt => "Save Matter") %>
+    </div>
+  <% end %>
+</div>
+

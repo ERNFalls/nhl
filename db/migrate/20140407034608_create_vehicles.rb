@@ -7,6 +7,7 @@ class CreateVehicles < ActiveRecord::Migration
       t.string :make
       t.string :model
       t.string :color
+      t.string :vin_no
       t.string :current_mileage
       t.string :bank
       t.string :account_no

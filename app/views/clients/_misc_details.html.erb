@@ -1,0 +1,130 @@
+<div>
+  <h3>Miscellaneous</h3>
+  <table>
+    <% if @client.ira == true %>
+      <tr>
+        <td colspan = "2">Client has an Individual Retirement Account</td>
+      </tr>
+    <% end %>
+    <% if @client.four_o_one_k == true %>
+      <tr>
+        <td colspan = "2">Client has a 401K</td>
+      </tr>
+    <% end %>
+    <% unless @client.repossessions.blank? %>
+      <tr>
+        <td>Repossession Details:</td>
+        <td><%= @client.repossessions %></td>
+      </tr>
+    <% end %>
+    <% unless @client.pending_suit.blank? %>
+      <tr>
+        <td>Pending Lawsuit Details:</td>
+        <td><%= @client.pending_suit %></td>
+      </tr>
+    <% end %>
+    <% unless @client.amount_owed_to_irs.blank? %>
+      <tr>
+        <td>Amount Owed to the IRS:</td>
+        <td><%= number_to_currency(@client.amount_owed_to_irs) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.safety_deposit_contents.blank? %>
+      <tr>
+        <td>Safety Deposit Contents:</td>
+        <td><%= @client.safety_deposit_contents %></td>
+      </tr>
+    <% end %>
+    <% unless @client.safety_deposit_location.blank? %>
+      <tr>
+        <td>Safety Deposit Location:</td>
+        <td><%= @client.safety_deposit_location %></td>
+      </tr>
+    <% end %>
+    <% unless @client.safety_deposit_list.blank? %>
+      <tr>
+        <td>Safety Deposit Access List:</td>
+        <td><%= @client.safety_deposit_list %></td>
+      </tr>
+    <% end %>
+    <% unless @client.retirement.blank? %>
+      <tr>
+        <td>Retirement Income:</td>
+        <td><%= number_to_currency(@client.retirement) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.pension.blank? %>
+      <tr>
+        <td>Pension Income:</td>
+        <td><%= number_to_currency(@client.pension) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.disability.blank? %>
+      <tr>
+        <td>Disability Income:</td>
+        <td><%= number_to_currency(@client.disability) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.child_support.blank? %>
+      <tr>
+        <td>Child Support Income:</td>
+        <td><%= number_to_currency(@client.child_support) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.alimony.blank? %>
+      <tr>
+        <td>Alimony Income:</td>
+        <td><%= number_to_currency(@client.alimony) %></td>
+      </tr>
+    <% end %>
+    <% unless @client.referred_by.blank? %>
+      <tr>
+        <td>Reffered By:</td>
+        <td><%= @client.referred_by %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>Client's Database ID:</td>
+      <td><%= @client.id %></td>
+    </tr>
+  </table>
+</div>
+<% unless @client.legacy_pd_suffix.blank? && @client.legacy_pd_email_two.blank? && @client.legacy_pd_one.blank? %>
+  <div>
+    <h3>Pro-Docs Legacy Data</h3>
+    <table>
+      <% unless @client.legacy_pd_email_two.blank? %>
+        <tr>
+          <td>PD Extra E-Mail:</td>
+          <td><%= @client.legacy_pd_email_two %></td>
+        </tr>
+      <% end %>
+      <% unless @client.legacy_pd_email_two.blank? %>
+        <tr>
+          <td>PD Closing Note:</td>
+          <td><%= @client.legacy_pd_suffix %></td>
+        </tr>
+      <% end %>
+      <% if @client.legacy_pd_one || @client.legacy_pd_two || @client.legacy_pd_three || @client.legacy_pd_four %>
+        <tr>
+          <td>PD Notes:</td>
+          <td>
+            <%= @client.legacy_pd_one %>
+            <br>
+            <%= @client.legacy_pd_two %>
+            <br>
+            <%= @client.legacy_pd_three %>
+            <br>
+            <%= @client.legacy_pd_four %>
+          </td>
+        </tr>
+      <% end %>
+      <% unless @client.legacy_pd_file.blank? %>
+        <tr>
+          <td>PD File Name:</td>
+          <td><%= @client.legacy_pd_file %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>

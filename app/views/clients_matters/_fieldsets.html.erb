@@ -1,0 +1,9 @@
+<fieldset>
+  <%= f.hidden_field :client_id, :value => @client.id %>
+  <div>
+    <%= f.label :matter_id, "Matter:" %>
+    <br>
+    <%= f.select :matter_id, options_from_collection_for_select(Matter.order('matters.plaintiff ASC').all, 'id', 'case_simple_style'),
+    {:prompt => "Select a Case"}, {:style => "width: 368px;"} %>
+  </div>
+</fieldset>

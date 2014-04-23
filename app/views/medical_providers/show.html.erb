@@ -36,7 +36,7 @@
   <div class = "sliding-plate">
 	<div id = "plate-one" >
 	  <div>
-	    <h2>- Medical Provider Key Data -</h2>
+	    <h2Medical Provider Key Data/h2>
 	    <table>
 		  <tr> 
             <td>Carrier ID:</td>
@@ -49,10 +49,10 @@
 		  <tr> 
             <td>Corporate Representative:</td>
             <td>
-              <%= @medical_provider.corporate_rep_prefix << " " <<
-              @medical_provider.corporate_rep_first_name << " " <<
-              @medical_provider.corporate_rep_middle_name << " " <<
-              @medical_provider.corporate_rep_last_name << " " <<
+              <%= @medical_provider.corporate_rep_prefix + " " +
+              @medical_provider.corporate_rep_first_name + " " +
+              @medical_provider.corporate_rep_middle_name + " " +
+              @medical_provider.corporate_rep_last_name + " " +
               @medical_provider.corporate_rep_suffix %>
             </td>
           </tr>
@@ -83,25 +83,25 @@
 		    <td>
 		      <%= @medical_provider.zip_code %>
 		      <% unless @medical_provider.plus_four_code.nil? %>
-		        <%= " " << @medical_provider.plus_four_code %>
+		        <%= " " + @medical_provider.plus_four_code %>
 		      <% end %>
 		    </td>
 		  </tr>
 		  <tr>  
 		    <td>Phone Number:</td>
 		    <td>
-			  <%= "(" << @medical_provider.area_code << ") " << 
-			  @medical_provider.exchange << " - " << @medical_provider.suffix %>
+			  <%= "(" + @medical_provider.area_code + ") " + 
+			  @medical_provider.exchange + " - " + @medical_provider.suffix %>
 			  <% unless @medical_provider.extension.nil? %>
-			    <%= " Ext. " << @medical_provider.extension %>
+			    <%= " Ext. " + @medical_provider.extension %>
 			  <% end %>
 		    </td>
 		  </tr>
           <tr>  
 		    <td>Fax Number:</td>
 		    <td>
-			  <%= "(" << @medical_provider.fax_area_code << ") " << 
-			  @medical_provider.exchange << " - " << @medical_provider.suffix %>
+			  <%= "(" + @medical_provider.fax_area_code + ") " + 
+			  @medical_provider.exchange + " - " + @medical_provider.suffix %>
 		    </td>
 		  </tr>
 		  <tr>
@@ -113,7 +113,7 @@
 	</div>
 	<div id = "plate-two" style = "display: block; height: 0; margin-left: 380px; opacity: 0; width: 0;">
 	  <div>
-	    <h2>- Edit MedicalProvider -</h2>
+	    <h2Edit MedicalProvider/h2>
 	    <%= render 'form' %>
 	  </div>
 	</div>
